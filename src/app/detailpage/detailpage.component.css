@@ -1,0 +1,338 @@
+.defaultUl{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+
+}
+.pricelist{
+  height: 100px!important;
+}
+.pricelist li{
+  background: #fcfcfc;
+  border-radius: 4px;
+  padding: 10px 5px;
+  box-shadow: 0px 0px 6px 0px #cdcdcd;
+}
+/* .quanty{
+
+margin:0px;
+width:30px;
+display: inline;
+}
+.pricelist .price{
+  display: block;
+    line-height: 26px;
+    text-align: center;
+}
+.pricelist span{
+  font-size: 11px; display: block; line-height: 1px;  text-align: center;
+} */
+/* .pricelist li {
+  display: flex;
+  flex-direction: row;
+
+  align-content: center;
+  justify-content: space-between;
+} */
+.hotelMinus {
+  background: #dfdfdf;
+  padding: 5.1px 5px;
+  font-size: 14px;
+  text-align: center;
+  position: relative;
+}
+.hotelPlus {
+  background: #dfdfdf;
+  padding: 5.1px 5px;
+  font-size: 14px;
+  text-align: center;
+  position: relative;
+}
+.form-count {
+  width: 42px;
+  height: 27px;
+  border-radius: 0px;
+  display: initial;
+}
+
+.btn-select{
+
+  padding: 4px;
+  line-height: 11px;
+  color: black;
+  font-size: 13px;
+}
+.btn-select.active{
+background: #006d38;
+
+  line-height: 11px;
+  color: #fff;
+  font-size: 13px;
+}
+.pricelist .price{
+  font-size: 11px;
+  display: block;
+  line-height: 28px;
+  text-align: center;
+}
+.pricelist span{
+  font-size: 11px; display: block; line-height: 12px;  text-align: center;
+}
+.pricelist li{
+  text-align: center;
+  font-size: 11px;    margin: 10px 0px;
+}
+.pricelist{height: 90.4px!important;}
+.btnC{
+  background-color: #006d38;
+  border-radius: 3px;
+  border: none;
+  color: #fff;
+  font-weight: 500;
+  padding: 10px;
+  text-transform: uppercase;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+  vertical-align: top;
+  width: 200px;
+  margin-right: 10px;
+  text-align: center;
+}
+.purchaseSection{
+ margin-top: 10px;
+}
+.cater{
+  font-size: 11px;
+    font-weight: 100;
+    margin:0px;
+}
+.titleCater{
+  font-size: 15px;
+  margin: 0px;
+  font-weight: 500;
+}
+#finalPrice{
+  font-size: 23px;
+    font-weight: 500;
+}
+.pricetag{
+  margin-top: 12px;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+.prdctCode{    font-size: 10px;
+  color: gray;}
+.addcart{
+  background-color: #ffbc00;
+  border-radius: 3px;
+  border: none;
+  color: #000;
+}
+.purchase{
+  background-color: #ffbc00;
+  border-radius: 3px;
+  border: none;
+  color: #000;
+}
+.compPrice{
+  font-size: 11px;
+  font-weight: 500;
+}
+/* .lSAction > a {
+
+  border-radius: 50%;
+  background: url('controls.png') #b4b4b4;
+} */
+.defaultUl{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.listProduct li .defaultFlex{
+  display: flex;
+  flex-direction: row;
+
+  align-content: center;
+  justify-content: space-between;
+}
+.listProduct .Availablity{
+  display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-self: unset;
+    justify-content: space-evenly;
+}.listProduct .showMore{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  align-self: unset;
+  justify-content: space-evenly;
+}
+.listProduct li {
+  background: #fff;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.36);
+}
+.listProduct li .defaultFlex img{
+  max-height: 122px;
+}
+.listProduct li .defaultFlex .priceArea{
+  display: flex;
+  flex-direction: column;
+  background: #fcfcfc;
+  padding: 7px;
+  width: 27%;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+    font-size: 12px;
+}
+.contentQuant{
+  font-size: 12px;
+}
+.btnProduct{
+  margin: 10px auto;
+  border-radius: 2px;
+  padding: 4.5px 13px;
+  font-size: 16px;
+  border: 1px solid #65656596;
+  font-weight: 500;
+  font-size: 12px;
+  outline: none;
+  cursor: pointer;
+  transition: 0.2s all ease-in;
+  text-decoration: none;
+}
+.cartOption{
+  display: none;
+}
+.btn-cart{
+  border-radius: 2px;
+    padding: 4.5px 13px;
+    font-size: 16px;
+    border: 1px solid #ff9900;
+    font-weight: 500;
+    font-size: 12px;
+    outline: none;
+    background: #ff9900;
+    color: #030303;
+    cursor: pointer;
+    transition: 0.2s all ease-in;
+    text-decoration: none;
+}
+.btnProduct:hover {
+  background: #df062d;
+  color:#fff;
+}
+.pad9{
+  padding: 0px 9px;
+}
+.productName{
+  font-weight: 500;
+  font-size: 15px;
+}
+.priceTAG{
+  font-size: 10px;
+  font-weight: 100;
+  COLOR: red;
+}
+.black{color:#000;}
+.mrpTag{
+  font-size :12px;
+}
+.availKG span{
+  background: #f3f3f3;
+  padding: 5px;
+  text-align: center;
+  font-size: 11px;
+  BORDER: 1PX SOLID #ffffff;
+}
+.productBrand img{
+max-width: 67px;
+}
+.productBrand li{
+  text-align: center;
+  background: #f6f6f6;
+  border-radius: 4px;
+  font-size: 11px;
+  margin-right: 15px;
+  box-shadow: 0 0 1px 0 rgba(0,0,0,0.36);
+}
+a{
+  text-decoration: none;
+}
+.productBrand li:hover{
+  box-shadow: 0 0 6px 0 rgba(0,0,0,0.36);
+}
+.productBrand{
+  text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.selectbrand{
+  text-align: center;
+    font-size: 17px;
+}
+#productView .modal-footer {
+  padding: 7px;
+  text-align: center;
+  border-top: 1px solid #e5e5e5;
+}
+#productView .modal-header{
+
+    padding: 9px;
+    border-bottom: 1px solid #e5e5e5;
+    text-align: center;
+
+}
+.viewmore{
+  font-size: 11px;
+  text-align: center;
+  cursor: pointer;
+}
+.viewmore span{
+  padding: 5px;
+  background: #ffffff;
+  border-radius: 40px;
+  box-shadow: 0px 0px 5px 0px #787878;
+}
+.pricelistSug  li {
+  text-align: center;
+  font-size: 11px;
+  margin: 10px 0px;
+}
+.pricelistSug  span  {
+  font-size: 11px;
+  display: block;
+  line-height: 12px;
+  text-align: center;
+}
+.pricelistSug  .price  {
+  font-size: 11px;
+  display: block;
+  line-height: 11px;
+  text-align: center;
+}
+.viewMorePricesData{
+  /* display: none; */
+}
+
+.descCart{
+  background: #ff9900;
+  /* border-radius: 3px; */
+  border: 1px solid #cdcdcd;
+  font-size: 12px;
+  padding: 5.4px 3px;
+  text-transform: capitalize;
+  font-weight: 500;
+  color: #2c2c2c;
+  position: relative;
+  top: -1px;
+  text-align: center;
+}

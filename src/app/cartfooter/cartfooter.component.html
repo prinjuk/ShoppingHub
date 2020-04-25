@@ -1,0 +1,76 @@
+
+<div class='cartdatasum' (click)='goCART()'>
+  View Cart | Checkout
+</div>
+<div
+  class="modal fade"
+  id="checkoutcart"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="checkoutcart"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+      <button
+        type="button"
+        class="close modalCloser"
+        data-dismiss="modal"
+        aria-label="Close"
+      >
+        <span aria-hidden="true" #closebutton>&times;</span>
+      </button>
+      <!-- <div class="modal-header">
+
+
+           <h5 class='selectbrand'>Brand Selection</h5>
+
+      </div> -->
+      <div class="modal-body">
+
+
+        <div class='checkoutform'>
+          <table class='table table-striped'>
+            <!-- <thead>
+              <tr>
+                <th>#</th>
+                <th>Product Name</th>
+                <th>Store</th>
+                <th>Price</th>
+                <th>ProductCode</th>
+              </tr>
+            </thead> -->
+            <tr>
+              <td></td>
+              <td>    <h4 class='orderHead'>Order Summary</h4></td>
+              <td></td>
+            </tr>
+            <tr *ngFor="let i of childMessage;let count = index">
+
+              <td>{{ i.product.count }}</td>
+              <td>{{ i.product.title }} <div class='portal'>{{ i.product.store }}</div></td>
+
+              <td class='priceTag'><i class='fa fa-inr'></i> {{ i.product.price*i.product.count }}</td>
+              <!-- <td>{{ i.product.code }}</td> -->
+
+            </tr>
+          </table>
+        </div>
+
+      </div>
+      <div class="modal-footer hidden text-center">
+        <button
+          type="button"
+          class="btnProduct"
+          data-dismiss="modal"
+          style="margin-right: 10px;"
+        >
+          Cancel
+        </button>
+        <!-- <a class="btnProduct" (click)="goProduct()" data-dismiss="modal"
+          >Proceed</a
+        > -->
+      </div>
+    </div>
+  </div>
+</div>

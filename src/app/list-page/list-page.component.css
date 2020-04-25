@@ -1,0 +1,309 @@
+.defaultUl{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.listProduct li .defaultFlex{
+  display: flex;
+  flex-direction: row;
+
+  align-content: center;
+  justify-content: space-between;
+}
+.listProduct .Availablity{
+  display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-self: unset;
+    justify-content: space-evenly;
+}.listProduct .showMore{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: inherit;
+  padding: 16px 17px;
+}
+.listProduct li {
+  background: #fff;
+  border-radius: 2px;
+  margin-bottom: 20px;
+  border: 1px solid #e0e0e0;
+
+}
+.listProduct:hover{
+  box-shadow: 0 0 6px 0 rgba(0,0,0,0.36);
+}
+.listProduct li .defaultFlex img{
+  max-height: 76px;
+}
+.listProduct li .defaultFlex .priceArea{
+  display: flex;
+  flex-direction: column;
+  background: #fcfcfc;
+  padding: 7px;
+  width: 27%;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+    font-size: 12px;
+}
+.contentQuant{
+  font-size: 12px;
+}
+.btnProduct{
+  margin: 10px auto;
+  border-radius: 2px;
+  padding: 4.5px 13px;
+  font-size: 16px;
+  border: 1px solid #65656596;
+  font-weight: 500;
+  font-size: 12px;
+  outline: none;
+  cursor: pointer;
+  transition: 0.2s all ease-in;
+  text-decoration: none;
+}
+/* .cartOption{
+  display: none;
+} */
+.btn-cart:hover{
+  background: #fdc649;
+  color: #000;
+}
+.btn-cart{
+  transition: cubic-bezier(0.6, -0.28, 0.735, 0.045);
+  border-radius: 2px;
+    padding: 12.5px 55px;
+    font-size: 16px;
+    border: 1px solid #ffffff;
+    font-weight: 500;
+    font-size: 15px;
+    outline: none;
+    background: #ffffff;
+    color: #030303;
+    border-radius: 11px;
+    cursor: pointer;
+    transition: 0.2s all ease-in;
+    text-decoration: none;
+    box-shadow: 0px 0px 4px 1px #cdcdcd;
+}
+.btnProduct:hover {
+  background: #df062d;
+  color:#fff;
+}
+.pad9{
+  padding: 0px 9px;
+}
+.productName{
+  font-weight: 100;
+  font-size: 20px;
+}
+.priceTAG{
+  font-size: 11px;
+  font-weight: 500;
+  COLOR: #16d287;
+}
+.black{color:#000;}
+.mrpTag{
+  font-size :12px;
+}
+.availKG{
+  margin-left: 9px;
+}
+.availKG span{
+  background: #ffffff;
+  text-align: center;
+  font-size: 11px;
+  color: gray;
+  font-weight: 100;
+}
+.productBrand img{
+max-width: 67px;
+}
+.productBrand li{
+  text-align: center;
+  background: #f6f6f6;
+  border-radius: 4px;
+  font-size: 11px;
+  margin-right: 15px;
+  box-shadow: 0 0 1px 0 rgba(0,0,0,0.36);
+}
+a{
+  text-decoration: none;
+}
+.productBrand li:hover{
+  box-shadow: 0 0 6px 0 rgba(0,0,0,0.36);
+}
+.productBrand{
+  text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.selectbrand{
+  text-align: center;
+    font-size: 17px;
+}
+#productView .modal-footer {
+  padding: 7px;
+  text-align: center;
+  border-top: 1px solid #e5e5e5;
+}
+#productView .modal-header{
+
+    padding: 9px;
+    border-bottom: 1px solid #e5e5e5;
+    text-align: center;
+
+}
+.pricelist .price{
+  font-size: 11px;
+  display: block;
+  line-height: 11px;
+  text-align: center;
+}
+.pricelist span{
+  font-size: 11px; display: block; line-height: 12px;  text-align: center;
+}
+.pricelist li{
+  text-align: center;
+  font-size: 11px;    margin: 10px 0px;background: #fcfcfc;
+  border-radius: 4px;
+  padding: 21px 5px;
+  box-shadow: 0px 0px 6px 0px #cdcdcd;
+}
+.pricelist{height:106.4px!important;}
+.viewmore{
+  font-size: 11px;
+  text-align: center;
+  cursor: pointer;
+}
+.viewmore span{
+  padding: 5px;
+  background: #ffffff;
+  border-radius: 40px;
+  box-shadow: 0px 0px 5px 0px #787878;
+}
+.btn-select{
+
+    padding: 2px;
+    line-height: 11px;
+    color: black;
+    font-size: 13px;
+}
+.btn-select.active{
+  background: #00ffd0;
+    padding: 2px;
+    line-height: 11px;
+    color: black;
+    font-size: 13px;
+}
+
+.hotelMinus {
+  background: #ffffff; padding: 15.7px 5px; font-size: 14px; text-align: center; border-left: 1px solid #cdcdcd; border-top: 1px solid #cdcdcd; border-bottom: 1px solid #cdcdcd; position: relative; border-radius: 10px 0px 0px 10px;
+}
+.hotelPlus {
+  background: #ffffff; padding: 15.7px 5px; font-size: 14px; text-align: center; position: relative; border-radius: 0px 10px 10px 0px; border-right: 1px solid #cdcdcd; border-top: 1px solid #cdcdcd; border-bottom: 1px solid #cdcdcd;
+
+}
+.form-count {    cursor: default;
+  background-color: #ffffff;
+  width: 78%; height: 50px; display: initial; border-radius: 0px; text-align: center; border-left: 0px solid; border-right: 0px solid;
+}
+
+.descCart{
+  background: #ff9900;
+  /* border-radius: 3px; */
+  border: 1px solid #cdcdcd;
+  font-size: 12px;
+  padding: 5.4px 3px;
+  text-transform: capitalize;
+  font-weight: 500;
+  color: #2c2c2c;
+  position: relative;
+  top: -1px;
+  text-align: center;
+}
+.ProductShowCase{
+  /* background: #f1f1f1; */
+  min-height: 122px;
+  display: flex;
+  align-items: center;
+  box-shadow: 1px 1px 11px 1px #cdcdcd;
+  padding: 10px 53px;
+}
+.viewMorePrices{
+  margin-bottom: 20px;
+}
+.modal-body {
+  position: relative;
+  padding: 15px;
+  min-height: 400px;
+}
+.cater{
+  font-size: 11px;
+    font-weight: 100;
+    margin:0px;
+}
+.titleCater{
+  font-size: 15px;
+  margin: 0px;
+  font-weight: 400;
+  text-transform: capitalize;
+}
+#finalPrice{
+  font-size: 23px;
+    font-weight: 500;
+}
+.pricetag{
+  margin-top: 12px;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+.compPrice {
+  font-size: 14px;
+  font-weight: 100;
+  color: #484848;
+}
+#scrollCart{
+  scroll-behavior: smooth;
+  /* overflow: auto; */
+  overflow: auto;
+  height: 354px;
+}
+.showMore2{
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  margin-bottom: 17px;
+}
+@media(max-width:767px){
+  .showMore2{
+    position: relative;
+
+    width: 100%;
+    margin-bottom: 17px;
+  }
+
+}
+.modalCloser{
+  font-size: 62px;
+  color: black;
+  position: absolute;
+  right: 18px;
+  font-weight: 100;
+  z-index: 99;
+}
+.prdctCode{
+  font-size: 10px;
+    color: gray;
+}
+[hidden] {
+  display: none!important;
+}
+.toast-top-right { bottom: 12px; right: 23px; }.toast-success { background-color: #ffffff; }
+#toast-container > div { margin: 0 0 6px; padding: 15px 15px 15px 50px; width: 284px; border-radius: 3px 3px 3px 3px; background-position: 15px center; background-repeat: no-repeat; box-shadow: 0 0 4px #4a4a4a; color: #0c0c0c; font-weight: 300; /* opacity: 0.8; */ -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80); filter: alpha(opacity=80); }
+
+
+.toast-title { font-weight: 100; }

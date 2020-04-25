@@ -1,0 +1,15 @@
+* {
+  margin: 0;
+  outline: none;
+  padding: 0;
+  font-weight: normal;
+  list-style: none;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -o-user-select: none;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

@@ -1,0 +1,189 @@
+
+<!--product view Modal -->
+<span>   <toaster-container ></toaster-container>
+  </span>
+<div
+  class="modal fade"
+  id="productView"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="productView"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <button
+        type="button"
+        class="close modalCloser"
+        data-dismiss="modal"
+        aria-label="Close"
+      >
+        <span aria-hidden="true" #closebutton>&times;</span>
+      </button>
+      <!-- <div class="modal-header">
+
+
+           <h5 class='selectbrand'>Brand Selection</h5>
+
+      </div> -->
+      <div class="">
+        <div class="row">
+          <div
+            class="col-md-6 text-center"
+            style="
+              height: 500px;
+              box-shadow: rgba(45, 49, 56, 0.08) -15px 0px 10px -10px inset;
+              padding: 16px;
+            "
+          >
+            <img
+              src="{{ productBindImage }}"
+              alt="Images"
+              height="432"
+            />
+          </div>
+          <div class="col-md-6" style="height: 500px; padding: 16px;">
+            <!-- <ul class='defaultUl productBrand'>
+              <li>
+               <img src="https://pluspng.com/img-png/nestle-logo-png--400.png">
+             <div><b>Nestle</b></div>
+             <i>Starting at INR 100</i>
+              </li>
+              <li>
+               <img src="data:image/png;base64,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">
+            <div><b>Milma</b></div>
+            <i>Starting at INR 120</i>
+              </li>
+              </ul> -->
+            <div id="scrollCart">
+              <span class="titleCater">{{ productBindName }}</span>
+              <h4 class="cater">More from {{productBindbrandName}}</h4>
+              <div id='sizeG'>{{productBindproductSize}}</div>
+              <div class="pricetag">
+                MRP RS. <span id="finalPrice" ngDefaultControl  #finalPrice [(ngModel)]="finalprice" >{{ finalprice }}</span>
+              </div>
+              <div class="prdctCode"> Product Code: <span id="pdtcode">{{tempPdt}}</span></div>
+              <div class="compPrice">
+                Nearby Store Prices
+              </div>
+              <br />
+              <div class="viewMorePrices">
+                <ul class="defaultUl pricelist" >
+                  <li  *ngFor="let pdt of relatedStore">
+                    <span>{{ pdt.storeName }}</span>
+                    <span class="price" ><i class="fa fa-inr"></i>{{ pdt.price }}  </span>
+                    <span class="btn btn-select " (click)="btnStoreChange(pdt.storeId, pdt.price)"   attr.data-price="{{pdt.price}}"  attr.id="{{ pdt.storeId}}" [class.active]="statusSelect==pdt.storeId" ><span [hidden]="statusSelect==pdt.storeId">Select</span><span [hidden]="!(statusSelect==pdt.storeId)"> Selected</span></span>
+                  </li>
+
+                </ul>
+              </div>
+            </div>
+            <hr />
+            <div class="showMore2">
+              <div class="row">
+                <div class="col-md-6 pull-left">
+                  <div class="cartOption">
+                    <span class="hotelMinus" (click)='hotelMinus(pdtCount.value)'><i class="fa fa-minus"></i></span>
+
+                    <input class="form-control form-count " ngDefaultControl  id='pdtCount' #pdtCount  [(ngModel)]="pdtcount" value="{{pdtcount}}"  disabled/>
+                    <span class="hotelPlus" (click)='hotelPlus(pdtCount.value)'><i class="fa fa-plus"></i></span>
+                  </div>
+                </div>
+                <div class="col-md-6 pull-right">
+                  <!-- <label>&nbsp;</label> -->
+                  <span class=""
+                    ><a class="btn btn-cart">
+                      Add
+                      <span class="priceTAG"
+                        ><i class="fa fa-inr"></i
+                        ><span class="CartupdatePrice">0</span>
+                      </span></a
+                    ></span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer hidden text-center">
+        <button
+          type="button"
+          class="btnProduct"
+          data-dismiss="modal"
+          style="margin-right: 10px;"
+        >
+          Cancel
+        </button>
+        <a class="btnProduct" (click)="goProduct()" data-dismiss="modal"
+          >Proceed</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+<section>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2">
+        <div class="widgetArea">
+          <p>Filter Widget</p>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-6 productViewer" *ngFor="let pdt of productArray">
+            <ul class="defaultUl listProduct"  (click)='productView( pdt.productid,pdt.productCommon.store)'>
+              <li>
+                <div class="defaultFlex">
+                  <div class="ProductShowCase" style='
+                  background: url({{ pdt.imageUrl }});
+                  background-size: cover;
+              '>
+
+                  </div>
+                  <!-- <div class='Availablity'>
+                    </div> -->
+                  <!-- <div class='contentQuant'>Available Quantities </div><div class='availKG'> <span>1 KG </span><span>2 KG </span></div> -->
+
+                  <div class="showMore">
+                    <div class="productName">
+                      {{ pdt.productName }}
+                    </div>
+                    <!-- <span class='mrpTag'>MRP starts from</span> -->
+                    <span class="priceTAG">
+                      <i class="fa fa-inr"></i>
+                      <span class="updatePrice">    {{ pdt.price }} -</span>
+                      <span class="availKG"> <span> {{ pdt.productSize }} </span></span>
+                    </span>
+                    <!-- <div class="cartOption">
+                      <span class="hotelMinus"><i class="fa fa-minus "></i></span>
+                      <span class='descCart'></span>
+                      <input class="form-count form-control hidden" style="" value="0" />
+                      <span class="hotelPlus"><i class="fa fa-plus "></i></span>
+
+
+                  </div> -->
+                    <!-- [routerLink]="[ '/list', '' ]" -->
+                    <!-- <span class='pad9'><a class='btnProduct'>Add to Cart</a></span> -->
+                    <!-- -->
+                  </div>
+                </div>
+                <!-- <div class='viewmore'>
+                  <span >More Stores <i class='fa fa-chevron-down'></i></span>
+                </div> -->
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="AdArea">
+          <p>Advert Widget</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<app-cartfooter  [childMessage]="parentMessage"></app-cartfooter>

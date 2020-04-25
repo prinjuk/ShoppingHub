@@ -1,0 +1,107 @@
+
+
+#shoptree-Nav{
+
+  height: 53px;
+  background-color: #efefef;
+  margin-bottom: 20px;
+}
+.logo img{
+max-height: 53px;
+}
+.search-bar{
+  position: relative;
+  top: 8px;
+}
+.navbar-toggle .icon-bar {
+  display: block;
+  width: 22px;
+  background: black;
+  height: 3px;
+  border-radius: 1px;
+}
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+.display-inline{
+  display: inline;
+}
+
+.example-full-auto {
+  width: auto;
+  border-radius: 0px;
+  border: 0px solid;
+  width: 82%;
+}
+.fa-shopping-cart{
+  font-size: 24px;
+}
+.width-select-auto{
+
+  width: auto;
+  display: inline;
+  border: 0px solid;
+  border-radius:  4px 0px 0px 4px;
+}
+.btn-no-style{
+border: 0px;
+height: 34.3px;
+    border-radius: 0px 4px 4px 0px;
+}
+.search-bar a{
+  padding: 0.9rem 20px;
+  background: #ffbc00;
+  border-radius: 0px 4px 4px 0px;
+  font-size: 13px;
+  text-align: center;
+  color: white;
+}
+.cart,.myaccount{
+display: inline;
+}
+/* .search-bar{
+
+} */
+/* search bar next lvel */
+/* .nli-primary {
+  color: mat-color($primary-color) !important;
+  }
+  .nli-accent {
+  color: mat-color($accent-color) !important;
+  }
+  .nli-warn {
+  color: mat-color($warn-color) !important;
+  }
+  .nli-primary-bg {
+  background-color: mat-color($primary-color) !important;
+  }
+  .nli-accent-bg {
+  background-color: mat-color($accent-color) !important;
+  }
+  .nli-warn-bg {
+  background-color: mat-color($warn-color) !important;
+  }
+  .nli-primary-border {
+  border-color: mat-color($primary-color) !important;
+  border-top-color: mat-color($primary-color) !important;
+  border-bottom-color: mat-color($primary-color) !important;
+  border-left-color: mat-color($primary-color) !important;
+  border-right-color: mat-color($primary-color) !important;
+  }
+  .nli-accent-border {
+  border-color: mat-color($accent-color) !important;
+  border-top-color: mat-color($accent-color) !important;
+  border-bottom-color: mat-color($accent-color) !important;
+  border-left-color: mat-color($accent-color) !important;
+  border-right-color: mat-color($accent-color) !important;
+  }
+  .nli-warn-border {
+  border-color: mat-color($warn-color) !important;
+  border-top-color: mat-color($warn-color) !important;
+  border-bottom-color: mat-color($warn-color) !important;
+  border-left-color: mat-color($warn-color) !important;
+  border-right-color: mat-color($warn-color) !important;
+  } */
+  /* end */
