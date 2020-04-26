@@ -2,8 +2,7 @@ import { Component, OnInit, ViewChild, Renderer2, Input , AfterViewInit  } from 
 import { Router } from '@angular/router';
 import { CartfooterComponent } from '../cartfooter/cartfooter.component';
 import {ToasterModule, ToasterService} from 'angular2-toaster';
-import { rejects } from 'assert';
-import { async } from '@angular/core/testing';
+import { CartDataService } from '../cart-data.service';
 declare var $: any;
 
 @Component({
@@ -13,9 +12,10 @@ declare var $: any;
 })
 
 export class ListPageComponent implements OnInit, AfterViewInit  {
-  constructor(private router: Router, private rendering: Renderer2, toasterService: ToasterService) {
+  constructor(private router: Router, private rendering: Renderer2, toasterService: ToasterService, private cartData: CartDataService) {
     this.toasterService = toasterService;
   }
+  inCart = ``;
   productTransfer = {};
   productArray = [];
   arrayCart = [];
@@ -36,6 +36,7 @@ export class ListPageComponent implements OnInit, AfterViewInit  {
   status = true;
  private toasterService: ToasterService;
 @ViewChild(CartfooterComponent) child; // giving child to parent
+// @ViewChild(PaymentsummaryComponent) payment;
 parentMessage = []; // parent to child
   // tslint:disable-next-line: member-ordering
   @ViewChild('closebutton') closebutton;
@@ -59,10 +60,10 @@ popToast() {
 }
 
   ngOnInit(): void {
-
+    this.cartData.currentMessage.subscribe(message => this.arrayCart = message);
 // DataListPage
 
- this.productTransfer = [
+    this.productTransfer = [
 {   storeId: 'Kunnil',
     storeName: 'Kunnil Hypermarket',
     productid: '411416A001008',
@@ -106,8 +107,8 @@ popToast() {
 }
 
 ];
- const data = this.productTransfer;
- for (const key in data) {
+    const data = this.productTransfer;
+    for (const key in data) {
   if (data.hasOwnProperty(key)) {
 
     this.productFilterArray.push(data[key]);
@@ -117,13 +118,13 @@ popToast() {
 //  this.productArray = this.productFilterArray.filter((el, p, i) => {
 //   // return i[0].productCommon.store.indexOf(el.productCommon.store) === p
 // i.forEach((value, index, array) => {
-//   debugger;
+//
 //   console.log(i[index].productCommon.store.indexOf(el.productCommon.store) === p);
 
 // });
 // });
 // Filtering duplication: future filter on low price
- this.productFilterArray.forEach((element, indexz) => {
+    this.productFilterArray.forEach((element, indexz) => {
   let flag = 0;
   if (this.productArray.length == -1) {
       this.productArray.push(element);
@@ -142,7 +143,7 @@ popToast() {
 
   });
 
- $('.btn-cart').click(() => {
+    $('.btn-cart').click(() => {
 
       const code = this.tempPdt;
       const store = this.statusSelect;
@@ -158,12 +159,28 @@ popToast() {
           count,
         },
       };
+      let flag = 0;
 
-      console.log(objectTransfer);
-      const priceToast = `₹ ${objectTransfer.product.price}`;
-      const labelToast = `Successfully added ${count} x ${objectTransfer.product.title} of ${count * price}`;
-      this.toasterService.pop('success', labelToast, priceToast);
-      this.arrayCart.push(objectTransfer);
+
+      this.arrayCart.forEach((element, index) => {
+        if (element.product.code == objectTransfer.product.code && element.product.store == objectTransfer.product.store ) {
+          flag = 1;
+
+          element.product.count = objectTransfer.product.count;
+          const priceToast = `${count} x ${objectTransfer.product.title} of ₹  ${count * price}`;
+          const labelToast = `Successfully updated!`;
+          this.toasterService.pop('success', labelToast, priceToast);
+        }
+
+
+      });
+      if (flag == 0) {
+        const priceToast = `${count} x ${objectTransfer.product.title} of ₹  ${count * price}`;
+        const labelToast = `Successfully added! `;
+        this.toasterService.pop('success', labelToast, priceToast);
+        this.arrayCart.push(objectTransfer);
+      }
+
       // this.parentMessage=labelToast;
       this.goProduct();
       this.cartUpdate();
@@ -174,7 +191,7 @@ popToast() {
   cartUpdate()  {
     this.parentMessage = this.arrayCart;
       // this.arrayCart.forEach((element,index,Array) => {
-
+    this.cartData.changeMessage(this.arrayCart);
       // });
   }
   goProduct() {
@@ -193,7 +210,7 @@ popToast() {
   }
 
   hotelPlus(data) {
-    debugger;
+
     const pdctCount = this.pdtcount;
     if (pdctCount != this.storelimit) {
       this.pdtcount++;
@@ -218,10 +235,23 @@ this.finalprice = data;
 this.statusSelect = select;
     // this.relatedStore=[];
 this.relatedStore.forEach((element, index) => {
-      if (element.storeId == select) {
+
+  if (element.storeId == select) {
           this.tempPdt = element.productid;
           this.productBindImage = element.imageUrl;
+          let flag = 0;
+          this.arrayCart.forEach((element2, index) => {
+            if (element2.product.code == element.productid  && element2.product.store == this.statusSelect) {
+              flag = 1;
 
+              this.inCart = `${ element2.product.count} items in cart`;
+              this.pdtcount = element2.product.count;
+            }
+          });
+          if (flag == 0) {
+            this.inCart = '';
+            this.pdtcount = 1;
+          }
           if (this.pdtcount > element.qtyLeft) {
             this.pdtcount = element.qtyLeft;
           }
@@ -270,8 +300,22 @@ productView(prdctId, prdctCommon) {
             this.productBindprice = element.price;
             this.productBindproductCommon = element.productCommon.store;
             this.storelimit = element.qtyLeft;
+            // if(this.arrayCart.)
+            // {}
+            let flag = 0;
+            this.arrayCart.forEach((element2, index) => {
+              if (element2.product.code == prdctId && element2.product.store == this.statusSelect) {
+
+                flag = 1;
+                this.inCart = `${ element2.product.count} items in cart`;
+                this.pdtcount = element2.product.count;
+              }
+            });
             // change later
+            // this.inCart = `${count} items in cart`;
+            if (flag == 0) {
             this.pdtcount = 1;
+            }
 
 
             this.statusCartButton();

@@ -82,6 +82,7 @@
             <div class="showMore2">
               <div class="row">
                 <div class="col-md-6 pull-left">
+                  <span class='curCart'>&nbsp;{{ this.inCart }}</span>
                   <div class="cartOption">
                     <span class="hotelMinus" (click)='hotelMinus(pdtCount.value)'><i class="fa fa-minus"></i></span>
 
@@ -91,6 +92,7 @@
                 </div>
                 <div class="col-md-6 pull-right">
                   <!-- <label>&nbsp;</label> -->
+                  <span style='display: block;'>&nbsp;</span>
                   <span class=""
                     ><a class="btn btn-cart">
                       Add

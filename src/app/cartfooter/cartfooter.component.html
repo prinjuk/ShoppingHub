@@ -45,6 +45,10 @@
               <td>    <h4 class='orderHead'>Order Summary</h4></td>
               <td></td>
             </tr>
+            <tr *ngIf='childMessage.length === 0'>
+             <td colspan="3"> <img src='https://tyjara.com/assets/site/img/empty-cart.png' style='width: 100%;'>
+            </td>
+            </tr>
             <tr *ngFor="let i of childMessage;let count = index">
 
               <td>{{ i.product.count }}</td>
@@ -54,6 +58,16 @@
               <!-- <td>{{ i.product.code }}</td> -->
 
             </tr>
+            <tr *ngIf='childMessage.length != 0' class='totalamt text-right'>
+
+
+              <td colspan='3' class='tot'>Total Amount: <i class='fa fa-inr'></i> {{ this.payout }}</td>
+
+            </tr>
+            <tr *ngIf='childMessage.length != 0'>
+              <td colspan="3"> <div class='btn btn-cart' (click)='goPayment()'>Checkout to payment</div>
+             </td>
+             </tr>
           </table>
         </div>
 

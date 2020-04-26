@@ -15,6 +15,9 @@ import { ListPageComponent } from './list-page/list-page.component';
 import { DetailpageComponent } from './detailpage/detailpage.component';
 import { CartfooterComponent } from './cartfooter/cartfooter.component';
 import { PurchaseSummaryComponent } from './purchase-summary/purchase-summary.component';
+import { PaymentsummaryComponent } from './paymentsummary/paymentsummary.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,10 @@ import { PurchaseSummaryComponent } from './purchase-summary/purchase-summary.co
     ListPageComponent,
     DetailpageComponent,
     CartfooterComponent,
-    PurchaseSummaryComponent
+    PurchaseSummaryComponent,
+    PaymentsummaryComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
@@ -48,6 +54,15 @@ import { PurchaseSummaryComponent } from './purchase-summary/purchase-summary.co
     },
     {
       path: 'purchase', component:PurchaseSummaryComponent,
+    },
+    {
+      path: 'login', component:LoginComponent,
+    },
+    {
+      path: 'signup', component:SignupComponent,
+    },
+    {
+      path: 'paymentsummary', component: PaymentsummaryComponent,
     },
     ]),
 

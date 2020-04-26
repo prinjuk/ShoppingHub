@@ -13,3 +13,8 @@
   -o-user-select: none;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+.toast-top-right { bottom: 12px!important; right: 23px!important; }.toast-success { background-color: #ffffff!important; }
+#toast-container > div { margin: 0 0 6px!important; padding: 15px 15px 15px 50px!important; width: 284px!important; border-radius: 3px 3px 3px 3px!important; background-position: 15px center!important; background-repeat: no-repeat!important; box-shadow: 0 0 4px #4a4a4a!important; color: #0c0c0c!important; font-weight: 300!important; /* opacity: 0.8; */ -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=80); filter: alpha(opacity=80); }
+
+
+.toast-title { font-weight: 100!important; }

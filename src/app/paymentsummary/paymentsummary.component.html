@@ -1,0 +1,136 @@
+
+     <section>
+       <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+
+            <div class="topbar">
+              <div class="row">
+                <div class="col-md-3">
+
+                </div>
+                <div class="col-md-6">
+                  <table class='table table-striped checkoutform'>
+
+                    <tr>
+                      <td></td>
+                      <td>    <h4 class='orderHead'>Order Summary</h4></td>
+                      <td></td>
+                    </tr>
+                    <tr *ngIf='childMessage.length === 0'>
+                     <td colspan="3"> <img src='https://tyjara.com/assets/site/img/empty-cart.png' style='width: 100%;'>
+                    </td>
+                    </tr>
+                    <tr *ngFor="let i of childMessage;let count = index">
+
+                      <td>{{ i.product.count }}</td>
+                      <td>{{ i.product.title }} <div class='portal'>{{ i.product.store }}</div></td>
+
+                      <td class='priceTag'><i class='fa fa-inr'></i> {{ i.product.price*i.product.count }}</td>
+                      <!-- <td>{{ i.product.code }}</td> -->
+
+                    </tr>
+                    <tr *ngIf='childMessage.length != 0' class='totalamt text-right'>
+
+
+                      <td colspan='3' class='tot'>Total Amount: <i class='fa fa-inr'></i> {{ this.payout }}</td>
+
+                    </tr>
+                    </table>
+                </div>
+              </div>
+            </div>
+            <div class="topbar">
+              <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                  <h4 class='orderHead'>Billing/Shipping Details</h4>
+                  <div class='addressArea'>
+                    <form>
+                      <div class="form-group">
+                        <label>
+                          Title
+                        </label>
+                        <select class='form-control form-control-sm'>
+                          <option value="mr">Mr</option>
+                          <option value="mr">Mrs</option>
+                          <option value="mr">Other</option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label>
+                          First Name
+                        </label>
+                        <input class='form-control form-control-sm'>
+
+                      </div>
+                      <div class="form-group">
+                        <label>
+                          Last Name
+                        </label>
+                        <input class='form-control form-control-sm'>
+
+                      </div>
+                      <h3 class='text-center'>   Address</h3>
+                      <div class="form-group">
+                        <label>
+                          House Name
+                        </label>
+                        <input class='form-control form-control-sm'>
+
+                      </div>
+                      <div class="form-group">
+                        <label>
+                          House No.
+                        </label>
+                        <input class='form-control form-control-sm'>
+
+                      </div>
+                      <div class="form-group">
+                        <label>
+                          Street Name
+                        </label>
+                        <input class='form-control form-control-sm'>
+
+                      </div>
+                      <div class="form-group">
+                        <label>
+                         City
+                        </label>
+                        <input class='form-control form-control-sm'>
+
+                      </div>
+                      <div class="form-group">
+                        <label>
+                         Pincode
+                        </label>
+                        <input class='form-control form-control-sm'>
+
+                      </div>
+                      <div class="form-group">
+                        <label>
+                          District/State
+                        </label>
+                        <input class='form-control form-control-sm'>
+
+                      </div>
+                      <div class="form-group">
+                        <label>
+
+                        </label>
+                        <div class='cartdatasum' (click)='paymentForm()'>
+                          Proceed to Payment
+                        </div>
+
+
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+       </div>
+     </section>
+

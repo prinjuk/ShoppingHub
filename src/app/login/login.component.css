@@ -1,0 +1,17 @@
+.cartdatasum{
+  position: relative;
+
+  /* background: #43264E; */
+  width: 300px;
+  background: #fdc649;
+  color: #000;
+  padding: 21px 5px;
+  z-index: 99;
+text-align: center;
+margin: 0 auto;
+  border-radius: 40px;
+  /* color: white; */
+  text-align: center;
+cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
