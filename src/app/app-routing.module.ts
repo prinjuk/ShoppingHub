@@ -8,12 +8,7 @@ const routes: Routes = [];
 
 @NgModule({
   imports: [RouterModule.forRoot([
-    {
-      path: '', component: HomeComponent,
-    },
-    {
-      path: 'list', component: ListPageComponent,
-    },
+
   ])],
   exports: [RouterModule]
 })

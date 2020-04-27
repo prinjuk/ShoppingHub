@@ -99,6 +99,11 @@
   font-weight: 100;
   font-size: 20px;
 }
+#productView .priceTAG{
+  font-size: 13px;
+  font-weight: 500;
+  COLOR: #000000;
+}
 .priceTAG{
   font-size: 11px;
   font-weight: 500;

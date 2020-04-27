@@ -265,6 +265,14 @@ const temp = pdctCount * Number(data);
 $('.CartupdatePrice').html(temp);
 this.statusCartButton();
   }
+  relatedstore(){
+    this.relatedStore.forEach((element, index) => {
+
+
+
+
+        });
+  }
 productView(prdctId, prdctCommon) {
   $('#productView').modal('show');
   this.relatedStore = [];
@@ -303,6 +311,7 @@ productView(prdctId, prdctCommon) {
             // if(this.arrayCart.)
             // {}
             let flag = 0;
+
             this.arrayCart.forEach((element2, index) => {
               if (element2.product.code == prdctId && element2.product.store == this.statusSelect) {
 
@@ -315,6 +324,7 @@ productView(prdctId, prdctCommon) {
             // this.inCart = `${count} items in cart`;
             if (flag == 0) {
             this.pdtcount = 1;
+            this.inCart='';
             }
 
 

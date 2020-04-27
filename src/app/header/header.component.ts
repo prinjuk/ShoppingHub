@@ -14,6 +14,6 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
   gosearch() {
- this.router.navigate(['list']);
+    this.router.navigate(['list']);
   }
 }

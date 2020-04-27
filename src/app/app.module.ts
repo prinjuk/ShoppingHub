@@ -18,7 +18,21 @@ import { PurchaseSummaryComponent } from './purchase-summary/purchase-summary.co
 import { PaymentsummaryComponent } from './paymentsummary/paymentsummary.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { AdminDashboardModule } from './admin-dashboard/admin-dashboard.module';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard/admin-dashboard.component';
+import { MasterComponent } from './master/master.component';
+import { DashboardComponent } from './admin-dashboard/admin-dashboard/maincontent/dashboard/dashboard.component';
+import { FeedbackComponent } from './admin-dashboard/admin-dashboard/maincontent/feedback/feedback.component';
+import { InventoryComponent } from './admin-dashboard/admin-dashboard/maincontent/Inventory/Inventory.component';
+import { OrdersComponent } from './admin-dashboard/admin-dashboard/maincontent/orders/orders.component';
 
+import { ManageshopsComponent } from './admin-dashboard/admin-dashboard/maincontent/manageshops/manageshops.component';
+import { ManageusersComponent } from './admin-dashboard/admin-dashboard/maincontent/manageusers/manageusers.component';
+import { ShopDashboardComponent } from './shop-dashboard/shop-dashboard.component';
+import { ShopFeedbackComponent } from './shop-dashboard/maincontent/shop-feedback/shop-feedback.component';
+import { ShopinventoryComponent } from './shop-dashboard/maincontent/shopinventory/shopinventory.component';
+import { ShopManageOrdersComponent } from './shop-dashboard/maincontent/shop-manage-orders/shop-manage-orders.component';
+import { ShopManageOrdersTrackComponent } from './shop-dashboard/maincontent/shop-manage-orders-track/shop-manage-orders-track.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,39 +45,88 @@ import { SignupComponent } from './signup/signup.component';
     PurchaseSummaryComponent,
     PaymentsummaryComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    MasterComponent,
+    DashboardComponent,
+    FeedbackComponent,
+
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    AdminDashboardModule,
     FormsModule,
     ToasterModule.forRoot(),
     RouterModule.forRoot([
       {
         path: '',
-      redirectTo: '/home',
-      pathMatch: 'full'
+        component: MasterComponent,
+        children: [
+          { path: '', component: HomeComponent, pathMatch: 'full'},
+          {
+            path: 'list', component: ListPageComponent,
+          },
+
+
+          {
+            path: 'detailpage', component: DetailpageComponent,
+          },
+          {
+            path: 'purchase', component: PurchaseSummaryComponent,
+          },
+          {
+            path: 'login', component: LoginComponent,
+          },
+          {
+            path: 'signup', component: SignupComponent,
+          },
+          {
+            path: 'paymentsummary', component: PaymentsummaryComponent,
+          },
+        ]
+    },
+
+    {
+      path: 'admin', component: AdminDashboardComponent,
+      children: [
+        { path: '', component: DashboardComponent, pathMatch: 'full'},
+        {
+          path: 'feedback', component: FeedbackComponent,
+        },
+        {
+          path: 'Inventory', component: InventoryComponent,
+        },
+        {
+          path: 'manageshops', component: ManageshopsComponent,
+        },
+        {
+          path: 'manageusers', component: ManageusersComponent,
+        },
+        {
+          path: 'orderDetails', component: OrdersComponent,
+        },
+    ]
     },
     {
-      path: 'list', component: ListPageComponent,
-    },{
-      path: 'home', component: HomeComponent,
+      path: 'shop', component: ShopDashboardComponent,
+      children: [
+        { path: '', component: ShopDashboardComponent, pathMatch: 'full'},
+        {
+          path: 'feedback', component: ShopFeedbackComponent,
+        },
+        {
+          path: 'Inventory', component: ShopinventoryComponent,
+        },
+        {
+          path: 'orders', component: ShopManageOrdersComponent,
+        },
+        {
+          path: 'ordertracking', component: ShopManageOrdersTrackComponent,
+        },
+
+    ]
     },
-    {
-      path: 'detailpage', component: DetailpageComponent,
-    },
-    {
-      path: 'purchase', component:PurchaseSummaryComponent,
-    },
-    {
-      path: 'login', component:LoginComponent,
-    },
-    {
-      path: 'signup', component:SignupComponent,
-    },
-    {
-      path: 'paymentsummary', component: PaymentsummaryComponent,
-    },
+
     ]),
 
     NgMatSearchBarModule,

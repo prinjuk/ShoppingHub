@@ -56,12 +56,17 @@
 
               <td class='priceTag'><i class='fa fa-inr'></i> {{ i.product.price*i.product.count }}</td>
               <!-- <td>{{ i.product.code }}</td> -->
+              <td>
+                <div (click)='deleteCart(i.product.store ,i.product.code)'>
+                  <i class='fa fa-close'></i>
+                </div>
 
+              </td>
             </tr>
             <tr *ngIf='childMessage.length != 0' class='totalamt text-right'>
 
 
-              <td colspan='3' class='tot'>Total Amount: <i class='fa fa-inr'></i> {{ this.payout }}</td>
+              <td colspan='4' class='tot'>Total Amount: <i class='fa fa-inr'></i> {{ this.payout }}</td>
 
             </tr>
             <tr *ngIf='childMessage.length != 0'>

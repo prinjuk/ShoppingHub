@@ -10,30 +10,64 @@ declare var $: any;
 
 export class CartfooterComponent implements OnInit {
   @Input() childMessage: any;
-  payout=0;
+  payout = 0;
   @ViewChild('closebutton') closebutton;
-  constructor(private router: Router,private cartData: CartDataService) { }
+  constructor(private router: Router, private cartData: CartDataService) { }
 
   ngOnInit(): void {
    this.cartData.currentMessage.subscribe(message => this.childMessage = message);
     // console.log(this.childMessage);
 
   }
-  goPayment()
-  {
+   Recal() {
+      let sum = 0;
+      this.childMessage.forEach(element => {
+      sum += Number(element.product.price * element.product.count);
+    });
+      this.payout = sum;
+    }
+  goPayment() {
     this.closebutton.nativeElement.click();
     this.cartData.changeMessage(this.childMessage);
     this.router.navigate(['paymentsummary']);
   }
-goCART()
-{
-  var sum=0;
-  this.childMessage.forEach(element => {
-    sum+=Number(element.product.price*element.product.count);
-  });
-  this.payout =sum;
-  //localstorage
-  localStorage.setItem('cartStorage', this.childMessage);
+goCART() {
+
+  // localstorage
+
 // { alert(this.childMessage);
+  if (this.childMessage.length == 0) {
+  const cartLeftOver = JSON.parse(localStorage.getItem('cartStorage'));
+  // alert(cartLeftOver);
+  cartLeftOver.forEach(element => {
+    this.childMessage.push(element);
+  });
+
+} else {
+  localStorage.setItem('cartStorage', JSON.stringify(this.childMessage));
+}
+  this.Recal();
+
   $('#checkoutcart').modal('show');
-}}
+}
+
+deleteCart(code, store) {
+
+  this.childMessage.forEach((element, index) => {
+    const indexiD = this.childMessage.indexOf(element);
+    if (element.product.code == store  && element.product.store == code ) {
+      if (this.childMessage.length != 1) {
+      this.childMessage.splice(indexiD, index);
+      }
+      else {
+      this.childMessage= [];
+      }
+    }
+    // sum += Number(element.product.price * element.product.count);
+  });
+  this.cartData.changeMessage(this.childMessage);
+  localStorage.setItem('cartStorage', JSON.stringify(this.childMessage));
+  this.Recal();
+}
+
+}
