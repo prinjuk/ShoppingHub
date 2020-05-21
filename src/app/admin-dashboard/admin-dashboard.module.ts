@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { MaincontentComponent } from './admin-dashboard/maincontent/maincontent.component';
 import { SidebarComponent } from './admin-dashboard/sidebar/sidebar.component';
@@ -9,7 +10,7 @@ import { InventoryComponent } from './admin-dashboard/maincontent/inventory/inve
 import { ManageusersComponent } from './admin-dashboard/maincontent/manageusers/manageusers.component';
 import { ManageshopsComponent } from './admin-dashboard/maincontent/manageshops/manageshops.component';
 import { FeedbackComponent } from './admin-dashboard/maincontent/feedback/feedback.component';
-
+import { AppRoutingModule } from './../app-routing.module';
 
 
 
@@ -17,7 +18,38 @@ import { FeedbackComponent } from './admin-dashboard/maincontent/feedback/feedba
   // tslint:disable-next-line: max-line-length
   declarations: [AdminDashboardComponent, MaincontentComponent, SidebarComponent, DashboardComponent, OrdersComponent, InventoryComponent, ManageusersComponent, ManageshopsComponent, FeedbackComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    AppRoutingModule,
+    RouterModule.forRoot([
+
+
+      {
+        path: 'admin', component: AdminDashboardComponent,
+        children: [
+          { path: '', component: DashboardComponent, pathMatch: 'full'},
+          {
+            path: 'feedback', component: FeedbackComponent,
+          },
+          {
+            path: 'dashboard', component: DashboardComponent,
+          },
+          {
+            path: 'Inventory', component: InventoryComponent,
+          },
+          {
+            path: 'manageshops', component: ManageshopsComponent,
+          },
+          {
+            path: 'manageusers', component: ManageusersComponent,
+          },
+          {
+            path: 'orderDetails', component: OrdersComponent,
+          },
+      ]
+      },
+
+
+      ]),
   ]
 })
 export class AdminDashboardModule { }

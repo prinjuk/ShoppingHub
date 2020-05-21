@@ -1,1 +1,37 @@
-<p>adminr-dashboard works!</p>
+
+<section class='bgArea'>
+<div class='container-fluid'>
+
+    <div class="row">
+      <div class="flexnav">
+        <div class=" sidenav">
+          <app-sidebar></app-sidebar>
+        </div>
+        <div class="bgareawhite ">
+          <div class="mainnav">
+            <div class="text-center">
+              <ul class='navContents'>
+                <li>Home</li>
+                <li>User</li>
+                <li>Stores</li>
+                <li>Settings</li>
+              </ul>
+            </div>
+            <div class="">
+
+            </div>
+            <div class="">
+              <a href='../'>Logout</a>
+            </div>
+          </div>
+          <div class='cardContents'>
+          <router-outlet></router-outlet>
+        </div>
+        </div>
+      </div>
+
+    </div>
+
+ </div>
+
+</section>

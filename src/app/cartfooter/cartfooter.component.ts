@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild , Input } from '@angular/core';
+import { Component, OnInit, ViewChild , Input , AfterViewInit} from '@angular/core';
 import { Router } from '@angular/router';
 import { CartDataService } from '../cart-data.service';
 declare var $: any;
@@ -8,7 +8,7 @@ declare var $: any;
   styleUrls: ['./cartfooter.component.css']
 })
 
-export class CartfooterComponent implements OnInit {
+export class CartfooterComponent implements OnInit, AfterViewInit  {
   @Input() childMessage: any;
   payout = 0;
   @ViewChild('closebutton') closebutton;
@@ -54,13 +54,13 @@ goCART() {
 deleteCart(code, store) {
 
   this.childMessage.forEach((element, index) => {
+    debugger;
     const indexiD = this.childMessage.indexOf(element);
     if (element.product.code == store  && element.product.store == code ) {
       if (this.childMessage.length != 1) {
       this.childMessage.splice(indexiD, index);
-      }
-      else {
-      this.childMessage= [];
+      } else {
+      this.childMessage = [];
       }
     }
     // sum += Number(element.product.price * element.product.count);
@@ -69,5 +69,20 @@ deleteCart(code, store) {
   localStorage.setItem('cartStorage', JSON.stringify(this.childMessage));
   this.Recal();
 }
+ngAfterViewInit() {
+  // after parent loads get initalzie child for data
+  if (this.childMessage.length == 0) {
+    const cartLeftOver = JSON.parse(localStorage.getItem('cartStorage'));
+    // alert(cartLeftOver);
+    cartLeftOver.forEach(element => {
+      this.childMessage.push(element);
+    });
+
+  } else {
+    localStorage.setItem('cartStorage', JSON.stringify(this.childMessage));
+  }
+  this.Recal();
+
+    }
 
 }

@@ -55,3 +55,11 @@ margin: 0 auto;
 cursor: pointer;
   transition: all 0.4s cubic-bezier(0.6, -0.28, 0.735, 0.045);
 }
+.example-form table{
+  width: 100%;
+}
+.mat-form-field {
+  display: block;
+  position: relative;
+  text-align: left;
+}

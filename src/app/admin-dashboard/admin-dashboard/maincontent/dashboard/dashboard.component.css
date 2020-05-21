@@ -1,0 +1,11 @@
+.dash{
+  display: flex;
+  justify-content: space-around;
+}
+.cardDataChart
+{
+  background: white;
+  padding: 27px;
+  margin-right: 8px;
+  box-shadow: 1px 1px 9px 2px #cdcdcd;
+}

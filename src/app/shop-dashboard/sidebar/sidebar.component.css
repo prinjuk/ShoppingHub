@@ -1,0 +1,163 @@
+
+.nav > li > a:hover, .nav > li > a:focus {
+  text-decoration: none;
+  background-color: #eeeeee00;
+}
+.off-canvas-sidebar, .off-canvas-sidebar[data=red], .sidebar, .sidebar[data=red] {
+  background: #ec250d;
+  background: linear-gradient(0deg,#ec250d 0,#fd5d93 100%);
+}
+.off-canvas-sidebar .logo, .sidebar .logo {
+  position: relative;
+  padding: .5rem .7rem;
+  z-index: 4;
+}
+
+@media (min-width: 991px){
+.main-panel, .sidebar, .sidebar-wrapper {
+    transition-property: top,bottom,width;
+    transition-duration: .2s,.2s,.35s;
+    transition-timing-function: linear,linear,ease;
+    -webkit-overflow-scrolling: touch;
+}}
+.animation-transition-general, .nav-pills .nav-link, .nav-tabs .nav-link, .navbar, .navbar-collapse .navbar-nav .nav-link, .off-canvas-sidebar .logo a.logo-mini, .off-canvas-sidebar .logo a.logo-normal, .off-canvas-sidebar .nav p, .off-canvas-sidebar .user .info>a>span, .off-canvas-sidebar .user .photo, .off-canvas-sidebar .user a, .sidebar .logo a.logo-mini, .sidebar .logo a.logo-normal, .sidebar .nav a, .sidebar .nav a i, .sidebar .nav p, .sidebar .user .info>a>span, .sidebar .user .photo, .sidebar .user a, .tag, .tag [data-role=remove] {
+  transition: all .1s ease 0s;
+}
+.off-canvas-sidebar .logo a.logo-mini, .sidebar .logo a.logo-mini {
+  opacity: 1;
+  float: left;
+  width: 34px;
+  text-align: center;
+  margin-left: 10px;
+  margin-right: 12px;
+}
+.off-canvas-sidebar .logo .simple-text, .sidebar .logo .simple-text {
+  text-transform: uppercase;
+  padding: .5rem 0;
+  display: block;
+  white-space: nowrap;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 400;
+  line-height: 30px;
+  overflow: hidden;
+}
+a {
+  color: #ba54f5;
+  font-weight: 300;
+}
+.logo-img {
+  width: 35px;
+  height: 35px;
+  display: block;
+  margin-left: 2px;
+  position: absolute;
+  top: 12px;
+}
+.logo-img img {
+  width: 35px;
+}
+
+img {
+  max-width: 100%;
+  border-radius: .2857rem;
+}
+.off-canvas-sidebar .logo:after, .sidebar .logo:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 15px;
+  height: 1px;
+  width: calc(100% - 30px);
+  background: rgba(255,255,255,.5);
+}
+.off-canvas-sidebar .sidebar-wrapper, .sidebar .sidebar-wrapper {
+  width: 100%;
+  min-height: 100%;
+  /* max-height: calc(100vh - 705px); */
+  z-index: 4;
+  position: relative;
+  overflow: auto;
+}
+.off-canvas-sidebar .nav, .sidebar .nav {
+  margin-top: 20px;
+  display: block;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+ol li, ul li {
+  color: #fff;
+}
+.off-canvas-sidebar .nav li.active>a:not([data-toggle=collapse]), .sidebar .nav li.active>a:not([data-toggle=collapse]) {
+  background: 0 0;
+}
+.off-canvas-sidebar .nav li:first-child>a, .sidebar .nav li:first-child>a {
+  margin: 0 15px;
+}
+.off-canvas-sidebar .nav li>a, .sidebar .nav li>a {
+  margin: 10px 15px 0;
+  border-radius: 30px;
+  color: #fff;
+  display: block;
+  text-decoration: none;
+  position: relative;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-size: .62475rem;
+  padding: 10px 8px;
+  line-height: 1.625rem;
+}
+.nav li a.active {
+  background: white!important;
+  border-radius: 0px!important;
+  color: black!important;
+  font-weight: 500!important;
+}
+.off-canvas-sidebar .nav li.active>a:not([data-toggle=collapse]) i, .off-canvas-sidebar .nav li.active>a:not([data-toggle=collapse]) p, .sidebar .nav li.active>a:not([data-toggle=collapse]) i, .sidebar .nav li.active>a:not([data-toggle=collapse]) p {
+  color: #fff;
+}
+.off-canvas-sidebar .nav li.active>a:not([data-toggle=collapse]) i, .off-canvas-sidebar .nav li.active>a:not([data-toggle=collapse]) p, .sidebar .nav li.active>a:not([data-toggle=collapse]) i, .sidebar .nav li.active>a:not([data-toggle=collapse]) p {
+  color: #fff;
+}
+body {
+  margin: 0;
+  font-family: Poppins,sans-serif;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #525f7f;
+  text-align: left;
+}
+ul {
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  padding-inline-start: 40px;
+}
+.sidebar{
+  /* height: 100vh; */
+}
+.off-canvas-sidebar .nav li>a, .sidebar .nav li>a {
+  margin: 10px 15px 0;
+  border-radius: 30px;
+  color: #fff;
+  display: block;
+  text-decoration: none;
+  position: relative;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 10px 8px;
+  line-height: 1.625rem;
+
+}
+

@@ -6,7 +6,17 @@ import { FormsModule } from '@angular/forms';
 import {ToasterModule, ToasterService} from 'angular2-toaster';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatInputModule  } from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+
+
+
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
@@ -19,20 +29,9 @@ import { PaymentsummaryComponent } from './paymentsummary/paymentsummary.compone
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { AdminDashboardModule } from './admin-dashboard/admin-dashboard.module';
-import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard/admin-dashboard.component';
 import { MasterComponent } from './master/master.component';
-import { DashboardComponent } from './admin-dashboard/admin-dashboard/maincontent/dashboard/dashboard.component';
-import { FeedbackComponent } from './admin-dashboard/admin-dashboard/maincontent/feedback/feedback.component';
-import { InventoryComponent } from './admin-dashboard/admin-dashboard/maincontent/Inventory/Inventory.component';
-import { OrdersComponent } from './admin-dashboard/admin-dashboard/maincontent/orders/orders.component';
+import { ShopDashboardModule } from './shop-dashboard/shop-dashboard.module';
 
-import { ManageshopsComponent } from './admin-dashboard/admin-dashboard/maincontent/manageshops/manageshops.component';
-import { ManageusersComponent } from './admin-dashboard/admin-dashboard/maincontent/manageusers/manageusers.component';
-import { ShopDashboardComponent } from './shop-dashboard/shop-dashboard.component';
-import { ShopFeedbackComponent } from './shop-dashboard/maincontent/shop-feedback/shop-feedback.component';
-import { ShopinventoryComponent } from './shop-dashboard/maincontent/shopinventory/shopinventory.component';
-import { ShopManageOrdersComponent } from './shop-dashboard/maincontent/shop-manage-orders/shop-manage-orders.component';
-import { ShopManageOrdersTrackComponent } from './shop-dashboard/maincontent/shop-manage-orders-track/shop-manage-orders-track.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,18 +46,21 @@ import { ShopManageOrdersTrackComponent } from './shop-dashboard/maincontent/sho
     LoginComponent,
     SignupComponent,
     MasterComponent,
-    DashboardComponent,
-    FeedbackComponent,
+
 
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AdminDashboardModule,
+    MatCheckboxModule,
+    MatRadioModule,
+    MatButtonModule,
+    MatInputModule,
+    MatFormFieldModule,
     FormsModule,
     ToasterModule.forRoot(),
     RouterModule.forRoot([
-      {
+    {
         path: '',
         component: MasterComponent,
         children: [
@@ -86,49 +88,12 @@ import { ShopManageOrdersTrackComponent } from './shop-dashboard/maincontent/sho
         ]
     },
 
-    {
-      path: 'admin', component: AdminDashboardComponent,
-      children: [
-        { path: '', component: DashboardComponent, pathMatch: 'full'},
-        {
-          path: 'feedback', component: FeedbackComponent,
-        },
-        {
-          path: 'Inventory', component: InventoryComponent,
-        },
-        {
-          path: 'manageshops', component: ManageshopsComponent,
-        },
-        {
-          path: 'manageusers', component: ManageusersComponent,
-        },
-        {
-          path: 'orderDetails', component: OrdersComponent,
-        },
-    ]
-    },
-    {
-      path: 'shop', component: ShopDashboardComponent,
-      children: [
-        { path: '', component: ShopDashboardComponent, pathMatch: 'full'},
-        {
-          path: 'feedback', component: ShopFeedbackComponent,
-        },
-        {
-          path: 'Inventory', component: ShopinventoryComponent,
-        },
-        {
-          path: 'orders', component: ShopManageOrdersComponent,
-        },
-        {
-          path: 'ordertracking', component: ShopManageOrdersTrackComponent,
-        },
 
-    ]
-    },
+
 
     ]),
-
+    ShopDashboardModule,
+    AdminDashboardModule,
     NgMatSearchBarModule,
     AppRoutingModule,
     NliSearchBarModule,

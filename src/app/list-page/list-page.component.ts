@@ -66,44 +66,38 @@ popToast() {
     this.productTransfer = [
 {   storeId: 'Kunnil',
     storeName: 'Kunnil Hypermarket',
-    productid: '411416A001008',
+    barcode: '411416A001008',
     productName: 'Bingo Mad Angles',
     brandName: 'Bingo',
     productSize: '80g',
     price: '90',
     qtyLeft: '5',
     imageUrl: 'https://homedelivery.ramachandran.in/image/cache/catalog/Diary/391912A001016_Nestle-Everyday-Dw-1Kg-250x250.jpg',
-    productCommon: {
-      store: 'S105',
-    },
+
 },
 {
   storeId: 'LULU',
   storeName: 'LULU Hypermarket',
-  productid: '1000s',
+  barcode: '8901491101844',
   productName: 'Lays Potato Chips',
   brandName: 'Lays',
   productSize: '80g',
   price: '100',
   qtyLeft: '15',
-  imageUrl: 'https://images-na.ssl-images-amazon.com/images/I/71RzeDJqcUL._SX425_.jpg',
-  productCommon: {
-    store: 'S106',
-  },
+  imageUrl: 'https://images.barcodesdatabase.org/file/barcodesdatabase/890/149/110/8901491101844.jpg',
+
 },
 {
   storeId: 'Kunnil',
   storeName: 'Kunnil Hypermarket',
-  productid: '1130s',
+  barcode: '8901491101844',
   productName: 'Lays Potato Chips',
   brandName: 'Lays',
   productSize: '80g',
   price: '400',
   qtyLeft: '4',
-  imageUrl: 'https://images-na.ssl-images-amazon.com/images/I/71RzeDJqcUL._SX425_.jpg',
-  productCommon: {
-    store: 'S106',
-  },
+  imageUrl: 'https://images.barcodesdatabase.org/file/barcodesdatabase/890/149/110/8901491101844.jpg',
+
 }
 
 ];
@@ -131,7 +125,7 @@ popToast() {
     } else {
       this.productArray.forEach((value, index, element) => {
 
-        if (element[index].productCommon.store == this.productFilterArray[indexz].productCommon.store) {
+        if (element[index].barcode == this.productFilterArray[indexz].barcode) {
             flag = 1;
 
           }
@@ -237,11 +231,11 @@ this.statusSelect = select;
 this.relatedStore.forEach((element, index) => {
 
   if (element.storeId == select) {
-          this.tempPdt = element.productid;
+          this.tempPdt = element.barcode;
           this.productBindImage = element.imageUrl;
           let flag = 0;
           this.arrayCart.forEach((element2, index) => {
-            if (element2.product.code == element.productid  && element2.product.store == this.statusSelect) {
+            if (element2.product.code == element.barcode  && element2.product.store == this.statusSelect) {
               flag = 1;
 
               this.inCart = `${ element2.product.count} items in cart`;
@@ -273,19 +267,19 @@ this.statusCartButton();
 
         });
   }
-productView(prdctId, prdctCommon) {
+productView(prdctId) {
   $('#productView').modal('show');
   this.relatedStore = [];
   const relatedStore = () => {
     return new Promise((resolve, reject) => {
       this.productFilterArray.forEach((element, index) => {
 
-        if (element.productCommon.store == prdctCommon) {
+        if (element.barcode == prdctId) {
 
             this.relatedStore.push(element);
 
         }
-        if (index == element.productCommon.length) {
+        if (index == element.barcode.length) {
           resolve(true);
         }
       });
@@ -296,17 +290,17 @@ productView(prdctId, prdctCommon) {
     return new Promise((resolve, reject) => {
       this.productFilterArray.forEach(element => {
 
-        if (element.productid == prdctId && element.productCommon.store == prdctCommon) {
+        if (element.barcode == prdctId ) {
             this.statusSelect = element.storeId;
             this.tempPdt = prdctId;
             this.finalprice = element.price;
-            this.tempcommon = prdctCommon;
+            // this.tempcommon = prdctCommon;
             this.productBindImage = element.imageUrl;
             this.productBindName = element.productName;
             this.productBindbrandName = element.brandName;
             this.productBindproductSize = element.productSize;
             this.productBindprice = element.price;
-            this.productBindproductCommon = element.productCommon.store;
+            // this.productBindproductCommon = element.productCommon.store;
             this.storelimit = element.qtyLeft;
             // if(this.arrayCart.)
             // {}
@@ -374,5 +368,6 @@ productView(prdctId, prdctCommon) {
 }
   ngAfterViewInit() {
 // after parent loads get initalzie child for data
+
   }
 }
