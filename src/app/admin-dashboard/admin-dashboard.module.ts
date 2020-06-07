@@ -11,8 +11,8 @@ import { ManageusersComponent } from './admin-dashboard/maincontent/manageusers/
 import { ManageshopsComponent } from './admin-dashboard/maincontent/manageshops/manageshops.component';
 import { FeedbackComponent } from './admin-dashboard/maincontent/feedback/feedback.component';
 import { AppRoutingModule } from './../app-routing.module';
-
-
+import { SharedComponentsModule } from '../sharedView/shared-components/shared-components.module';
+import {MatButtonModule} from '@angular/material/button';
 
 @NgModule({
   // tslint:disable-next-line: max-line-length
@@ -20,6 +20,8 @@ import { AppRoutingModule } from './../app-routing.module';
   imports: [
     CommonModule,
     AppRoutingModule,
+    MatButtonModule,
+    SharedComponentsModule,
     RouterModule.forRoot([
 
 

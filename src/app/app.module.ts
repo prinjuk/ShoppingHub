@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import {MatTableModule} from '@angular/material/table';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -31,7 +31,8 @@ import { SignupComponent } from './signup/signup.component';
 import { AdminDashboardModule } from './admin-dashboard/admin-dashboard.module';
 import { MasterComponent } from './master/master.component';
 import { ShopDashboardModule } from './shop-dashboard/shop-dashboard.module';
-
+import { SharedComponentsModule } from './sharedView/shared-components/shared-components.module';
+import { DatatableServiceStore } from './sharedView/shared-components/datatable.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,9 +49,11 @@ import { ShopDashboardModule } from './shop-dashboard/shop-dashboard.module';
     MasterComponent,
 
 
+
   ],
   imports: [
     BrowserModule,
+    SharedComponentsModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
     MatRadioModule,
@@ -58,6 +61,7 @@ import { ShopDashboardModule } from './shop-dashboard/shop-dashboard.module';
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
+    MatTableModule,
     ToasterModule.forRoot(),
     RouterModule.forRoot([
     {
@@ -99,7 +103,7 @@ import { ShopDashboardModule } from './shop-dashboard/shop-dashboard.module';
     NliSearchBarModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [DatatableServiceStore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,0 +1,31 @@
+<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="Id">
+    <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.Id}} </mat-cell>
+  </ng-container>
+
+
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef> Store Name </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+  </ng-container>
+
+
+  <ng-container matColumnDef="owner">
+    <mat-header-cell *matHeaderCellDef> Owner Details </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.owner}} </mat-cell>
+  </ng-container>
+
+
+  <ng-container matColumnDef="sales">
+    <mat-header-cell *matHeaderCellDef> Sales Report </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.sales}} </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="view">
+    <mat-header-cell *matHeaderCellDef> View More </mat-header-cell>
+    <mat-cell *matCellDef="let element">  <button mat-raised-button color="primary">View Store</button> </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
