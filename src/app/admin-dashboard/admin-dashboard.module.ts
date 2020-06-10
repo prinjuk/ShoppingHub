@@ -13,7 +13,7 @@ import { FeedbackComponent } from './admin-dashboard/maincontent/feedback/feedba
 import { AppRoutingModule } from './../app-routing.module';
 import { SharedComponentsModule } from '../sharedView/shared-components/shared-components.module';
 import {MatButtonModule} from '@angular/material/button';
-
+import {MatTableModule} from '@angular/material/table';
 @NgModule({
   // tslint:disable-next-line: max-line-length
   declarations: [AdminDashboardComponent, MaincontentComponent, SidebarComponent, DashboardComponent, OrdersComponent, InventoryComponent, ManageusersComponent, ManageshopsComponent, FeedbackComponent],
@@ -21,6 +21,7 @@ import {MatButtonModule} from '@angular/material/button';
     CommonModule,
     AppRoutingModule,
     MatButtonModule,
+    MatTableModule,
     SharedComponentsModule,
     RouterModule.forRoot([
 

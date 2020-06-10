@@ -6,9 +6,9 @@ import { CartDataService } from '../cart-data.service';
   styleUrls: ['./paymentsummary.component.css']
 })
 export class PaymentsummaryComponent implements OnInit {
-  childMessage : any;
-  payout =0;
-  constructor(private cartData : CartDataService) { }
+  childMessage: any;
+  payout = 0;
+  constructor(private cartData: CartDataService) { }
   Recal() {
     let sum = 0;
     this.childMessage.forEach(element => {
@@ -28,10 +28,9 @@ export class PaymentsummaryComponent implements OnInit {
     } else {
       localStorage.setItem('cartStorage', JSON.stringify(this.childMessage));
     }
-      this.Recal();
+    this.Recal();
   }
-  paymentForm()
-  {
+  paymentForm() {
 
   }
 }

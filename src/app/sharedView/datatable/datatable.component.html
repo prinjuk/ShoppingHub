@@ -1,4 +1,4 @@
-<mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<!-- <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
   <ng-container matColumnDef="Id">
     <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>
@@ -28,4 +28,18 @@
   </ng-container>
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-</mat-table>
+</mat-table> -->
+<!-- <div  *ngFor="let data2 of dataSource">
+   {{data2.name}}
+
+</div> -->
+<!-- <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="{{data2}}"  *ngFor="let data2 of displayedColumns">
+    <mat-header-cell *matHeaderCellDef> {{data2}} </mat-header-cell>
+    <mat-cell *matCellDef="let element;"> {{element[data2]}} </mat-cell>
+
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table> -->

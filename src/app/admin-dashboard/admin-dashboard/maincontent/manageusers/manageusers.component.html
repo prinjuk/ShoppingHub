@@ -1,1 +1,43 @@
-<p>manageusers works!</p>
+
+
+<div class='adminpanelpadding'>
+  <h2>User Management</h2>
+<table mat-table [dataSource]="dataUser" class="mat-elevation-z8">
+
+
+  <ng-container matColumnDef="Id">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let element"> {{element.Id}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef> name </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="desc">
+    <th mat-header-cell *matHeaderCellDef> Designation </th>
+    <td mat-cell *matCellDef="let element"> {{element.desc}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="lastlogin">
+    <th mat-header-cell *matHeaderCellDef> Last Login </th>
+    <td mat-cell *matCellDef="let element"> {{element.lastlogin}} </td>
+  </ng-container>
+  <ng-container matColumnDef="JoinedOn">
+    <th mat-header-cell *matHeaderCellDef>Joined On</th>
+    <td mat-cell *matCellDef="let element"> {{element.JoinedOn}} </td>
+  </ng-container>
+  <ng-container matColumnDef="routerLink">
+    <th mat-header-cell *matHeaderCellDef>Action</th>
+    <td mat-cell *matCellDef="let element"> <a href='{{element.routerLink}}' mat-raised-button color="primary">View</a> </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+</div>
+
