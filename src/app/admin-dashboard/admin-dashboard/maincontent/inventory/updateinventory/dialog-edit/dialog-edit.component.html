@@ -1,0 +1,77 @@
+<form class="example-form "   (submit)='newinventForm($event)' [formGroup]='userdata' >
+  <!-- <mat-form-field class="example-full-width">
+    <mat-label>Company (disabled)</mat-label>
+    <input matInput disabled value="Google">
+  </mat-form-field> -->
+
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+    <td>
+      <mat-form-field class="example-full-width">
+      <mat-label>Product Name</mat-label>
+      <input matInput formControlName='productname'  required>
+    </mat-form-field>
+  </td>
+
+  </tr>
+  <tr>
+    <td>
+      <mat-form-field class="example-full-width">
+      <mat-label>Kunnil </mat-label>
+      <input matInput formControlName='storeid'   disabled value='Kunnil' placeholder="Kunnil">
+    </mat-form-field>
+  </td>
+  </tr>
+  <!-- categories needed -->
+  <tr>
+    <td>
+      <mat-form-field class='example-full-width'>
+        <mat-label>Product Id</mat-label>
+        <input matInput formControlName='productid' required>
+      </mat-form-field>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <mat-form-field class="example-full-width">
+        <mat-label>Quantity Available</mat-label>
+        <input matInput formControlName='quant'  required>
+      </mat-form-field>
+
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <mat-form-field class="example-full-width">
+        <mat-label>Remaining Available</mat-label>
+        <input matInput formControlName='remaining'  required>
+      </mat-form-field>
+
+    </td>
+  </tr>
+  <tr>
+    <td><mat-form-field class="example-full-width">
+      <mat-label>Common Barcode</mat-label>
+      <input matInput placeholder="Enter Barcode common for the product" formControlName='barcode'  required>
+    </mat-form-field></td>
+  </tr>
+  <tr>
+    <td><mat-form-field class="example-full-width">
+      <mat-label>Price/ Per Product</mat-label>
+      <input matInput placeholder="Enter per unit Price" formControlName='price' required>
+    </mat-form-field></td>
+  </tr>
+  <tr>
+    <td><mat-form-field class="example-full-width">
+      <mat-label>Product Image</mat-label>
+      <input matInput placeholder="Image url" value="" formControlName='imageurl'  required>
+      <!-- <mat-hint align="end"> / 5</mat-hint> -->
+    </mat-form-field></td>
+  </tr>
+</table>
+
+<div class="example-button-row text-center">
+<button mat-raised-button color="primary" type='submit'>Update the Product</button>
+</div>
+
+</form>

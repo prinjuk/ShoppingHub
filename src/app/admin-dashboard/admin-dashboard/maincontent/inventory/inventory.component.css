@@ -1,0 +1,35 @@
+.dash{
+  display: flex;
+  justify-content: space-around;
+}
+.cardDataChart
+{
+  background: white;
+  padding: 27px;
+  margin-right: 8px;
+  box-shadow: 1px 1px 9px 2px #cdcdcd;
+}
+.navbar ul{
+  list-style: none;
+    padding: 0px;
+    display: flex;
+    justify-content: space-evenly;
+    background: white;
+    padding: 0px 5px;
+
+}
+.navbar ul li{
+ cursor: pointer;
+ padding: 8px 11px;
+  }
+  .navbar ul li.active:focus{
+    border:0px solid
+
+
+  }
+.navbar ul li.active{
+  color: #1e1e1e;
+  border-bottom: 2px solid #000;
+  border-radius: 0px;
+
+}

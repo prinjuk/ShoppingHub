@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgMatSearchBarModule } from 'ng-mat-search-bar';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import {ToasterModule, ToasterService} from 'angular2-toaster';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,8 +14,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule  } from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
-
-
+import {MatSelectModule} from '@angular/material/select';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { HomeComponent } from './home/home.component';
 import { HeaderComponent } from './header/header.component';
@@ -33,6 +33,7 @@ import { MasterComponent } from './master/master.component';
 import { ShopDashboardModule } from './shop-dashboard/shop-dashboard.module';
 import { SharedComponentsModule } from './sharedView/shared-components/shared-components.module';
 import { DatatableServiceStore } from './sharedView/shared-components/datatable.service';
+import { DialogComponent } from './sharedView/dialog/dialog/dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,17 +48,21 @@ import { DatatableServiceStore } from './sharedView/shared-components/datatable.
     LoginComponent,
     SignupComponent,
     MasterComponent,
+    DialogComponent,
 
 
 
   ],
   imports: [
     BrowserModule,
+    MatSelectModule,
     SharedComponentsModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
     MatRadioModule,
+    ReactiveFormsModule,
     MatButtonModule,
+    MatDialogModule,
     MatInputModule,
     MatFormFieldModule,
     FormsModule,

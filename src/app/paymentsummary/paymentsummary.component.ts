@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CartDataService } from '../cart-data.service';
+import { NgForm } from '@angular/forms';
 @Component({
   selector: 'app-paymentsummary',
   templateUrl: './paymentsummary.component.html',
@@ -7,6 +8,7 @@ import { CartDataService } from '../cart-data.service';
 })
 export class PaymentsummaryComponent implements OnInit {
   childMessage: any;
+  Details: any;
   payout = 0;
   constructor(private cartData: CartDataService) { }
   Recal() {
@@ -30,7 +32,19 @@ export class PaymentsummaryComponent implements OnInit {
     }
     this.Recal();
   }
-  paymentForm() {
-
+  paymentForm(form: NgForm) {
+    if(form.invalid)
+    return;
+    const details = this.Details = {
+      firstname: form.value.firstname,
+      lastname: form.value.lastname,
+      phone: form.value.phone,
+      addy: form.value.addy,
+      street: form.value.street,
+      city: form.value.city,
+      zip: form.value.zip,
+      state: form.value.state,
+    };
+console.log(details);
   }
 }
