@@ -34,7 +34,7 @@
               "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"
             ],
             "scripts": [
-              "src/server.js",
+
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js",
               "src/scripts/basicFunction.js",
