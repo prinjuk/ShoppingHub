@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild, Renderer2, Input , AfterViewInit  } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
 import { CartfooterComponent } from '../cartfooter/cartfooter.component';
 import {ToasterModule, ToasterService} from 'angular2-toaster';
 import { CartDataService } from '../cart-data.service';
 declare var $: any;
-
+import { HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-list-page',
   templateUrl: './list-page.component.html',
@@ -12,7 +13,12 @@ declare var $: any;
 })
 
 export class ListPageComponent implements OnInit, AfterViewInit  {
-  constructor(private router: Router, private rendering: Renderer2, toasterService: ToasterService, private cartData: CartDataService) {
+  constructor(
+    private router: Router,
+    private rendering: Renderer2,
+    toasterService: ToasterService,
+    private cartData: CartDataService,
+    private http: HttpClient) {
     this.toasterService = toasterService;
   }
   inCart = ``;
@@ -63,79 +69,43 @@ popToast() {
     this.cartData.currentMessage.subscribe(message => this.arrayCart = message);
 // DataListPage
 
-    this.productTransfer = [
-{   storeId: 'Kunnil',
-    storeName: 'Kunnil Hypermarket',
-    barcode: '411416A001008',
-    productName: 'Bingo Mad Angles',
-    brandName: 'Bingo',
-    productSize: '80g',
-    price: '90',
-    qtyLeft: '5',
-    imageUrl: 'https://homedelivery.ramachandran.in/image/cache/catalog/Diary/391912A001016_Nestle-Everyday-Dw-1Kg-250x250.jpg',
+    this.http.get<{message: string, list: any}>('http://localhost:3000/api/searchlist')
+    .subscribe((res) => {
 
-},
-{
-  storeId: 'LULU',
-  storeName: 'LULU Hypermarket',
-  barcode: '8901491101844',
-  productName: 'Lays Potato Chips',
-  brandName: 'Lays',
-  productSize: '80g',
-  price: '100',
-  qtyLeft: '15',
-  imageUrl: 'https://images.barcodesdatabase.org/file/barcodesdatabase/890/149/110/8901491101844.jpg',
+      this.productTransfer = res.list;
+      const data = this.productTransfer;
+      for (const key in data) {
+        if (data.hasOwnProperty(key)) {
 
-},
-{
-  storeId: 'Kunnil',
-  storeName: 'Kunnil Hypermarket',
-  barcode: '8901491101844',
-  productName: 'Lays Potato Chips',
-  brandName: 'Lays',
-  productSize: '80g',
-  price: '400',
-  qtyLeft: '4',
-  imageUrl: 'https://images.barcodesdatabase.org/file/barcodesdatabase/890/149/110/8901491101844.jpg',
+          this.productFilterArray.push(data[key]);
 
-}
-
-];
-    const data = this.productTransfer;
-    for (const key in data) {
-  if (data.hasOwnProperty(key)) {
-
-    this.productFilterArray.push(data[key]);
-
+        }
   }
-}
-//  this.productArray = this.productFilterArray.filter((el, p, i) => {
-//   // return i[0].productCommon.store.indexOf(el.productCommon.store) === p
-// i.forEach((value, index, array) => {
-//
-//   console.log(i[index].productCommon.store.indexOf(el.productCommon.store) === p);
 
-// });
-// });
-// Filtering duplication: future filter on low price
-    this.productFilterArray.forEach((element, indexz) => {
-  let flag = 0;
-  if (this.productArray.length == -1) {
-      this.productArray.push(element);
-    } else {
-      this.productArray.forEach((value, index, element) => {
-
-        if (element[index].barcode == this.productFilterArray[indexz].barcode) {
-            flag = 1;
-
-          }
-      });
-      if (flag != 1) {
+  // Filtering duplication: future filter on low price
+      this.productFilterArray.forEach((element, indexz) => {
+    let flag = 0;
+    if (this.productArray.length == -1) {
         this.productArray.push(element);
-      }
-    }
+      } else {
+        this.productArray.forEach((value, index, element) => {
 
-  });
+          if (element[index].barcode == this.productFilterArray[indexz].barcode) {
+              flag = 1;
+
+            }
+        });
+        if (flag != 1) {
+          this.productArray.push(element);
+        }
+      }
+
+    });
+
+    });
+
+
+
 
     $('.btn-cart').click(() => {
 
@@ -259,7 +229,7 @@ const temp = pdctCount * Number(data);
 $('.CartupdatePrice').html(temp);
 this.statusCartButton();
   }
-  relatedstore(){
+  relatedstore() {
     this.relatedStore.forEach((element, index) => {
 
 
@@ -318,7 +288,7 @@ productView(prdctId) {
             // this.inCart = `${count} items in cart`;
             if (flag == 0) {
             this.pdtcount = 1;
-            this.inCart='';
+            this.inCart = '';
             }
 
 

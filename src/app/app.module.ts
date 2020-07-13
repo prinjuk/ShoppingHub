@@ -34,6 +34,8 @@ import { ShopDashboardModule } from './shop-dashboard/shop-dashboard.module';
 import { SharedComponentsModule } from './sharedView/shared-components/shared-components.module';
 import { DatatableServiceStore } from './sharedView/shared-components/datatable.service';
 import { DialogComponent } from './sharedView/dialog/dialog/dialog.component';
+
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +57,7 @@ import { DialogComponent } from './sharedView/dialog/dialog/dialog.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     MatSelectModule,
     SharedComponentsModule,
     BrowserAnimationsModule,
@@ -108,7 +111,7 @@ import { DialogComponent } from './sharedView/dialog/dialog/dialog.component';
     NliSearchBarModule,
     BrowserAnimationsModule
   ],
-  providers: [DatatableServiceStore],
+  providers: [DatatableServiceStore,HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
