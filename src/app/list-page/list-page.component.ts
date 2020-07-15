@@ -202,7 +202,7 @@ this.relatedStore.forEach((element, index) => {
 
   if (element.storeId == select) {
           this.tempPdt = element.barcode;
-          this.productBindImage = element.imageUrl;
+          this.productBindImage = element.imageurl;
           let flag = 0;
           this.arrayCart.forEach((element2, index) => {
             if (element2.product.code == element.barcode  && element2.product.store == this.statusSelect) {
@@ -265,7 +265,7 @@ productView(prdctId) {
             this.tempPdt = prdctId;
             this.finalprice = element.price;
             // this.tempcommon = prdctCommon;
-            this.productBindImage = element.imageUrl;
+            this.productBindImage = element.imageurl;
             this.productBindName = element.productName;
             this.productBindbrandName = element.brandName;
             this.productBindproductSize = element.productSize;

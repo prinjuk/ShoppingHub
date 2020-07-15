@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 @Injectable()
 @Component({
@@ -13,7 +13,7 @@ import { Injectable } from '@angular/core';
 export class AddinventoryComponent implements OnInit {
   Details: any;
   public userdata: FormGroup;
-  constructor(public form: FormBuilder) { }
+  constructor(public form: FormBuilder,  private http: HttpClient) { }
 
   ngOnInit(): void {
     this.buildForm();
@@ -29,12 +29,12 @@ export class AddinventoryComponent implements OnInit {
     if (input.srcElement.files[0] && (input.srcElement.value.endsWith('jpg') || input.srcElement.value.endsWith('png'))) {
    reader = new FileReader();
 
-   reader.onload = (e:any)=>{
+   reader.onload = (e: any) => {
 
     data = e.target.result;
 
    //  this.uploaded=true;
-    let preview: HTMLElement = document.getElementById('preview') as HTMLElement;
+    const preview: HTMLElement = document.getElementById('preview') as HTMLElement;
     preview.setAttribute('src', data);
 
    };
@@ -47,11 +47,14 @@ export class AddinventoryComponent implements OnInit {
       productname: ['', [Validators.required]],
       storeid: ['', [Validators.required]],
       productid: ['', [Validators.required]],
-      quant: ['', [Validators.required, Validators.pattern('[0-9]')]],
-      remaining: ['', [Validators.required, Validators.pattern('[0-9]')]],
+      quant: ['', [Validators.required]],
+      remaining: ['', [Validators.required]],
       barcode: ['', [Validators.required]],
-      price: ['', [Validators.required, Validators.pattern('[0-9]')]],
+      price: ['', [Validators.required]],
       imageurl: ['', [Validators.required]],
+      storeName: ['', [Validators.required]],
+      brandName:  ['', [Validators.required]],
+      productSize:   ['', [Validators.required]],
     });
 //    this.userdata.setValue({
 
@@ -60,19 +63,24 @@ export class AddinventoryComponent implements OnInit {
 
     }
   newinventForm(form: NgForm) {
-    if (form.invalid) {
+
+    if (this.userdata.invalid) {
     return;
-    }
-    const details = this.Details = {
-      productname: form.value.productname,
-      store: form.value.storeid,
-      productid: form.value.productid,
-      quant: form.value.quant,
-      remaining: form.value.remaining,
-      barcode: form.value.barcode,
-      price: form.value.price,
-      imageurl: form.value.imageurl,
-    };
-    console.log(details);
+    } else {
+      // const preview: HTMLElement = document.getElementById('preview') as HTMLElement;
+      // const imageUpload = preview.getAttribute('src');
+      // this.userdata.value['imageurl'] = imageUpload;
+
+
+
+      const details = this.userdata.value;
+      console.log(details);
+      const url = 'http://localhost:3000/newInvent';
+      this.http.post<any>(url, details).subscribe(res => {
+
+        console.log(details);
+        });
+}
+
   }
 }

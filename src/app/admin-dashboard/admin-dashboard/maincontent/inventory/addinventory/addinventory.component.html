@@ -1,6 +1,6 @@
 <div class='tab-content'>
   <div class='row'>
-    <form class="example-form "   (submit)='newinventForm($event)' [formGroup]='userdata' >
+    <form class="example-form" formenctype ='/newInvent'  method="POST"  (ngSubmit)='newinventForm($event)' [formGroup]='userdata' >
     <div class="col-md-4 col-xs-12">
       <div class="imagearea avatar-upload"  (click)='upload($event)'  >
         <img class="" id='preview' src="https://748073e22e8db794416a-cc51ef6b37841580002827d4d94d19b6.ssl.cf3.rackcdn.com/not-found.png" alt="upload" style="">
@@ -20,6 +20,25 @@
     </mat-form-field> -->
 
     <table class="example-full-width" cellspacing="0">
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+          <mat-label>Store Name</mat-label>
+          <input matInput formControlName='storeName'  required>
+        </mat-form-field>
+      </td>
+
+      </tr>
+      <tr>
+        <td>
+          <mat-form-field class="example-full-width">
+          <mat-label>Brand Name</mat-label>
+          <input matInput formControlName='brandName'  required>
+        </mat-form-field>
+      </td>
+
+      </tr>
+
       <tr>
       <td>
         <mat-form-field class="example-full-width">
@@ -75,6 +94,15 @@
         <mat-label>Price/ Per Product</mat-label>
         <input matInput placeholder="Enter per unit Price" formControlName='price' required>
       </mat-form-field></td>
+    </tr>
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width">
+        <mat-label>Product Size</mat-label>
+        <input matInput formControlName='productSize'  required>
+      </mat-form-field>
+    </td>
+
     </tr>
     <!-- <tr>
       <td><mat-form-field class="example-full-width">

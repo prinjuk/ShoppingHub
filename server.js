@@ -11,3 +11,5 @@ const server=http.createServer(app);
 // server.on("error",error);
 // server.on("listening",onlistening);
 server.listen(port);
+console.log(port);
+
