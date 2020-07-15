@@ -46,6 +46,8 @@ console.log('db connected succesful');
 //       'GET, POSTS, PATCH, DELETE, OPTIONS');
 // next();
 // });
+
+//submitting
 app.post('/newInvent',(req,res,next) => {
     // console.log(req.body.storeId);
   const passData=new List({
@@ -72,6 +74,7 @@ app.post('/newInvent',(req,res,next) => {
   // passData.save();
 
 });
+//retrieving
 app.use('/api/searchlist',(req,res,next)=>{
   let searchlist;
   List.find()

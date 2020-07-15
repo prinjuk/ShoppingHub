@@ -67,10 +67,10 @@ export class AddinventoryComponent implements OnInit {
     if (this.userdata.invalid) {
     return;
     } else {
-      // const preview: HTMLElement = document.getElementById('preview') as HTMLElement;
-      // const imageUpload = preview.getAttribute('src');
-      // this.userdata.value['imageurl'] = imageUpload;
-
+      const preview: HTMLElement = document.getElementById('preview') as HTMLElement;
+      const imageUpload = preview.getAttribute('src');
+      this.userdata.value['imageurl'] = imageUpload;
+      
 
 
       const details = this.userdata.value;

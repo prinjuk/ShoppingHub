@@ -6,6 +6,7 @@ import {ToasterModule, ToasterService} from 'angular2-toaster';
 import { CartDataService } from '../cart-data.service';
 declare var $: any;
 import { HttpClient } from '@angular/common/http';
+import { DomSanitizer } from '@angular/platform-browser';
 @Component({
   selector: 'app-list-page',
   templateUrl: './list-page.component.html',
@@ -18,6 +19,7 @@ export class ListPageComponent implements OnInit, AfterViewInit  {
     private rendering: Renderer2,
     toasterService: ToasterService,
     private cartData: CartDataService,
+    private sanitizer : DomSanitizer,
     private http: HttpClient) {
     this.toasterService = toasterService;
   }
@@ -181,7 +183,10 @@ popToast() {
     }
     this.statusCartButton();
   }
-
+imageConverter(base64data)
+{
+ return (this.sanitizer.bypassSecurityTrustUrl(base64data));
+}
   hotelMinus(data) {
     let pdctCount = this.pdtcount;
     if (pdctCount < 2) {

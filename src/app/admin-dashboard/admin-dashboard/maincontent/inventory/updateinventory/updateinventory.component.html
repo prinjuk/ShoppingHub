@@ -21,7 +21,7 @@
         <table class='table tableresult' (click)='opendialog(result)'>
           <tr>
             <td colspan='2' class='text-center'>
-              <img src="{{result.image}}">
+              <img src="{{result.imageurl}}">
             </td>
           </tr>
           <tr>
@@ -30,7 +30,7 @@
               Product Name
             </th>
             <td>
-              {{result.name}}
+              {{result.productname}}
             </td>
           </tr>
           <tr>
@@ -38,23 +38,23 @@
               Store Name
             </th>
             <td>
-              {{result.store}}
+              {{result.storeName}}
             </td>
           </tr>
-          <tr>
+          <!-- <tr>
             <th>
               Product Id
             </th>
             <td>
               {{result.productid}}
             </td>
-          </tr>
+          </tr> -->
           <tr>
             <th>
               Quantity Available
             </th>
             <td>
-              {{result.QTYa}}
+              {{result.quant}}
             </td>
           </tr>
           <tr>
@@ -62,7 +62,7 @@
               Remaining Available
             </th>
             <td>
-              {{result.QTYr}}
+              {{result.remaining}}
             </td>
           </tr>
           <tr>
@@ -70,7 +70,7 @@
               Barcode
             </th>
             <td>
-              {{result.Barcode}}
+              {{result.barcode}}
             </td>
           </tr>
           <tr>
@@ -78,7 +78,7 @@
               Price/ Per Product
             </th>
             <td>
-              {{result.Priceper}}
+              {{result.price}}
             </td>
           </tr>
 

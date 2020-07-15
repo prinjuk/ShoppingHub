@@ -139,9 +139,8 @@
               <li>
                 <div class="defaultFlex">
                   <div class="ProductShowCase" style='
-                  background: url({{ pdt.imageurl }});
-                  background-size: cover;
-              '>
+                  background: url({{ imageConverter(pdt.imageurl) }});
+                  background-size: cover;'>
 
                   </div>
                   <!-- <div class='Availablity'>
@@ -150,7 +149,7 @@
 
                   <div class="showMore">
                     <div class="productName">
-                      {{ pdt.productName }}
+                      {{ pdt.productname }}
                     </div>
                     <!-- <span class='mrpTag'>MRP starts from</span> -->
                     <span class="priceTAG">
