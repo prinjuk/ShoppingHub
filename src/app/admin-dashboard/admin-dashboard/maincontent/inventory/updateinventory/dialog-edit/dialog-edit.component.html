@@ -1,4 +1,4 @@
-<form class="example-form "   (submit)='newinventForm($event)' [formGroup]='userdata' >
+<form class="example-form "   [formGroup]='userdata' >
   <!-- <mat-form-field class="example-full-width">
     <mat-label>Company (disabled)</mat-label>
     <input matInput disabled value="Google">
@@ -14,23 +14,23 @@
   </td>
 
   </tr>
-  <tr>
+  <!-- <tr>
     <td>
       <mat-form-field class="example-full-width">
       <mat-label>Kunnil </mat-label>
       <input matInput formControlName='storeid'   disabled value='Kunnil' placeholder="Kunnil">
     </mat-form-field>
   </td>
-  </tr>
+  </tr> -->
   <!-- categories needed -->
-  <tr>
+  <!-- <tr>
     <td>
       <mat-form-field class='example-full-width'>
         <mat-label>Product Id</mat-label>
         <input matInput formControlName='productid' required>
       </mat-form-field>
     </td>
-  </tr>
+  </tr> -->
   <tr>
     <td>
       <mat-form-field class="example-full-width">
@@ -71,9 +71,9 @@
 </table>
 
 <div class="example-button-row text-center">
-<button mat-raised-button color="primary" type='submit'>Update the Product</button>
+<button mat-raised-button color="primary" (click)="newinventForm(ListId)"  type='submit'>Update the Product</button>
 <hr>
-<button mat-raised-button color="warning" >Delete the Product</button>
+<button mat-raised-button color="warning" (click)="DeleteProduct(ListId)"  >Delete the Product</button>
 </div>
 
 </form>

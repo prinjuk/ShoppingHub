@@ -22,3 +22,7 @@ td, th {
 th {
  font-weight: 500;
 }
+img{
+  width: 117px;
+    object-fit: cover;
+}

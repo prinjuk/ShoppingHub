@@ -33,9 +33,9 @@ export class UpdateinventoryComponent implements OnInit {
     if (!this.productdata.invalid) {
       this.resultshown = 1;
       searchvalue = this.productdata.value.productsec;
-      this.http.get<{message: string, list: any}>('http://localhost:3000/api/searchlist')
+      this.http.get<{message: string, list: any}>('http://localhost:3000/api/filterSearch/'+ searchvalue)
       .subscribe((res) => {
-        debugger;
+
         this.resultjsonsearch = res.list;
         // const data = this.productTransfer;
         const resultSet = JSON.stringify(this.resultjsonsearch);

@@ -74,7 +74,7 @@ app.post('/newInvent',(req,res,next) => {
   // passData.save();
 
 });
-//retrieving
+//retrievingSearch
 app.use('/api/searchlist',(req,res,next)=>{
   let searchlist;
   List.find()
@@ -86,45 +86,80 @@ app.use('/api/searchlist',(req,res,next)=>{
     });
   });
 
-//   const searchlist=[
-//     {   storeId: 'Kunnil',
-//     storeName: 'Kunnil Hypermarket',
-//     barcode: '411416A001008',
-//     productName: 'Bingo Mad Angles',
-//     brandName: 'Bingo',
-//     productSize: '80g',
-//     price: '90',
-//     qtyLeft: '5',
-//     imageUrl: 'https://homedelivery.ramachandran.in/image/cache/catalog/Diary/391912A001016_Nestle-Everyday-Dw-1Kg-250x250.jpg',
+});
+//searchspecific
+app.use('/api/filterSearch/:productname',(req,res,next)=>{
+  let searchlist;
 
-// },
-// {
-//   storeId: 'LULU',
-//   storeName: 'LULU Hypermarket',
-//   barcode: '8901491101844',
-//   productName: 'Lays Potato Chips',
-//   brandName: 'Lays',
-//   productSize: '80g',
-//   price: '100',
-//   qtyLeft: '15',
-//   imageUrl: 'https://images.barcodesdatabase.org/file/barcodesdatabase/890/149/110/8901491101844.jpg',
+  let para=req.params.productname;
+  console.log(req.params.productname);
+  List.find(
+    { productname: { $regex: para }}
 
-// },
-// {
-//   storeId: 'Kunnil',
-//   storeName: 'Kunnil Hypermarket',
-//   barcode: '8901491101844',
-//   productName: 'Lays Potato Chips',
-//   brandName: 'Lays',
-//   productSize: '80g',
-//   price: '400',
-//   qtyLeft: '4',
-//   imageUrl: 'https://images.barcodesdatabase.org/file/barcodesdatabase/890/149/110/8901491101844.jpg',
-
-// }
-
-//   ];
+  )
+  .then((document)=>{
+    searchlist=document;
+    res.status(200).json({
+      message:'success',
+      list:searchlist,
+    });
+  });
 
 });
+//deletespecific
+app.delete('/api/delete/:id',(req,res,next)=>{
+  let searchlist;
 
+  let para=req.params.id;
+  console.log(req.params._id);
+  List.deleteOne(
+    { _id: para}
+
+  )
+  .then((document)=>{
+    searchlist=document;
+    console.log('deleted');
+    res.status(200).json({
+      message:'success',
+      list:searchlist,
+    });
+  });
+
+});
+//updatespecific
+app.put('/api/update/:id',(req,res,next)=>{
+
+
+  let para=req.params.id;
+  console.log(req.params._id);
+  const passData=new List({
+    _id:req.body.id,
+    storeid: req.body.id,
+
+    barcode:  req.body.barcode,
+    productname:  req.body.productname,
+    // brandName:  req.body.brandName,
+    // productSize:  req.body.productSize,
+    price:  req.body.price,
+    quant:  req.body.quant,
+    imageurl:  req.body.imageurl,
+    remaining: req.body.remaining,
+
+
+ });
+  List.updateOne(
+    { _id: para},
+    passData
+
+  )
+  .then((document)=>{
+    searchlist=document;
+    console.log('passed');
+    res.status(200).json({
+      message:'success',
+
+    });
+  });
+
+});
 module.exports = app;

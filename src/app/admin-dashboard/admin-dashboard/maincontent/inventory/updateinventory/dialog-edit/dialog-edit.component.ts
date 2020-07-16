@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
 @Injectable()
 @Component({
   selector: 'app-dialog-edit',
@@ -11,21 +13,22 @@ import { Injectable } from '@angular/core';
 })
 export class DialogEditComponent implements OnInit {
   Details: any;
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public form: FormBuilder) { }
+  ListId = '';
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any, public form: FormBuilder, public http: HttpClient) { }
   public userdata: FormGroup;
   ngOnInit(): void {
 this.buildForm();
-
+this.ListId = this.data.result['_id'];
 console.log(this.data);
 this.userdata.patchValue({
-  productname: this.data['result']['productname'],
-  storeid: this.data['result']['storeid'],
-  productid: this.data['result']['productid'],
-  quant: this.data['result']['quant'],
-  remaining: this.data['result']['remaining'],
-  barcode: this.data['result']['barcode'],
-  price: this.data['result']['price'],
-  imageurl: this.data['result']['imageurl'],
+  productname: this.data.result['productname'],
+  storeid: this.data.result['storeid'],
+  productid: this.data.result['productid'],
+  quant: this.data.result['quant'],
+  remaining: this.data.result['remaining'],
+  barcode: this.data.result['barcode'],
+  price: this.data.result['price'],
+  imageurl: this.data.result['imageurl'],
 
    });
 
@@ -33,8 +36,8 @@ this.userdata.patchValue({
   public buildForm() {
     this.userdata = this.form.group({
       productname: ['', [Validators.required]],
-      storeid: ['', [Validators.required]],
-      productid: ['', [Validators.required]],
+
+      // productid: ['', [Validators.required]],
       quant: ['', [Validators.required]],
       remaining: ['', [Validators.required]],
       barcode: ['', [Validators.required]],
@@ -47,20 +50,41 @@ this.userdata.patchValue({
 // });
 
     }
-  newinventForm(form: NgForm) {
-    if (form.invalid) {
-    return;
+  newinventForm(ListId) {
+    console.log(this.userdata.valid);
+    this.userdata.value['id']=ListId;
+    if (this.userdata.valid) {
+      this.http.put('http://localhost:3000/api/update/'+ ListId, this.userdata.value)
+      .subscribe((res)=>{
+        console.log(res);
+      });
+
+    } else {
+
     }
-    const details = this.Details = {
-      productname: form.value.productname,
-      store: form.value.storeid,
-      productid: form.value.productid,
-      quant: form.value.quant,
-      remaining: form.value.remaining,
-      barcode: form.value.barcode,
-      price: form.value.price,
-      imageurl: form.value.imageurl,
-    };
-    console.log(details);
+
+    // if (form.invalid) {
+    // return;
+    // } else {
+    //   const details = this.Details = {
+    //     productname: form.value.productname,
+    //     store: form.value.storeid,
+    //     productid: form.value.productid,
+    //     quant: form.value.quant,
+    //     remaining: form.value.remaining,
+    //     barcode: form.value.barcode,
+    //     price: form.value.price,
+    //     imageurl: form.value.imageurl,
+    //   };
+    //   console.log(details);
+    // }
+
+  }
+  DeleteProduct(value) {
+    this.http.delete<{message: string, list: any}>('http://localhost:3000/api/delete/' + value)
+    .subscribe(response => {
+      alert(response.message);
+    });
+
   }
 }
