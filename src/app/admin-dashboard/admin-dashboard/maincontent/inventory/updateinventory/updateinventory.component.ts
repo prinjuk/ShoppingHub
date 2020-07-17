@@ -41,7 +41,7 @@ export class UpdateinventoryComponent implements OnInit {
         const resultSet = JSON.stringify(this.resultjsonsearch);
 
 
-        this.refined=[];
+        this.refined= [];
         console.log(resultSet);
         for (const element of JSON.parse(resultSet)) {
           if (element.productname.toLowerCase().includes(searchvalue.toLowerCase())) {

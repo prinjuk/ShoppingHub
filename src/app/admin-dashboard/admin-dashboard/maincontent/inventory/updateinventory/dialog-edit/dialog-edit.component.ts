@@ -71,21 +71,6 @@ export class DialogEditComponent implements OnInit {
 
     }
 
-    // if (form.invalid) {
-    // return;
-    // } else {
-    //   const details = this.Details = {
-    //     productname: form.value.productname,
-    //     store: form.value.storeid,
-    //     productid: form.value.productid,
-    //     quant: form.value.quant,
-    //     remaining: form.value.remaining,
-    //     barcode: form.value.barcode,
-    //     price: form.value.price,
-    //     imageurl: form.value.imageurl,
-    //   };
-    //   console.log(details);
-    // }
 
   }
   DeleteProduct(value) {

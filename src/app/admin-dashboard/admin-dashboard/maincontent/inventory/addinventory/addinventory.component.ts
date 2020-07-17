@@ -18,10 +18,10 @@ export class AddinventoryComponent implements OnInit {
   ngOnInit(): void {
     this.buildForm();
   }
-  upload(e) {
-    const element: HTMLElement = document.getElementById('uploadImage') as HTMLElement;
-    element.click();
-  }
+  // upload(e) {
+  //   const element: HTMLElement = document.getElementById('uploadImage') as HTMLElement;
+  //   element.click();
+  // }
   onFileChange(input) {
     let data = '';
     let reader;
@@ -70,7 +70,7 @@ export class AddinventoryComponent implements OnInit {
       const preview: HTMLElement = document.getElementById('preview') as HTMLElement;
       const imageUpload = preview.getAttribute('src');
       this.userdata.value['imageurl'] = imageUpload;
-      
+
 
 
       const details = this.userdata.value;
