@@ -139,7 +139,7 @@ app.put('/api/update/:id',(req,res,next)=>{
     barcode:  req.body.barcode,
     productname:  req.body.productname,
     // brandName:  req.body.brandName,
-    // productSize:  req.body.productSize,
+    productSize:  req.body.productSize,
     price:  req.body.price,
     quant:  req.body.quant,
     imageurl:  req.body.imageurl,
