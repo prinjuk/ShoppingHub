@@ -85,6 +85,7 @@ popToast() {
   }
 
   // Filtering duplication: future filter on low price
+  debugger;
       this.productFilterArray.forEach((element, indexz) => {
     let flag = 0;
     if (this.productArray.length == -1) {
@@ -204,8 +205,8 @@ this.finalprice = data;
 this.statusSelect = select;
     // this.relatedStore=[];
 this.relatedStore.forEach((element, index) => {
-
-  if (element.storeId == select) {
+debugger;
+  if (element.storeid == select) {
           this.tempPdt = element.barcode;
           this.productBindImage = element.imageurl;
           let flag = 0;
@@ -221,10 +222,10 @@ this.relatedStore.forEach((element, index) => {
             this.inCart = '';
             this.pdtcount = 1;
           }
-          if (this.pdtcount > element.qtyLeft) {
-            this.pdtcount = element.qtyLeft;
+          if (this.pdtcount > element.quant) {
+            this.pdtcount = element.quant;
           }
-          this.storelimit = element.qtyLeft;
+          this.storelimit = element.quant;
         }
 
 
@@ -243,6 +244,7 @@ this.statusCartButton();
         });
   }
 productView(prdctId) {
+  debugger;
   $('#productView').modal('show');
   this.relatedStore = [];
   const relatedStore = () => {
@@ -266,17 +268,17 @@ productView(prdctId) {
       this.productFilterArray.forEach(element => {
 
         if (element.barcode == prdctId ) {
-            this.statusSelect = element.storeId;
+            this.statusSelect = element.storeid;
             this.tempPdt = prdctId;
             this.finalprice = element.price;
             // this.tempcommon = prdctCommon;
             this.productBindImage = element.imageurl;
-            this.productBindName = element.productName;
+            this.productBindName = element.productname;
             this.productBindbrandName = element.brandName;
             this.productBindproductSize = element.productSize;
             this.productBindprice = element.price;
             // this.productBindproductCommon = element.productCommon.store;
-            this.storelimit = element.qtyLeft;
+            this.storelimit = element.quant;
             // if(this.arrayCart.)
             // {}
             let flag = 0;

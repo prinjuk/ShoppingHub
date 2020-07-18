@@ -36,7 +36,8 @@ goCART() {
   // localstorage
 
 // { alert(this.childMessage);
-  if (this.childMessage.length == 0) {
+debugger;
+  if (this.childMessage.length == 0 && JSON.parse(localStorage.getItem('cartStorage'))!=null) {
   const cartLeftOver = JSON.parse(localStorage.getItem('cartStorage'));
   // alert(cartLeftOver);
   cartLeftOver.forEach(element => {

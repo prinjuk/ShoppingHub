@@ -1,23 +1,51 @@
 const express= require('express');
 const List =require('./models/List');
+const path = require('path');
 const mongoose=require('mongoose');
 const router = express.Router();
 const bodyParser = require("body-parser");
 var cors = require('cors');
 const { ConsoleReporter } = require('jasmine');
 
-
 const app= express();
 app.use(cors());
+
+const multer =require('multer');
+const MIME_TYPE_MAP={
+  'image/png':'png',
+  'image/jpg':'jpg',
+}
+
+app.use('/images',express.static(path.join('./backend/images'),{fallthrough: false}));
+const storage = multer.diskStorage({
+  // destination:(req,file,cb)=>{
+  //   // const isValid=MIME_TYPE_MAP[file.mimetype];
+  //   // let error = new Error('invalid mime type');
+  //   // if(isValid)
+  //   // {
+  //   //   error =null;
+  //   // }
+  //   cb(error,'backend/images');
+  // },
+  // filename:(req,file,cb)=>{
+  //   const name=file.originalname.toLowerCase().split(' ').join('-');
+  //   const ext=MIME_TYPE_MAP[file.mimetype];
+  //   cb(null,name+'-'+ Date.now()+ '.'+ ext);
+  // }
+  destination: function (req, file, cb) {
+    cb(null, 'backend/images')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now()+'.jpg')
+  }
+});
+
+
 //Here we are configuring express to use body-parser as middle-ware.
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.json());
-// app.use(function (req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-//   next();
-// });
+
 mongoose.connect('mongodb+srv://adminPK:K8fZUKUGDa0OtXZz@shopping-hub.ilxx0.mongodb.net/Shopping-hub?retryWrites=true&w=majority',{ useNewUrlParser: true })
 .then(()=>{
 console.log('db connected succesful');
@@ -27,29 +55,11 @@ console.log('db connected succesful');
   console.log('db failed');
 
 });
-// router.post('/', function(req, res) {
-// alert("hi");
-// });
 
-
-
-
-// app.use((req,res,next)=>{
-//       res.setHeader('Access-Control-Allow-Origin','*');
-//       res.setHeader(
-//         'Access-Control-Allow-Headers',
-//       'Origin,X-Requested-With,Content-Type,Accept'
-//       );
-
-//       res.setHeader(
-//         'Access-Control-Allow-Methods',
-//       'GET, POSTS, PATCH, DELETE, OPTIONS');
-// next();
-// });
 
 //submitting
-app.post('/newInvent',(req,res,next) => {
-    // console.log(req.body.storeId);
+app.post('/newInvent',multer({storage,storage}).single('imageurl'),(req,res,next) => {
+   const url=req.protocol+'://'+req.get('host');
   const passData=new List({
 
     storeid: req.body.storeid,
@@ -60,12 +70,12 @@ app.post('/newInvent',(req,res,next) => {
     productSize:  req.body.productSize,
     price:  req.body.price,
     quant:  req.body.quant,
-    imageurl:  req.body.imageurl,
+    imageurl: url+'/images/'+req.file.filename,
     remaining: req.body.remaining,
 
     productSize: req.body.productSize,
  });
- passData.save();
+passData.save();
   res.status(200).json({
     message:'success',
     list:passData,

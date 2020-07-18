@@ -72,7 +72,7 @@
                   <li  *ngFor="let pdt of relatedStore">
                     <span>{{ pdt.storeName }}</span>
                     <span class="price" ><i class="fa fa-inr"></i>{{ pdt.price }}  </span>
-                    <span class="btn btn-select " (click)="btnStoreChange(pdt.storeId, pdt.price)"   attr.data-price="{{pdt.price}}"  attr.id="{{ pdt.storeId}}" [class.active]="statusSelect==pdt.storeId" ><span [hidden]="statusSelect==pdt.storeId">Select</span><span [hidden]="!(statusSelect==pdt.storeId)"> Selected</span></span>
+                    <span class="btn btn-select " (click)="btnStoreChange(pdt.storeid, pdt.price)"   attr.data-price="{{pdt.price}}"  attr.id="{{ pdt.storeid}}" [class.active]="statusSelect==pdt.storeid" ><span [hidden]="statusSelect==pdt.storeid">Select</span><span [hidden]="!(statusSelect==pdt.storeid)"> Selected</span></span>
                   </li>
 
                 </ul>
