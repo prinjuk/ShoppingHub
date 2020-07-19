@@ -135,7 +135,7 @@
       <div class="col-md-8">
         <div class="row">
           <div class="col-md-6 productViewer" *ngFor="let pdt of productArray">
-            <ul class="defaultUl listProduct"  (click)='productView( pdt.barcode)'>
+            <ul class="defaultUl listProduct"  (click)='productView( pdt.barcode, pdt.storeid)'>
               <li>
                 <div class="defaultFlex">
                   <div class="ProductShowCase" style='

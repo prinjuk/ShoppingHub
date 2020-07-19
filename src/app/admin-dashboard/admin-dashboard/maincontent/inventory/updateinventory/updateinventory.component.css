@@ -23,6 +23,7 @@ th {
  font-weight: 500;
 }
 img{
-  width: 117px;
-    object-fit: cover;
+  height: 123px;
+  -o-object-fit: contain;
+  object-fit: contain;
 }

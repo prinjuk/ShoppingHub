@@ -18,12 +18,13 @@ export class ListPageComponent implements OnInit, AfterViewInit  {
     private router: Router,
     private rendering: Renderer2,
     toasterService: ToasterService,
-    private cartData: CartDataService,
+    public cartData: CartDataService,
     private sanitizer : DomSanitizer,
     private http: HttpClient) {
     this.toasterService = toasterService;
   }
   inCart = ``;
+  searchQuery:any;
   productTransfer = {};
   productArray = [];
   arrayCart = [];
@@ -68,10 +69,17 @@ popToast() {
 }
 
   ngOnInit(): void {
+    debugger;
     this.cartData.currentMessage.subscribe(message => this.arrayCart = message);
+    this.cartData.currentsearch.subscribe(message=>this.searchQuery=message);
 // DataListPage
-
-    this.http.get<{message: string, list: any}>('http://localhost:3000/api/searchlist')
+if(this.searchQuery.value.search == undefined)
+{
+  this.searchQuery.value.search='';
+}
+console.log(this.searchQuery.value.search);
+    debugger;
+    this.http.get<{message: string, list: any}>('http://localhost:3000/api/searchlist'+this.searchQuery.value.search)
     .subscribe((res) => {
 
       this.productTransfer = res.list;
@@ -85,7 +93,7 @@ popToast() {
   }
 
   // Filtering duplication: future filter on low price
-  debugger;
+  
       this.productFilterArray.forEach((element, indexz) => {
     let flag = 0;
     if (this.productArray.length == -1) {
@@ -243,7 +251,7 @@ this.statusCartButton();
 
         });
   }
-productView(prdctId) {
+productView(prdctId,storeid) {
   debugger;
   $('#productView').modal('show');
   this.relatedStore = [];
@@ -266,8 +274,8 @@ productView(prdctId) {
   const checkPdt = () => {
     return new Promise((resolve, reject) => {
       this.productFilterArray.forEach(element => {
-
-        if (element.barcode == prdctId ) {
+        
+        if (element.storeid == storeid ) {
             this.statusSelect = element.storeid;
             this.tempPdt = prdctId;
             this.finalprice = element.price;

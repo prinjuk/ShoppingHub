@@ -7,6 +7,7 @@ import {ToasterModule, ToasterService} from 'angular2-toaster';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 // import { ListData } from './models/listData.model';
+import {MatIconModule} from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
 import {MatCheckboxModule} from '@angular/material/checkbox';
@@ -58,6 +59,7 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     HttpClientModule,
+    MatIconModule,
     MatSelectModule,
     SharedComponentsModule,
     BrowserAnimationsModule,

@@ -85,16 +85,36 @@ passData.save();
 
 });
 //retrievingSearch
-app.use('/api/searchlist',(req,res,next)=>{
+app.use('/api/searchlist:query',(req,res,next)=>{
   let searchlist;
-  List.find()
-  .then((document)=>{
-    searchlist=document;
-    res.status(200).json({
-      message:'success',
-      list:searchlist,
+  
+    console.log(req.params.query);
+  if(req.params.query == 'Products from ShopHub')
+  {
+    List.find(
+      // { productname: { $regex: req.params.query,$options: "i" }}
+    )
+    .then((document)=>{
+      searchlist=document;
+      res.status(200).json({
+        message:'success',
+        list:searchlist,
+      });
     });
-  });
+  }
+  else{
+    List.find(
+      { productname: { $regex: req.params.query,$options: "i" }}
+    )
+    .then((document)=>{
+      searchlist=document;
+      res.status(200).json({
+        message:'success',
+        list:searchlist,
+      });
+    });
+  }
+ 
 
 });
 //searchspecific
@@ -102,9 +122,10 @@ app.use('/api/filterSearch/:productname',(req,res,next)=>{
   let searchlist;
 
   let para=req.params.productname;
+  
   console.log(req.params.productname);
   List.find(
-    { productname: { $regex: para }}
+    { productname: { $regex: para,$options: "i" }}
 
   )
   .then((document)=>{

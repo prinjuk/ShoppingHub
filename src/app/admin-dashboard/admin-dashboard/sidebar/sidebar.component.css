@@ -4,8 +4,8 @@
   background-color: #eeeeee00;
 }
 .off-canvas-sidebar, .off-canvas-sidebar[data=red], .sidebar, .sidebar[data=red] {
-  background: #ec250d;
-  background: linear-gradient(0deg,#ec250d 0,#fd5d93 100%);
+  /* background: #ec250d; */
+  background: #43264E;
 }
 .off-canvas-sidebar .logo, .sidebar .logo {
   position: relative;

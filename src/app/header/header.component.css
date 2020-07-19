@@ -1,17 +1,44 @@
 
 
 #shoptree-Nav{
-
-  height: 53px;
-  background-color: #efefef;
+  height: 73px;
   margin-bottom: 20px;
+  background: #43264E;
+  color: white;
 }
 .logo img{
 max-height: 53px;
 }
 .search-bar{
-  position: relative;
-  top: 8px;
+  display: flex;
+  height: 41px;
+}
+.mat-input-element{
+  font-size: 18px;
+}
+::ng-deep .mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: #fff !important;
+ }
+
+ ::ng-deep.mat-form-field-underline {
+  /*change color of underline*/
+  background-color:  #fff !important;
+} 
+
+::ng-deep.mat-form-field-ripple {
+ /*change color of underline when focused*/
+ background-color: #fff !important;
+}
+.example-full-width{
+  width:100%;
+}
+.w50p{
+  width:50%;
+}
+.flex{
+  display: flex;
+  justify-content: space-between;
 }
 .navbar-toggle .icon-bar {
   display: block;
@@ -50,14 +77,14 @@ border: 0px;
 height: 34.3px;
     border-radius: 0px 4px 4px 0px;
 }
-.search-bar a{
+/* .search-bar a{
   padding: 0.9rem 20px;
   background: #ffbc00;
   border-radius: 0px 4px 4px 0px;
   font-size: 13px;
   text-align: center;
   color: white;
-}
+} */
 .cart,.myaccount{
 display: inline;
 }

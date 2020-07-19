@@ -35,7 +35,7 @@ export class DialogEditComponent implements OnInit {
   remaining: this.data.result.remaining,
   barcode: this.data.result.barcode,
   price: this.data.result.price,
-  imageurl: this.data.result.imageurl,
+  // imageurl: this.data.result.imageurl,
   productSize: this.data.result.productSize,
    });
 
@@ -45,12 +45,13 @@ export class DialogEditComponent implements OnInit {
       productname: ['', [Validators.required]],
 
       productSize: ['', [Validators.required]],
-      quant: ['', [Validators.required]],
-      remaining: ['', [Validators.required]],
+      quant:['', [Validators.required,  Validators.pattern("^[0-9]*$")]],
+      remaining: ['', [Validators.required,  Validators.pattern("^[0-9]*$")]],
       barcode: ['', [Validators.required]],
-      price: ['', [Validators.required]],
-      imageurl: ['', [Validators.required]],
+      price: ['', [Validators.required,  Validators.pattern("^[0-9]*$")]],
+      // imageurl: ['', [Validators.required]],
     });
+    
 //    this.userdata.setValue({
 
 //    lastName: 'def'
