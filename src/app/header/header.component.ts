@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import {MatDialog} from '@angular/material/dialog';
 import { CartDataService } from '../cart-data.service';
+import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 @Component({
   selector: 'app-header',
@@ -11,8 +12,8 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 })
 export class HeaderComponent implements OnInit {
   public searchData: FormGroup;
-
-  constructor(private router: Router,public form:FormBuilder,public search:CartDataService) {}
+  productTransfer:any;
+  constructor(private router: Router,public form:FormBuilder,public search:CartDataService,public http:HttpClient) {}
 
   ngOnInit(): void {
     this.buildForm();
@@ -31,9 +32,18 @@ export class HeaderComponent implements OnInit {
         search:'Products from ShopHub'
       });
     }
+    this.http.get<{message: string, list: any}>('http://localhost:3000/api/searchlist'+this.searchData.value['search'])
+    .subscribe((res) => {
+
+      this.productTransfer = res.list;
+      const data = this.productTransfer;
+      this.search.changesearch(data);
+      this.router.navigate(['list']);
+ 
     
-    this.search.changesearch(this.searchData);
-   
-    this.router.navigate(['list']);
+
+    });
+
+    
   }
 }

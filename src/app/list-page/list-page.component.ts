@@ -23,12 +23,15 @@ export class ListPageComponent implements OnInit, AfterViewInit  {
     private http: HttpClient) {
     this.toasterService = toasterService;
   }
+  progressStatus=false;
+  loadingdata=true;
   inCart = ``;
   searchQuery:any;
   productTransfer = {};
   productArray = [];
   arrayCart = [];
   productFilterArray = [];
+ FinalArray = [];
   relatedStore = [];
   storelimit = 1;
   // this.relatedStore ='';
@@ -71,18 +74,14 @@ popToast() {
   ngOnInit(): void {
     debugger;
     this.cartData.currentMessage.subscribe(message => this.arrayCart = message);
-    this.cartData.currentsearch.subscribe(message=>this.searchQuery=message);
-// DataListPage
-if(this.searchQuery.value.search == undefined)
-{
-  this.searchQuery.value.search='';
-}
-console.log(this.searchQuery.value.search);
-    debugger;
-    this.http.get<{message: string, list: any}>('http://localhost:3000/api/searchlist'+this.searchQuery.value.search)
-    .subscribe((res) => {
-
-      this.productTransfer = res.list;
+    this.cartData.currentsearch.subscribe(message=>{
+      debugger;
+      
+      this.productArray=[];
+      this.productFilterArray=[];
+    
+      this.searchQuery=message;
+      this.productTransfer = this.searchQuery;
       const data = this.productTransfer;
       for (const key in data) {
         if (data.hasOwnProperty(key)) {
@@ -110,10 +109,20 @@ console.log(this.searchQuery.value.search);
           this.productArray.push(element);
         }
       }
+      this.loadingdata=false;
+      this.FinalArray=[...this.productArray];
 
     });
-
     });
+    
+// DataListPage
+// if(this.searchQuery.value.search == undefined)
+// {
+//   this.searchQuery.value.search='';
+// }
+// console.log(this.searchQuery.value.search);
+//     debugger;
+    
 
 
 
