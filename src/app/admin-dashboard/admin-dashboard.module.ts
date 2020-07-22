@@ -15,6 +15,7 @@ import { AppRoutingModule } from './../app-routing.module';
 import { SharedComponentsModule } from '../sharedView/shared-components/shared-components.module';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 import { ProfileComponent } from './admin-dashboard/maincontent/profile/profile.component';
 import { SalesComponent } from './admin-dashboard/maincontent/sales/sales.component';
 import { EngagementComponent } from './admin-dashboard/maincontent/inventory/engagement/engagement.component';
@@ -29,7 +30,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule  } from '@angular/material/input';
-
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSelectModule} from '@angular/material/select';
 import { DialogEditComponent } from './admin-dashboard/maincontent/inventory/updateinventory/dialog-edit/dialog-edit.component';
 @NgModule({
@@ -37,9 +39,11 @@ import { DialogEditComponent } from './admin-dashboard/maincontent/inventory/upd
   declarations: [AdminDashboardComponent, MaincontentComponent, SidebarComponent, DashboardComponent, OrdersComponent, InventoryComponent, ManageusersComponent, ManageshopsComponent, FeedbackComponent, ProfileComponent, SalesComponent, EngagementComponent, StatusinventComponent, UpdateinventoryComponent, AddinventoryComponent, DialogEditComponent],
   imports: [
     CommonModule,
+    MatExpansionModule,
     FormsModule,
     BrowserModule,
     MatDialogModule,
+    MatSnackBarModule,
     AppRoutingModule,
     MatButtonModule,
     ReactiveFormsModule,
@@ -50,6 +54,7 @@ import { DialogEditComponent } from './admin-dashboard/maincontent/inventory/upd
     MatCheckboxModule,
     MatRadioModule,
     MatFormFieldModule,
+    MatPaginatorModule,
     MatInputModule,
     RouterModule.forRoot([
 

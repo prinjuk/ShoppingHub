@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { mimeType } from './mime-type-validator';
+import {MatSnackBar} from '@angular/material/snack-bar';
 @Injectable()
 @Component({
   selector: 'app-addinventory',
@@ -14,7 +15,7 @@ import { mimeType } from './mime-type-validator';
 export class AddinventoryComponent implements OnInit {
   Details: any;
   public userdata: FormGroup;
-  constructor(public form: FormBuilder,  private http: HttpClient) { }
+  constructor(public form: FormBuilder,  private http: HttpClient,public snackBar:MatSnackBar) { }
   SpecialImagePassing:any;
   ngOnInit(): void {
     this.buildForm();
@@ -95,7 +96,9 @@ export class AddinventoryComponent implements OnInit {
       
       const url = 'http://localhost:3000/newInvent';
       this.http.post<any>(url, PdtList).subscribe(res => {
-
+        this.snackBar.open('Product Added!', 'Dismiss', {
+          duration: 2000,
+        });
         console.log(details);
         });
 }

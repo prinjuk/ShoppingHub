@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SyncDataEditorService } from '../sync-data-editor.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 @Injectable()
 @Component({
   selector: 'app-dialog-edit',
@@ -19,7 +20,8 @@ export class DialogEditComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     public form: FormBuilder,
     public http: HttpClient,
-    public listUpdate: SyncDataEditorService
+    public listUpdate: SyncDataEditorService,
+    public snackBar: MatSnackBar
       ) { }
   public userdata: FormGroup;
   ngOnInit(): void {
@@ -65,7 +67,10 @@ export class DialogEditComponent implements OnInit {
       this.http.put('http://localhost:3000/api/update/' + ListId, this.userdata.value)
       .subscribe((res) => {
         this.listUpdate.changeMessage(this.TransferDataSync);
-
+        // let snackBarRef = this.snackBar.open('Product Updated!');
+        this.snackBar.open('Product Updated!', 'Dismiss', {
+          duration: 2000,
+        });
       });
 
     } else {
@@ -78,6 +83,9 @@ export class DialogEditComponent implements OnInit {
     this.http.delete<{message: string, list: any}>('http://localhost:3000/api/delete/' + value)
     .subscribe(response => {
       alert(response.message);
+      this.snackBar.open('Product Deleted!', 'Dismiss', {
+        duration: 2000,
+      });
     });
 
   }

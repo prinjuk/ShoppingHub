@@ -20,7 +20,7 @@ export class PaymentsummaryComponent implements OnInit {
   }
   ngOnInit(): void {
     this.cartData.currentMessage.subscribe(message => this.childMessage = message);
-    if (this.childMessage.length == 0) {
+    if (this.childMessage.length == 0 && JSON.parse(localStorage.getItem('cartStorage')) != null) {
       const cartLeftOver = JSON.parse(localStorage.getItem('cartStorage'));
       // alert(cartLeftOver);
       cartLeftOver.forEach(element => {

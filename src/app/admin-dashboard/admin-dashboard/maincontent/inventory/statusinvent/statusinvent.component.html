@@ -1,1 +1,76 @@
-<p>statusinvent works!</p>
+<div class="row">
+    <div class="col-md-6">
+        <mat-accordion>
+            <mat-expansion-panel hideToggle *ngFor='let pdt of productTransfer'>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  {{pdt.productname}}
+                </mat-panel-title>
+                <mat-panel-description>
+                    
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+             <div>
+                <table class='table'>
+                    <tr>
+                      
+                        <th>
+                            Store Name
+                        </th>
+                         <th>
+                            Brand Name
+                        </th>
+                        <th>
+                            Barcode
+                        </th>
+                       
+                        <th>
+                        Remaining 
+                        </th>
+                        <th>
+                          Size
+                            </th>
+                            <th>
+                                Price
+                            </th>
+                    </tr>
+                    <tr>
+                      
+                        <td>
+                            {{pdt.storeName}}
+                        </td>
+                         <td>
+                            {{pdt.brandName}}
+                        </td>
+                        <td>
+                            {{pdt.barcode}}
+                        </td>
+                       
+                        <td>
+                            {{pdt.remaining}}
+                        </td>
+                        <td>
+                            {{pdt.productSize}}
+                            </td>
+                            <td>
+                                {{pdt.price}}
+                            </td>
+                    </tr>
+                </table>
+             </div>
+             
+            </mat-expansion-panel>
+        
+          </mat-accordion>
+        
+        <mat-paginator [length]='totalPosts'
+                        [pageSize]='postPerPage'
+                        [pageSizeOptions]='pageSizeOptions'
+                        (page)='onChangedPage($event)'
+        ></mat-paginator>
+        
+    </div>
+    <div class="col-md-6">
+      
+    </div>
+</div>

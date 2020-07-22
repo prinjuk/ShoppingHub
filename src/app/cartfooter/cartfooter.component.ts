@@ -16,7 +16,7 @@ export class CartfooterComponent implements OnInit, AfterViewInit  {
 
   ngOnInit(): void {
    this.cartData.currentMessage.subscribe(message => this.childMessage = message);
-    // console.log(this.childMessage);
+   this.LoadingData();
 
   }
    Recal() {
@@ -33,10 +33,6 @@ export class CartfooterComponent implements OnInit, AfterViewInit  {
   }
 goCART() {
 
-  // localstorage
-
-// { alert(this.childMessage);
-debugger;
   if (this.childMessage.length == 0 && JSON.parse(localStorage.getItem('cartStorage'))!=null) {
   const cartLeftOver = JSON.parse(localStorage.getItem('cartStorage'));
   // alert(cartLeftOver);
@@ -70,20 +66,24 @@ deleteCart(code, store) {
   localStorage.setItem('cartStorage', JSON.stringify(this.childMessage));
   this.Recal();
 }
+LoadingData()
+{
+    // after parent loads get initalzie child for data
+    if (this.childMessage.length == 0) {
+      const cartLeftOver = JSON.parse(localStorage.getItem('cartStorage'));
+      // alert(cartLeftOver);
+      cartLeftOver.forEach(element => {
+        this.childMessage.push(element);
+      });
+  
+    } else {
+      localStorage.setItem('cartStorage', JSON.stringify(this.childMessage));
+    }
+    this.Recal();
+  
+}
 ngAfterViewInit() {
-  // after parent loads get initalzie child for data
-  if (this.childMessage.length == 0) {
-    const cartLeftOver = JSON.parse(localStorage.getItem('cartStorage'));
-    // alert(cartLeftOver);
-    cartLeftOver.forEach(element => {
-      this.childMessage.push(element);
-    });
-
-  } else {
-    localStorage.setItem('cartStorage', JSON.stringify(this.childMessage));
-  }
-  this.Recal();
-
+this.LoadingData();
     }
 
 }

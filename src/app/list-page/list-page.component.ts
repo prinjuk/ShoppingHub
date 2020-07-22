@@ -72,10 +72,10 @@ popToast() {
 }
 
   ngOnInit(): void {
-    debugger;
+    
     this.cartData.currentMessage.subscribe(message => this.arrayCart = message);
     this.cartData.currentsearch.subscribe(message=>{
-      debugger;
+      
       
       this.productArray=[];
       this.productFilterArray=[];
@@ -121,7 +121,7 @@ popToast() {
 //   this.searchQuery.value.search='';
 // }
 // console.log(this.searchQuery.value.search);
-//     debugger;
+//     
     
 
 
@@ -222,7 +222,7 @@ this.finalprice = data;
 this.statusSelect = select;
     // this.relatedStore=[];
 this.relatedStore.forEach((element, index) => {
-debugger;
+
   if (element.storeid == select) {
           this.tempPdt = element.barcode;
           this.productBindImage = element.imageurl;
@@ -261,7 +261,7 @@ this.statusCartButton();
         });
   }
 productView(prdctId,storeid) {
-  debugger;
+  
   $('#productView').modal('show');
   this.relatedStore = [];
   const relatedStore = () => {

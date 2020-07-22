@@ -35,7 +35,7 @@ import { ShopDashboardModule } from './shop-dashboard/shop-dashboard.module';
 import { SharedComponentsModule } from './sharedView/shared-components/shared-components.module';
 import { DatatableServiceStore } from './sharedView/shared-components/datatable.service';
 import { DialogComponent } from './sharedView/dialog/dialog/dialog.component';
-
+import {MatPaginatorModule} from '@angular/material/paginator';
 import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
@@ -66,6 +66,7 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     MatCheckboxModule,
     MatRadioModule,
+    MatPaginatorModule,
     ReactiveFormsModule,
     MatButtonModule,
     MatDialogModule,

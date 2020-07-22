@@ -57,6 +57,7 @@ console.log('db connected succesful');
 });
 
 
+
 //submitting
 app.post('/newInvent',multer({storage,storage}).single('imageurl'),(req,res,next) => {
    const url=req.protocol+'://'+req.get('host');
@@ -193,4 +194,29 @@ app.put('/api/update/:id',(req,res,next)=>{
   });
 
 });
+//paginator
+app.get('/api/retLimiter/',(req,res,next)=>{
+  console.log(req.query);
+const pageSize=+req.query.size;
+const currentPage=+req.query.page;
+const postQuery=List.find();
+if(pageSize && currentPage)
+{
+  postQuery
+  .skip(pageSize*(currentPage-1))
+  .limit(pageSize);
+}
+postQuery.then(doc=>{
+res.status(200).json({
+message:'200',
+list:doc
+});
+});
+});
+
+
+
+
+
+
 module.exports = app;
