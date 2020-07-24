@@ -16,6 +16,7 @@ export class CartfooterComponent implements OnInit, AfterViewInit  {
 
   ngOnInit(): void {
    this.cartData.currentMessage.subscribe(message => this.childMessage = message);
+   debugger;
    this.LoadingData();
 
   }

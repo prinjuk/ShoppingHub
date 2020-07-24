@@ -27,11 +27,12 @@ export class StatusinventComponent implements OnInit {
   }
 getList()
 {
-  this.http.get<{message: string, list: any}>('http://localhost:3000/api/retLimiter/'+this.searchData)
+  this.http.get<{message: string, list: any,max:any}>('http://localhost:3000/api/retLimiter/'+this.searchData)
   .subscribe((res) => {
-
+    console.log(res);
+    this.totalPosts=res.max;
     this.productTransfer = [...res.list];
-
+ 
   
     
 

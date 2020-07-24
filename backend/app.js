@@ -196,20 +196,25 @@ app.put('/api/update/:id',(req,res,next)=>{
 });
 //paginator
 app.get('/api/retLimiter/',(req,res,next)=>{
-  console.log(req.query);
+  
 const pageSize=+req.query.size;
 const currentPage=+req.query.page;
 const postQuery=List.find();
+let fetchData,MaxPost;
 if(pageSize && currentPage)
 {
-  postQuery
-  .skip(pageSize*(currentPage-1))
-  .limit(pageSize);
+  postQuery.skip(pageSize*(currentPage-1)).limit(pageSize);
 }
-postQuery.then(doc=>{
-res.status(200).json({
-message:'200',
-list:doc
+postQuery.then(docs=>{
+  fetchData=docs;
+ 
+        return List.countDocuments();
+      }).then(count=>{
+        console.log(count);
+      res.status(200).json({
+      message:'200',
+      list:fetchData,
+      max:count
 });
 });
 });
