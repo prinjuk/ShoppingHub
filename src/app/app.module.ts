@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { NgMatSearchBarModule } from 'ng-mat-search-bar';
 import { RouterModule } from '@angular/router';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
@@ -10,6 +11,7 @@ import { AppComponent } from './app.component';
 import {MatIconModule} from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
+
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -57,6 +59,7 @@ import { HttpClientModule } from '@angular/common/http';
 
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     HttpClientModule,
     NgxSkeletonLoaderModule,

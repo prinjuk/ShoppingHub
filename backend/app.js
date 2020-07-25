@@ -1,12 +1,13 @@
 const express= require('express');
 const List =require('./models/List');
+
 const path = require('path');
 const mongoose=require('mongoose');
 const router = express.Router();
 const bodyParser = require("body-parser");
 var cors = require('cors');
-const { ConsoleReporter } = require('jasmine');
-
+const authRoute=require('./auth');
+// const shopRoute=require('./shop');
 const app= express();
 app.use(cors());
 
@@ -16,29 +17,7 @@ const MIME_TYPE_MAP={
   'image/jpg':'jpg',
 }
 
-app.use('/images',express.static(path.join('./backend/images'),{fallthrough: false}));
-const storage = multer.diskStorage({
-  // destination:(req,file,cb)=>{
-  //   // const isValid=MIME_TYPE_MAP[file.mimetype];
-  //   // let error = new Error('invalid mime type');
-  //   // if(isValid)
-  //   // {
-  //   //   error =null;
-  //   // }
-  //   cb(error,'backend/images');
-  // },
-  // filename:(req,file,cb)=>{
-  //   const name=file.originalname.toLowerCase().split(' ').join('-');
-  //   const ext=MIME_TYPE_MAP[file.mimetype];
-  //   cb(null,name+'-'+ Date.now()+ '.'+ ext);
-  // }
-  destination: function (req, file, cb) {
-    cb(null, 'backend/images')
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now()+'.jpg')
-  }
-});
+
 
 
 //Here we are configuring express to use body-parser as middle-ware.
@@ -57,7 +36,29 @@ console.log('db connected succesful');
 });
 
 
-
+app.use('/images',express.static(path.join('./backend/images'),{fallthrough: false}));
+  const storage = multer.diskStorage({
+    // destination:(req,file,cb)=>{
+    //   // const isValid=MIME_TYPE_MAP[file.mimetype];
+    //   // let error = new Error('invalid mime type');
+    //   // if(isValid)
+    //   // {
+    //   //   error =null;
+    //   // }
+    //   cb(error,'backend/images');
+    // },
+    // filename:(req,file,cb)=>{
+    //   const name=file.originalname.toLowerCase().split(' ').join('-');
+    //   const ext=MIME_TYPE_MAP[file.mimetype];
+    //   cb(null,name+'-'+ Date.now()+ '.'+ ext);
+    // }
+    destination: function (req, file, cb) {
+      cb(null, 'backend/images')
+    },
+    filename: function (req, file, cb) {
+      cb(null, file.fieldname + '-' + Date.now()+'.jpg')
+    }
+});
 //submitting
 app.post('/newInvent',multer({storage,storage}).single('imageurl'),(req,res,next) => {
    const url=req.protocol+'://'+req.get('host');
@@ -222,6 +223,6 @@ postQuery.then(docs=>{
 
 
 
-
+app.use('/api/auth',authRoute);
 
 module.exports = app;

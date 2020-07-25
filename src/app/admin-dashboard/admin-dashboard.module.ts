@@ -11,7 +11,7 @@ import { InventoryComponent } from './admin-dashboard/maincontent/inventory/inve
 import { ManageusersComponent } from './admin-dashboard/maincontent/manageusers/manageusers.component';
 import { ManageshopsComponent } from './admin-dashboard/maincontent/manageshops/manageshops.component';
 import { FeedbackComponent } from './admin-dashboard/maincontent/feedback/feedback.component';
-import { AppRoutingModule } from './../app-routing.module';
+import { AppRoutingModule } from './../app-routing.module'; 
 import { SharedComponentsModule } from '../sharedView/shared-components/shared-components.module';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';

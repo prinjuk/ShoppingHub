@@ -1,3 +1,5 @@
+
+
 .cartdatasum{
   position: relative;
 
@@ -15,14 +17,17 @@ margin: 0 auto;
 cursor: pointer;
   transition: all 0.4s cubic-bezier(0.6, -0.28, 0.735, 0.045);
 }
-label {
+/* label {
   display: inline-block;
   max-width: 100%;
   margin-bottom: 5px;
   font-weight: 500;
-}
+} */
 .loginForm{
   box-shadow: 1px 1px 10px 1px #e1e1e1;
     padding: 31px;
     border-radius: 4px;
+}
+.example-full-width{
+  width: 100%;
 }
