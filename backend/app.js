@@ -1,6 +1,6 @@
 const express= require('express');
 const List =require('./models/List');
-
+const checkAuth=require('./middleware/check-auth');
 const path = require('path');
 const mongoose=require('mongoose');
 const router = express.Router();
@@ -140,7 +140,8 @@ app.use('/api/filterSearch/:productname',(req,res,next)=>{
 
 });
 //deletespecific
-app.delete('/api/delete/:id',(req,res,next)=>{
+app.delete('/api/delete/:id',checkAuth,(req,res,next)=>{
+  
   let searchlist;
 
   let para=req.params.id;

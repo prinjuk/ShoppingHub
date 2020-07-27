@@ -38,7 +38,8 @@ import { SharedComponentsModule } from './sharedView/shared-components/shared-co
 import { DatatableServiceStore } from './sharedView/shared-components/datatable.service';
 import { DialogComponent } from './sharedView/dialog/dialog/dialog.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth-interceptor';
 @NgModule({
   declarations: [
     AppComponent,
@@ -119,7 +120,8 @@ import { HttpClientModule } from '@angular/common/http';
     NliSearchBarModule,
     BrowserAnimationsModule
   ],
-  providers: [DatatableServiceStore,HttpClientModule],
+  providers: [DatatableServiceStore,HttpClientModule,{
+    provide: HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

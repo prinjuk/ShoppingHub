@@ -37,6 +37,7 @@
     "ionic2-auto-complete": "^1.6.2-alpha",
     "ionicons": "^5.0.1",
     "jquery": "^3.5.0",
+    "jsonwebtoken": "^8.5.1",
     "lg-autoplay": "^1.0.4",
     "lg-fullscreen": "^1.1.0",
     "lg-hash": "^1.0.4",

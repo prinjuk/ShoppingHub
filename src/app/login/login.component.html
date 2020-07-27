@@ -12,13 +12,13 @@
      
             <mat-form-field class="example-full-width">
               <mat-label>Email</mat-label>
-              <input matInput ngModel type='email'  name='emailid' placeholder='Email Id' #emailInput='ngModel' required>
+              <input matInput ngModel type='email'  name='email' placeholder='Email Id' #emailInput='ngModel' required>
               <mat-error *ngIf='emailInput.invalid'>Please enter valid email</mat-error>
             </mat-form-field>
           
             <mat-form-field class="example-full-width">
               <mat-label>Password</mat-label>
-             <input matInput  name='passid' ngModel type='password' #passwordInput='ngModel'  required>
+             <input matInput  name='password' ngModel type='password' #passwordInput='ngModel'  required>
           <mat-error *ngIf='passwordInput.invalid'>Please enter valid password</mat-error>
             </mat-form-field>
             <div class="example-button-row">
