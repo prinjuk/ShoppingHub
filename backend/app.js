@@ -60,7 +60,7 @@ app.use('/images',express.static(path.join('./backend/images'),{fallthrough: fal
     }
 });
 //submitting
-app.post('/newInvent',multer({storage,storage}).single('imageurl'),(req,res,next) => {
+app.post('/newInvent',checkAuth,multer({storage,storage}).single('imageurl'),(req,res,next) => {
    const url=req.protocol+'://'+req.get('host');
   const passData=new List({
 
@@ -76,13 +76,14 @@ app.post('/newInvent',multer({storage,storage}).single('imageurl'),(req,res,next
     remaining: req.body.remaining,
 
     productSize: req.body.productSize,
+     creator:req.userData.userId
  });
-passData.save();
+ passData.save();
   res.status(200).json({
     message:'success',
     list:passData,
   });
-  console.log(passData);
+
   // passData.save();
 
 });

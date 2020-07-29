@@ -33,6 +33,8 @@ router.post('/signup',(req,res,next)=>{
 
 });
 router.post('/login',(req,res,next)=>{
+    let emailStorage='';
+    let useridStorage='';
     User.findOne({email:req.body.email})
         .then(user=>{
             if(!user)
@@ -41,6 +43,8 @@ router.post('/login',(req,res,next)=>{
                     message:'auth failed'
                 });
             }
+            emailStorage=req.body.email;
+            useridStorage=user._id;
             return bcrypt.compare(req.body.password,user.password);
         })
         .then(result=>{
@@ -51,12 +55,13 @@ router.post('/login',(req,res,next)=>{
                 });
             }
             const token =jwt.sign(
-                {email:user.email,userId:user._id},
+                {email:emailStorage,userId:useridStorage},
                 'testing_VALUES_HASH',
                 {expiresIn:'1h'}
                 );
             res.status(200).json({
-                token:token
+                token:token,
+                expiresIn:3600,
             })
         })
         .catch(err=>{

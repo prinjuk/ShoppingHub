@@ -11,6 +11,7 @@ const listSchema= mongoose.Schema({
   remaining: {type: String,required:true},
   imageurl: {type: String,required:true},
   productSize: {type: String,required:true},
+  creator:{type: mongoose.Schema.Types.ObjectId, ref: 'User',required:true}
 });
 
 module.exports = mongoose.model('List',listSchema);

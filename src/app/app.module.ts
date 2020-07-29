@@ -40,6 +40,7 @@ import { DialogComponent } from './sharedView/dialog/dialog/dialog.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth-interceptor';
+import { AuthGuard } from './auth.guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -120,7 +121,7 @@ import { AuthInterceptor } from './auth-interceptor';
     NliSearchBarModule,
     BrowserAnimationsModule
   ],
-  providers: [DatatableServiceStore,HttpClientModule,{
+  providers: [DatatableServiceStore,HttpClientModule,AuthGuard,{
     provide: HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true}],
   bootstrap: [AppComponent]
 })

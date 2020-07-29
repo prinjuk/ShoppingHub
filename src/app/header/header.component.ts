@@ -21,6 +21,7 @@ export class HeaderComponent implements OnInit,OnDestroy {
 
   ngOnInit(): void {
     this.buildForm();
+    this.userIsAuthed=this.auth.statusAuth();
     this.authListenerSubs=this.auth.getAuthStatusListener()
     .subscribe(isAuth=>{
         this.userIsAuthed=isAuth;
@@ -56,6 +57,12 @@ export class HeaderComponent implements OnInit,OnDestroy {
 
     });
 
+    
+  }
+  logout()
+  {
+
+    this.auth.logOut();
     
   }
 }

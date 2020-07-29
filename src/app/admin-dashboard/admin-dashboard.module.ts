@@ -34,6 +34,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSelectModule} from '@angular/material/select';
 import { DialogEditComponent } from './admin-dashboard/maincontent/inventory/updateinventory/dialog-edit/dialog-edit.component';
+import { AuthGuard } from '../auth.guard';
 @NgModule({
   // tslint:disable-next-line: max-line-length
   declarations: [AdminDashboardComponent, MaincontentComponent, SidebarComponent, DashboardComponent, OrdersComponent, InventoryComponent, ManageusersComponent, ManageshopsComponent, FeedbackComponent, ProfileComponent, SalesComponent, EngagementComponent, StatusinventComponent, UpdateinventoryComponent, AddinventoryComponent, DialogEditComponent],
@@ -60,11 +61,11 @@ import { DialogEditComponent } from './admin-dashboard/maincontent/inventory/upd
 
 
       {
-        path: 'admin', component: AdminDashboardComponent,
+        path: 'admin', component: AdminDashboardComponent,canActivate:[AuthGuard],
         children: [
           { path: '', component: DashboardComponent, pathMatch: 'full'},
           {
-            path: 'feedback', component: FeedbackComponent,
+            path: 'feedback', component: FeedbackComponent,canActivate:[AuthGuard]
           },
           {
             path: 'dashboard', component: DashboardComponent,
@@ -117,6 +118,7 @@ import { DialogEditComponent } from './admin-dashboard/maincontent/inventory/upd
 
 
       ]),
-  ]
+  ],
+  providers:[AuthGuard]
 })
 export class AdminDashboardModule { }
