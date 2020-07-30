@@ -121,14 +121,16 @@ app.use('/api/searchlist:query',(req,res,next)=>{
 
 });
 //searchspecific
-app.use('/api/filterSearch/:productname',(req,res,next)=>{
+app.use('/api/filterSearch/:productname',checkAuth,(req,res,next)=>{
   let searchlist;
 
   let para=req.params.productname;
   
   console.log(req.params.productname);
   List.find(
-    { productname: { $regex: para,$options: "i" }}
+    { productname: { $regex: para,$options: "i" },
+      creator:req.userData.userId         
+     }
 
   )
   .then((document)=>{
@@ -148,7 +150,8 @@ app.delete('/api/delete/:id',checkAuth,(req,res,next)=>{
   let para=req.params.id;
   console.log(req.params._id);
   List.deleteOne(
-    { _id: para}
+    { _id: para},
+    {  creator:req.userData.userId}
 
   )
   .then((document)=>{
@@ -162,7 +165,7 @@ app.delete('/api/delete/:id',checkAuth,(req,res,next)=>{
 
 });
 //updatespecific
-app.put('/api/update/:id',(req,res,next)=>{
+app.put('/api/update/:id',checkAuth,(req,res,next)=>{
 
 
   let para=req.params.id;
@@ -198,11 +201,11 @@ app.put('/api/update/:id',(req,res,next)=>{
 
 });
 //paginator
-app.get('/api/retLimiter/',(req,res,next)=>{
+app.get('/api/retLimiter/',checkAuth,(req,res,next)=>{
   
 const pageSize=+req.query.size;
 const currentPage=+req.query.page;
-const postQuery=List.find();
+const postQuery=List.find({  creator:req.userData.userId      });
 let fetchData,MaxPost;
 if(pageSize && currentPage)
 {
