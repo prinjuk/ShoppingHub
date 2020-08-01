@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
     //   // {
     //   //   error =null;
     //   // }
-    //   cb(error,'backend/images');
+    //   cb(error,'images');
     // },
     // filename:(req,file,cb)=>{
     //   const name=file.originalname.toLowerCase().split(' ').join('-');
@@ -23,7 +23,7 @@ const storage = multer.diskStorage({
     //   cb(null,name+'-'+ Date.now()+ '.'+ ext);
     // }
     destination: function (req, file, cb) {
-      cb(null, './images')
+      cb(null, 'images')
     },
     filename: function (req, file, cb) {
       cb(null, file.fieldname + '-' + Date.now()+'.jpg')

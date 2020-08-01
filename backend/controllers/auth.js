@@ -27,7 +27,7 @@ exports.Login=(req,res,next)=>{
             }
             const token =jwt.sign(
                 {email:emailStorage,userId:useridStorage},
-                'testing_VALUES_HASH',
+                process.env.JWT_KEY,
                 {expiresIn:'1h'}
                 );
             res.status(200).json({

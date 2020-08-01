@@ -32,7 +32,7 @@ exports.AddProduct=(req,res,next) => {
  exports.ListPage=(req,res,next)=>{
     let searchlist;
     
-      console.log(req.params.query);
+     
     if(req.params.query == 'Products from ShopHub')
     {
       List.find(

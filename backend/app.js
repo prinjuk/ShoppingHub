@@ -8,16 +8,12 @@ const router = express.Router();
 const bodyParser = require("body-parser");
 var cors = require('cors');
 const authRoute=require('./auth');
-// const shopRoute=require('./shop');
 const app= express();
 app.use(cors());
-
-
 //Here we are configuring express to use body-parser as middle-ware.
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.json());
-
 mongoose.connect('mongodb+srv://adminPK:'+process.env.MONGODB_ALTAS_PWD+'@shopping-hub.ilxx0.mongodb.net/Shopping-hub?retryWrites=true&w=majority',{ useNewUrlParser: true })
 .then(()=>{
 console.log('db connected succesful');
@@ -27,10 +23,7 @@ console.log('db connected succesful');
   console.log('db failed');
 
 });
-
-
-app.use('/images',express.static(path.join('./backend/images'),{fallthrough: false}));
-
+app.use('/images',express.static(path.join('images'),{fallthrough: false}));
 //submitting
 app.post('/newInvent',checkAuth,fileExtractor,crud.AddProduct);
 //retrievingSearch
@@ -43,10 +36,6 @@ app.delete('/api/delete/:id',checkAuth,crud.deleteEntry);
 app.put('/api/update/:id',checkAuth,crud.updateProduct);
 //paginator
 app.get('/api/retLimiter/',checkAuth,crud.allProducts);
-
-
-
-
 app.use('/api/auth',authRoute);
 
 module.exports = app;
