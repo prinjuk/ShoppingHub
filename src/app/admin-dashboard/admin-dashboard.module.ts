@@ -36,7 +36,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSelectModule} from '@angular/material/select';
 import { DialogEditComponent } from './admin-dashboard/maincontent/inventory/updateinventory/dialog-edit/dialog-edit.component';
 import { AuthGuard } from '../auth.guard';
-import { ErrorInterceptor } from '../Error-interceptor';
+import { ErrorInterceptor } from '../error-interceptor';
 import { AuthInterceptor } from '../auth-interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 @NgModule({
