@@ -5,7 +5,7 @@ const routes: Routes = [
   {
   path:'',
   
-  loadChildren: () => import('./Main.module').then(m => m.CustomersModule)
+  loadChildren: () => import('./Admin.module').then(m => m.AdminModule)
 }
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class adminRoutingModule { }

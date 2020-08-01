@@ -78,42 +78,42 @@ import { AuthGuard } from './auth.guard';
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
-    // ListData,
+   
     MatTableModule,
     ToasterModule.forRoot(),
-    RouterModule.forRoot([
-    {
-        path: '',
-        component: MasterComponent,
-        children: [
-          { path: '', component: HomeComponent, pathMatch: 'full'},
-          {
-            path: 'list', component: ListPageComponent,
-          },
+    // RouterModule.forRoot([
+    // {
+    //     path: '',
+    //     component: MasterComponent,
+    //     children: [
+    //       { path: '', component: HomeComponent, pathMatch: 'full'},
+    //       {
+    //         path: 'list', component: ListPageComponent,
+    //       },
 
 
-          {
-            path: 'detailpage', component: DetailpageComponent,
-          },
-          {
-            path: 'purchase', component: PurchaseSummaryComponent,
-          },
-          {
-            path: 'login', component: LoginComponent,
-          },
-          {
-            path: 'signup', component: SignupComponent,
-          },
-          {
-            path: 'paymentsummary', component: PaymentsummaryComponent,
-          },
-        ]
-    },
+    //       {
+    //         path: 'detailpage', component: DetailpageComponent,
+    //       },
+    //       {
+    //         path: 'purchase', component: PurchaseSummaryComponent,
+    //       },
+    //       {
+    //         path: 'login', component: LoginComponent,
+    //       },
+    //       {
+    //         path: 'signup', component: SignupComponent,
+    //       },
+    //       {
+    //         path: 'paymentsummary', component: PaymentsummaryComponent,
+    //       },
+    //     ]
+    // },
 
 
 
 
-    ]),
+    // ]),
     ShopDashboardModule,
     AdminDashboardModule,
     NgMatSearchBarModule,

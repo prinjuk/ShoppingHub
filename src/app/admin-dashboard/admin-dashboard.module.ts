@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { adminRoutingModule } from './app-admin-router';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { MaincontentComponent } from './admin-dashboard/maincontent/maincontent.component';
 import { SidebarComponent } from './admin-dashboard/sidebar/sidebar.component';
@@ -35,6 +36,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSelectModule} from '@angular/material/select';
 import { DialogEditComponent } from './admin-dashboard/maincontent/inventory/updateinventory/dialog-edit/dialog-edit.component';
 import { AuthGuard } from '../auth.guard';
+import { ErrorInterceptor } from '../Error-interceptor';
+import { AuthInterceptor } from '../auth-interceptor';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 @NgModule({
   // tslint:disable-next-line: max-line-length
   declarations: [AdminDashboardComponent, MaincontentComponent, SidebarComponent, DashboardComponent, OrdersComponent, InventoryComponent, ManageusersComponent, ManageshopsComponent, FeedbackComponent, ProfileComponent, SalesComponent, EngagementComponent, StatusinventComponent, UpdateinventoryComponent, AddinventoryComponent, DialogEditComponent],
@@ -57,68 +61,16 @@ import { AuthGuard } from '../auth.guard';
     MatFormFieldModule,
     MatPaginatorModule,
     MatInputModule,
-    RouterModule.forRoot([
+    adminRoutingModule,
+    // RouterModule.forRoot([
 
 
-      {
-        path: 'admin', component: AdminDashboardComponent,canActivate:[AuthGuard],
-        children: [
-          { path: '', component: DashboardComponent, pathMatch: 'full'},
-          {
-            path: 'feedback', component: FeedbackComponent,canActivate:[AuthGuard]
-          },
-          {
-            path: 'dashboard', component: DashboardComponent,
-          },
-          {
-            path: 'Inventory',
-             component: InventoryComponent,
-            children:[
-             {
-              path: 'dashboard', // child route path
-              component: DashboardComponent // child route component that the router renders
-             },
-             {
-              path: 'engagement', // child route path
-              component: EngagementComponent // child route component that the router renders
-             },
-             {
-              path: 'addproduct', // child route path
-              component: AddinventoryComponent // child route component that the router renders
-             },
-             {
-              path: 'updateinventory', // child route path
-              component: UpdateinventoryComponent // child route component that the router renders
-             },
-             {
-              path: 'statusinventory', // child route path
-              component: StatusinventComponent // child route component that the router renders
-             },
-            ],
 
 
-          },
-          {
-            path: 'manageshops', component: ManageshopsComponent,
-          },
-          {
-            path: 'sales', component: SalesComponent,
-          },
-          {
-            path: 'profile', component: ProfileComponent,
-          },
-          {
-            path: 'manageusers', component: ManageusersComponent,
-          },
-          {
-            path: 'orderDetails', component: OrdersComponent,
-          },
-      ]
-      },
-
-
-      ]),
+    //   ]),
   ],
-  providers:[AuthGuard]
+  providers:[  AuthGuard,
+    {provide: HTTP_INTERCEPTORS,useClass:AuthInterceptor,multi:true},
+    {provide: HTTP_INTERCEPTORS,useClass:ErrorInterceptor,multi:true},]
 })
 export class AdminDashboardModule { }
