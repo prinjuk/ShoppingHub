@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Subscription } from 'rxjs';
+import { environment } from '../../environments/environment';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -45,7 +46,7 @@ export class HeaderComponent implements OnInit,OnDestroy {
         search:'Products from ShopHub'
       });
     }
-    this.http.get<{message: string, list: any}>('http://localhost:3000/api/searchlist'+this.searchData.value['search'])
+    this.http.get<{message: string, list: any}>(environment.apiURL+'api/searchlist'+this.searchData.value['search'])
     .subscribe((res) => {
 
       this.productTransfer = res.list;

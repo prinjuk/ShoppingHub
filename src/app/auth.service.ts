@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import {AuthData} from './signup/signup.model';
 import { Subject } from 'rxjs';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 @Injectable({
     providedIn:"root"
 })
@@ -26,7 +27,7 @@ getAuthStatusListener()
         createUser(email:string,password:string)
         {
             const auth:AuthData={email:email,password:password};
-        this.http.post("http://localhost:3000/api/auth/signup",auth)
+        this.http.post(environment.apiURL+"api/auth/signup",auth)
         .subscribe(resp=>{
             console.log(resp);
         })
@@ -34,7 +35,7 @@ getAuthStatusListener()
         login(email:string,password:string)
         {
             const auth:AuthData={email:email,password:password};
-            this.http.post<{token:string,expiresIn:number}>("http://localhost:3000/api/auth/login",auth)
+            this.http.post<{token:string,expiresIn:number}>(environment.apiURL+"api/auth/login",auth)
             .subscribe(resp=>{
               debugger;
                const expiresInDuration=resp.expiresIn;

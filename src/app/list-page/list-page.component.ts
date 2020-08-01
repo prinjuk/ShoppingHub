@@ -7,6 +7,7 @@ import { CartDataService } from '../cart-data.service';
 declare var $: any;
 import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
+
 @Component({
   selector: 'app-list-page',
   templateUrl: './list-page.component.html',

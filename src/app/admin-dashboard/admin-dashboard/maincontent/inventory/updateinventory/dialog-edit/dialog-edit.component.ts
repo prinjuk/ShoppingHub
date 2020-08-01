@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { SyncDataEditorService } from '../sync-data-editor.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { environment } from 'src/environments/environment';
 @Injectable()
 @Component({
   selector: 'app-dialog-edit',
@@ -64,7 +65,7 @@ export class DialogEditComponent implements OnInit {
     console.log(this.userdata.valid);
     this.userdata.value.id = ListId;
     if (this.userdata.valid) {
-      this.http.put('http://localhost:3000/api/update/' + ListId, this.userdata.value)
+      this.http.put(environment.apiURL+'api/update/' + ListId, this.userdata.value)
       .subscribe((res) => {
         this.listUpdate.changeMessage(this.TransferDataSync);
         // let snackBarRef = this.snackBar.open('Product Updated!');
@@ -80,7 +81,7 @@ export class DialogEditComponent implements OnInit {
 
   }
   DeleteProduct(value) {
-    this.http.delete<{message: string, list: any}>('http://localhost:3000/api/delete/' + value)
+    this.http.delete<{message: string, list: any}>(environment.apiURL+'/api/delete/' + value)
     .subscribe(response => {
       alert(response.message);
       this.snackBar.open('Product Deleted!', 'Dismiss', {

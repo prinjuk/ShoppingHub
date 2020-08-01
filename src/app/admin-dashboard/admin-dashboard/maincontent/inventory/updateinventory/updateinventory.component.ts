@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { DialogEditComponent } from '../updateinventory/dialog-edit/dialog-edit.component';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 @Injectable()
 @Component({
   selector: 'app-updateinventory',
@@ -33,7 +34,7 @@ export class UpdateinventoryComponent implements OnInit {
     if (!this.productdata.invalid) {
       this.resultshown = 1;
       searchvalue = this.productdata.value.productsec;
-      this.http.get<{message: string, list: any}>('http://localhost:3000/api/filterSearch/'+ searchvalue)
+      this.http.get<{message: string, list: any}>(environment.apiURL+'api/filterSearch/'+ searchvalue)
       .subscribe((res) => {
 
         this.resultjsonsearch = res.list;
@@ -52,46 +53,7 @@ export class UpdateinventoryComponent implements OnInit {
        }
 
       });
-    //   this.resultjsonsearch = [
-    //     {
-    //       name: 'LaysX',
-    //       store: 'Kunnil',
-    //       productid: '3FHT',
-    //       QTYa: '146',
-    //       QTYr: '12',
-    //       Barcode: '649528789587',
-    //       Priceper: '150',
-    //       image: 'https://images.barcodesdatabase.org/file/barcodesdatabase/890/149/110/8901491101844.jpg'
-    //     },   {
-    //       name: 'LaysY',
-    //       store: 'Kunnil',
-    //       productid: '3FHT',
-    //       QTYa: '146',
-    //       QTYr: '12',
-    //       Barcode: '649528789587',
-    //       Priceper: '150',
-    //       image: 'https://images.barcodesdatabase.org/file/barcodesdatabase/890/149/110/8901491101844.jpg'
-    //     },   {
-    //       name: 'LaysS',
-    //       store: 'Kunnil',
-    //       productid: '3FHT',
-    //       QTYa: '146',
-    //       QTYr: '12',
-    //       Barcode: '649528789587',
-    //       Priceper: '150',
-    //       image: 'https://images.barcodesdatabase.org/file/barcodesdatabase/890/149/110/8901491101844.jpg'
-    //     },   {
-    //       name: 'Lays',
-    //       store: 'Kunnil',
-    //       productid: '3FHT',
-    //       QTYa: '146',
-    //       QTYr: '12',
-    //       Barcode: '649528789587',
-    //       Priceper: '150',
-    //       image: 'https://images.barcodesdatabase.org/file/barcodesdatabase/890/149/110/8901491101844.jpg'
-    //     },
-    // ];
-
+  
 
 
     }

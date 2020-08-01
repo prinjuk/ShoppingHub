@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.json());
 
-mongoose.connect('mongodb+srv://adminPK:K8fZUKUGDa0OtXZz@shopping-hub.ilxx0.mongodb.net/Shopping-hub?retryWrites=true&w=majority',{ useNewUrlParser: true })
+mongoose.connect('mongodb+srv://adminPK:'+process.env.MONGODB_ALTAS_PWD+'@shopping-hub.ilxx0.mongodb.net/Shopping-hub?retryWrites=true&w=majority',{ useNewUrlParser: true })
 .then(()=>{
 console.log('db connected succesful');
 

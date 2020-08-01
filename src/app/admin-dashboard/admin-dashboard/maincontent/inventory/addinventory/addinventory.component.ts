@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { mimeType } from './mime-type-validator';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { environment } from '../../../../../../environments/environment';
 @Injectable()
 @Component({
   selector: 'app-addinventory',
@@ -94,7 +95,7 @@ export class AddinventoryComponent implements OnInit {
       const details = this.userdata.value;
       console.log(PdtList);
       
-      const url = 'http://localhost:3000/newInvent';
+      const url = environment.apiURL+'newInvent';
       this.http.post<any>(url, PdtList).subscribe(res => {
         this.snackBar.open('Product Added!', 'Dismiss', {
           duration: 2000,
