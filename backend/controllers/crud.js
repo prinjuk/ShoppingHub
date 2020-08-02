@@ -1,4 +1,4 @@
-const List =require('../models/List');
+const List =require('../models/list');
 
 exports.AddProduct=(req,res,next) => {
     const url=req.protocol+'://'+req.get('host');

@@ -9,7 +9,7 @@ const bodyParser = require("body-parser");
 var cors = require('cors');
 const authRoute=require('./auth');
 const app= express();
-app.use(cors());
+app.use(cors({credentials: true, origin: true}));
 //Here we are configuring express to use body-parser as middle-ware.
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());

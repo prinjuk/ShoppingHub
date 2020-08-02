@@ -27,7 +27,7 @@ exports.Login=(req,res,next)=>{
             }
             const token =jwt.sign(
                 {email:emailStorage,userId:useridStorage},
-                process.env.JWT_KEY,
+                process.env.JWT,
                 {expiresIn:'1h'}
                 );
             res.status(200).json({
