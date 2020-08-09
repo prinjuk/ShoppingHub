@@ -44,45 +44,7 @@ exports.Login=(req,res,next)=>{
         })
     }
     catch(err){
-        try{
-            supplier.findOne({email:req.body.email})
-            .then(user=>{
-                if(!user)
-                {
-                    return res.status(401).json({
-                        message:'Invalid Credientials'
-                    });
-                }
-                emailStorage=req.body.email;
-                useridStorage=user._id;
-                return bcrypt.compare(req.body.password,user.password);
-            })
-            .then(result=>{
-                if(!result)
-                {
-                    return res.status(401).json({
-                        message:'Invalid Password'
-                    });
-                }
-                const token =jwt.sign(
-                    {email:emailStorage,userId:useridStorage},
-                    process.env.JWT,
-                    {expiresIn:'1h'}
-                    );
-                res.status(200).json({
-                    token:token,
-                    expiresIn:3600,
-                })
-            })
-            .catch(err=>{
-                return res.status(401).json({
-                    message:'Not signed up in? Join now'
-                });
-            })
-        }
-        catch(err){
-    
-        }
+     
     }
     
 }
@@ -138,6 +100,29 @@ exports.newSupplier=(req,res,next)=>{
             usertype: 3,
 
         });
+
+        ///copying to user list
+        const userInfoAuth=new User({
+            firstname:req.body.firstname,
+            lastname:req.body.lastname,
+            phoneNumber:req.body.phoneNumber,
+            email:req.body.email,
+            password:hash,
+            usertype:3
+        });
+        userInfoAuth.save()
+        .then(result=>{
+          
+            res.status(201).json({
+                message:'user created',
+                result:result
+            });
+        }).catch(err=>{
+            res.status(500).json({
+               message:'Invalid Authentication Failed'
+            });
+        })
+           ///creating to user list
         userData.save()
         .then(result=>{
           
