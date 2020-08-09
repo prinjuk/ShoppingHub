@@ -1,6 +1,14 @@
-table{
+table,.example-full-width{
   width:100%;
 }
-.adminpanelpadding{
+/* .adminpanelpadding{
   padding: 4px 48px;
+} */
+.mat-tab-body-content {
+
+  background: #fff;
+}
+.mat-tab-label {
+  
+  background: #fff;
 }

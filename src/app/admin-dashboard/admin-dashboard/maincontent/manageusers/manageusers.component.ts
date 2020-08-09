@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../../../auth.service';
+
 export class StoreList {
   public name: string;
   public Id: number;
@@ -8,13 +10,7 @@ public routerLink:string;
   public JoinedOn: string;
 }
 
-const ELEMENT_DATA: StoreList[] = [
-  {Id: 1, name: 'Prinju Koshy', desc: 'ShopKeeper', lastlogin:'22/08/2021',JoinedOn:'22/08/2000',routerLink:''},
-  {Id: 1, name: 'Prinju Koshy', desc: 'ShopKeeper', lastlogin:'22/08/2021',JoinedOn:'22/08/2000',routerLink:''},
-  {Id: 1, name: 'Prinju Koshy', desc: 'ShopKeeper', lastlogin:'22/08/2021',JoinedOn:'22/08/2000',routerLink:''},
-  {Id: 1, name: 'Prinju Koshy', desc: 'ShopKeeper', lastlogin:'22/08/2021',JoinedOn:'22/08/2000',routerLink:''},
-
-];
+const ELEMENT_DATA: StoreList[] = [ ];
 
 @Component({
   selector: 'app-manageusers',
@@ -24,11 +20,31 @@ const ELEMENT_DATA: StoreList[] = [
 export class ManageusersComponent implements OnInit {
 
 
-  displayedColumns: string[] = ['Id', 'name', 'desc', 'lastlogin','JoinedOn','routerLink'];
+  displayedColumns: string[] = ['email', 'firstname', 'lastname', 'phone','usertype'];
   dataUser = ELEMENT_DATA;
-  constructor() { }
+  constructor(public auth:AuthService) { }
 
   ngOnInit(): void {
+    
+    this.auth.getUser().subscribe((res)=>{
+      // console.log(res.list);
+      this.dataUser=res.list;
+    });
+
   }
 
+  onLogin(form)
+  {
+    if(!form.invalid)
+    {
+      // console.log(form.value.firstname, form.value.lastname, form.value.storename, form.value.GST
+      //   , form.value.Address1, form.value.Address2, form.value.city, form.value.State, form.value.Country,form.value.Zip,
+      //   form.value.phoneNumber, form.value.email, form.value.passid);
+      debugger;
+  this.auth.createSupplier(form.value.firstname, form.value.lastname, form.value.storename, form.value.GST
+    , form.value.Address1, form.value.Address2, form.value.city, form.value.State, form.value.Country,form.value.Zip,
+    form.value.phoneNumber, form.value.email, form.value.passid);
+  
+    }
+  }
 }

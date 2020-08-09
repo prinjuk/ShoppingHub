@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import {MatIconModule} from '@angular/material/icon';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatTableModule} from '@angular/material/table';
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -41,6 +41,8 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth-interceptor';
 import { AuthGuard } from './auth.guard';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatTabsModule} from '@angular/material/tabs';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,11 +64,13 @@ import { AuthGuard } from './auth.guard';
   ],
   imports: [
     CommonModule,
+    MatTabsModule,
     BrowserModule,
     HttpClientModule,
     NgxSkeletonLoaderModule,
     MatIconModule,
     MatSelectModule,
+   
     SharedComponentsModule,
     BrowserAnimationsModule,
     MatCheckboxModule,
@@ -74,11 +78,13 @@ import { AuthGuard } from './auth.guard';
     MatPaginatorModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatDatepickerModule,
     MatDialogModule,
+    MatNativeDateModule,
     MatInputModule,
     MatFormFieldModule,
     FormsModule,
-   
+  
     MatTableModule,
     ToasterModule.forRoot(),
     // RouterModule.forRoot([

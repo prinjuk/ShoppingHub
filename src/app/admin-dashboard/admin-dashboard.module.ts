@@ -39,20 +39,25 @@ import { AuthGuard } from '../auth.guard';
 import { ErrorInterceptor } from '../error-interceptor';
 import { AuthInterceptor } from '../auth-interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { replaceData } from './admin-dashboard/maincontent/manageusers/replaceUserType';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatStepperModule} from '@angular/material/stepper';
 @NgModule({
   // tslint:disable-next-line: max-line-length
-  declarations: [AdminDashboardComponent, MaincontentComponent, SidebarComponent, DashboardComponent, OrdersComponent, InventoryComponent, ManageusersComponent, ManageshopsComponent, FeedbackComponent, ProfileComponent, SalesComponent, EngagementComponent, StatusinventComponent, UpdateinventoryComponent, AddinventoryComponent, DialogEditComponent],
+  declarations: [AdminDashboardComponent,replaceData, MaincontentComponent, SidebarComponent, DashboardComponent, OrdersComponent, InventoryComponent, ManageusersComponent, ManageshopsComponent, FeedbackComponent, ProfileComponent, SalesComponent, EngagementComponent, StatusinventComponent, UpdateinventoryComponent, AddinventoryComponent, DialogEditComponent],
   imports: [
     CommonModule,
     MatExpansionModule,
     FormsModule,
     BrowserModule,
+    MatTabsModule,
     MatDialogModule,
     MatSnackBarModule,
     AppRoutingModule,
     MatButtonModule,
     ReactiveFormsModule,
     MatTableModule,
+    MatStepperModule,
     MatSelectModule,
     BrowserAnimationsModule,
     SharedComponentsModule,

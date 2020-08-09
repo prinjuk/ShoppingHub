@@ -9,12 +9,36 @@
             <h2>Sign Up</h2>
        
             <form class="example-form" action="/signup" (submit)='onLogin(signupform) ' #signupform='ngForm'>
-       
+              <mat-form-field class="example-full-width">
+                <mat-label>First Name</mat-label>
+                <input matInput ngModel type='text'  name='firstname' placeholder='First Name' #Fname='ngModel' required >
+                <mat-error *ngIf='Fname.invalid'>Your First Name</mat-error>
+              </mat-form-field>
+              <mat-form-field class="example-full-width">
+              <mat-label>Last Name</mat-label>
+              <input matInput ngModel type='text'  name='lastname' placeholder='Last Name' #Lname='ngModel' required >
+              <mat-error *ngIf='Lname.invalid'>Your Last Name</mat-error>
+            </mat-form-field>
+     
+            <!-- <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Date of Birth</mat-label>
+              <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field> -->
+            
+            <mat-form-field class="example-full-width">
+              <mat-label>Phone Number</mat-label>
+              <input matInput ngModel type="text" name='phoneNumber' class="example-right-align"  #Pnumber='ngModel' required number>
+              <span matPrefix>91&nbsp;&nbsp;</span>
+                 <mat-error *ngIf='Pnumber.invalid'>Please enter valid number</mat-error>
+            </mat-form-field>
               <mat-form-field class="example-full-width">
                 <mat-label>Email</mat-label>
                 <input matInput ngModel type='email'  name='email' placeholder='Email Id' #emailInput='ngModel' required email>
                 <mat-error *ngIf='emailInput.invalid'>Please enter valid email</mat-error>
               </mat-form-field>
+              
             
               <mat-form-field class="example-full-width">
                 <mat-label>Password</mat-label>
