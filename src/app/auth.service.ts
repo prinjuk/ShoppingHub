@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AuthData, initData,Supplier } from './signup/signup.model';
+import { AuthData, initData,Supplier,DeleteViaUniqueCode } from './signup/signup.model';
 
 import { Subject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
@@ -32,11 +32,20 @@ export class AuthService {
                 console.log(resp);
             })
     };
-    createSupplier(firstname: string, lastname: string, storename: string, GST: string, Address1: string, Address2: string, city: string, State: string, Country: string,Zip:string, phoneNumber: number, email: string, password: string) {
+    deleteUserSupplierWay(Unique_id:string)
+    {
+        const auth: DeleteViaUniqueCode = {  unique_SHOP: Unique_id};
+        this.http.post(environment.apiURL + "api/auth/removeUser", auth)
+        .subscribe(resp => {
+            console.log(resp);
+        })
+     
+    }
+    createSupplier(firstname: string, lastname: string, storename: string, GST: string, Address1: string, Address2: string, city: string, State: string, Country: string,Zip:string, phoneNumber: number, email: string, password: string,usertype:number) {
       
         const auth: Supplier = { firstname: firstname, lastname: lastname,storename:storename, gst: GST,address1:Address1,
             address2:Address2,city:city,state:State,country:Country,zip:Zip,
-            phoneNumber: phoneNumber, email: email, password: password,usertype:3 };
+            phoneNumber: phoneNumber, email: email, password: password,usertype:usertype };
             console.log(auth);
         this.http.post(environment.apiURL + "api/auth/newSupplier", auth)
             .subscribe(resp => {

@@ -2,6 +2,7 @@ const User=require('../models/user');
 const supplier=require('../models/supplier');
 const bcrypt=require('bcryptjs');
 const jwt=require('jsonwebtoken');
+const { unique } = require('jquery');
 
 
 exports.Login=(req,res,next)=>{
@@ -53,14 +54,16 @@ exports.signup=(req,res,next)=>{
  
     bcrypt.hash(req.body.password,10)
     .then(hash=>{
-      
+        uniqueShopValue= String(Math.floor(Math.random() * 1000000));
         const userData=new User({
             firstname:req.body.firstname,
             lastname:req.body.lastname,
             phoneNumber:req.body.phoneNumber,
             email:req.body.email,
             password:hash,
-            usertype:2
+            usertype:2,
+            unique_SHOP:uniqueShopValue
+            
         });
         userData.save()
         .then(result=>{
@@ -79,10 +82,12 @@ exports.signup=(req,res,next)=>{
 
 }
 exports.newSupplier=(req,res,next)=>{
-    debugger;
+    try{
+        uniqueShopValue= String(Math.floor(Math.random() * 1000000));
     bcrypt.hash(req.body.password,10)
     .then(hash=>{
-   
+
+
         const userData=new supplier({
             firstname: req.body.firstname,
             lastname:req.body.lastname,
@@ -97,8 +102,8 @@ exports.newSupplier=(req,res,next)=>{
             country: req.body.country,
             zip: req.body.zip,
             password:hash,
-            usertype: 3,
-
+            usertype: req.body.usertype,
+            unique_SHOP:uniqueShopValue
         });
 
         ///copying to user list
@@ -108,8 +113,10 @@ exports.newSupplier=(req,res,next)=>{
             phoneNumber:req.body.phoneNumber,
             email:req.body.email,
             password:hash,
-            usertype:3
+            usertype:req.body.usertype,
+            unique_SHOP:uniqueShopValue
         });
+        
         userInfoAuth.save()
         .then(result=>{
           
@@ -137,10 +144,14 @@ exports.newSupplier=(req,res,next)=>{
         })
     });
    
-
+    }
+    catch(err)
+    {
+        console.log(err);
+    }
 }
 exports.getUser=(req,res,next)=>{
-    User.find().select('email firstname lastname phoneNumber usertype')
+    User.find().select('_id email firstname lastname phoneNumber usertype unique_SHOP')
     .then((document)=>{
         userData=document.phoneNumber
         res.status(200).json({
@@ -148,4 +159,15 @@ exports.getUser=(req,res,next)=>{
           list:document,
         }); 
     })
+}
+exports.removeSupplier=(req,res,next)=>{
+   
+    User.deleteOne({ unique_SHOP: req.body.unique_SHOP }, function (err) {
+        if(err) console.log(err);
+        console.log("Successful deletion");
+      });
+      supplier.deleteOne({ unique_SHOP: req.body.unique_SHOP }, function (err) {
+        if(err) console.log(err);
+        console.log("Successful deletion");
+      });
 }

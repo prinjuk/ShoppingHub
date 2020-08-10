@@ -15,6 +15,7 @@ const supplierSchema= mongoose.Schema({
   zip: {type: String,required:true},
   password: {type: String,required:true},
   usertype: {type: Number,required:true},
+  unique_SHOP: {type: Number,required:true,unique:true},
 });
 supplierSchema.plugin(uniqueValidator);
 module.exports = mongoose.model('supplier',supplierSchema);

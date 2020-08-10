@@ -11,6 +11,11 @@ export interface AuthData{
     email:string,
     password:string,
 }
+export interface DeleteViaUniqueCode{
+    
+    unique_SHOP:string,
+   
+}
 export interface Supplier{
     firstname: string,
     lastname: string,

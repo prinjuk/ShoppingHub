@@ -46,6 +46,13 @@
                     {{ element.usertype | replaceUserType: "element.usertype" }}
                   </td>
                 </ng-container>
+                <ng-container matColumnDef="Action">
+                  <th mat-header-cell *matHeaderCellDef>Action</th>
+                  <td mat-cell *matCellDef="let element">
+                    <button mat-button color="primary" (click)="DeleteEntry(element.unique_SHOP)">Deactivate User</button>
+                 
+                  </td>
+                </ng-container>
                 <!-- <ng-container matColumnDef="JoinedOn">
             <th mat-header-cell *matHeaderCellDef>Joined On</th>
             <td mat-cell *matCellDef="let element"> {{element.JoinedOn}} </td>
@@ -224,7 +231,14 @@
                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
               </mat-form-field> -->
-
+              <mat-form-field class="example-full-width">
+                <mat-label>User Type</mat-label>
+                <mat-select  ngModel name="usertype"    #usertype="ngModel"        required>
+                  <mat-option   ngModel *ngFor="let userType of userType" [value]="userType.value" >
+                    {{userType.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
                     <mat-form-field class="example-full-width">
                       <mat-label>Phone Number</mat-label>
                       <input

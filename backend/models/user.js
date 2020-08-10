@@ -7,6 +7,7 @@ const userSchema= mongoose.Schema({
   email: {type: String,required:true,unique:true},
   password: {type: String,required:true},
   usertype: {type: Number,required:true},
+  unique_SHOP: {type: Number,required:true,unique:true}
 });
 userSchema.plugin(uniqueValidator);
 module.exports = mongoose.model('User',userSchema);
