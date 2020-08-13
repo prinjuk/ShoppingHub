@@ -16,6 +16,19 @@ export interface DeleteViaUniqueCode{
     unique_SHOP:string,
    
 }
+export interface authLive{
+    name:string,
+    token:string,
+    expirationData:Date,
+    shopid:string,
+   
+}
+export interface authLiveToken{
+  
+    token:string,
+   
+   
+}
 export interface Supplier{
     firstname: string,
     lastname: string,

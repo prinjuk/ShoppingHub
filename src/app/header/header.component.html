@@ -48,7 +48,7 @@
         <a *ngIf='!userIsAuthed'  routerLink='/signup'  mat-raised-button='primary'><mat-icon>account_circle</mat-icon> Sign Up</a>
         <a *ngIf='!userIsAuthed'  routerLink='/login'  mat-raised-button='primary'><mat-icon>shopping_cart</mat-icon> Login</a>
         <div class="myaccount">
-         <a *ngIf='userIsAuthed'  routerLink='/admin' mat-raised-button='primary'> Admin
+         <a *ngIf='userIsAuthed'  routerLink='/admin' mat-raised-button='primary'> {{userlogin}}
          </a>   
          <span *ngIf='userIsAuthed'>
           <button  mat-raised-button color="primary" (click)='logout()'>Logout</button>

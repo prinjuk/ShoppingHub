@@ -1,5 +1,6 @@
 const User=require('../models/user');
 const supplier=require('../models/supplier');
+const authReq=require('../models/authentication');
 const bcrypt=require('bcryptjs');
 const jwt=require('jsonwebtoken');
 const { unique } = require('jquery');
@@ -8,6 +9,8 @@ const { unique } = require('jquery');
 exports.Login=(req,res,next)=>{
     let emailStorage='';
     let useridStorage='';
+    let userstoreStorage='';
+    let nametoreStorage='';
     try{
         User.findOne({email:req.body.email})
         .then(user=>{
@@ -19,6 +22,8 @@ exports.Login=(req,res,next)=>{
             }
             emailStorage=req.body.email;
             useridStorage=user._id;
+            userstoreStorage=user.unique_SHOP;
+            nametoreStorage=user.firstname;
             return bcrypt.compare(req.body.password,user.password);
         })
         .then(result=>{
@@ -34,9 +39,12 @@ exports.Login=(req,res,next)=>{
                 {expiresIn:'1h'}
                 );
             res.status(200).json({
+                name:nametoreStorage,
                 token:token,
+                unique_SHOP:userstoreStorage,
                 expiresIn:3600,
             })
+        
         })
         .catch(err=>{
             return res.status(401).json({
@@ -164,10 +172,54 @@ exports.removeSupplier=(req,res,next)=>{
    
     User.deleteOne({ unique_SHOP: req.body.unique_SHOP }, function (err) {
         if(err) console.log(err);
-        console.log("Successful deletion");
+     
       });
       supplier.deleteOne({ unique_SHOP: req.body.unique_SHOP }, function (err) {
         if(err) console.log(err);
-        console.log("Successful deletion");
+       
       });
+}
+exports.authLive=(req,res,next)=>{
+    console.log(req.body);
+    const authLiveReq=new authReq({
+        auth_name:req.body.name,
+        auth_token:req.body.token,
+        auth_expdate:req.body.expirationData,
+        auth_shopId:req.body.shopid,
+    })
+    authLiveReq.save()
+    .then(result=>{
+          
+        res.status(201).json({
+            message:'auth created',
+            result:result
+        });
+    }).catch(err=>{
+        res.status(500).json({
+           message:'Invalid Authentication Failed'
+        });
+    })
+}
+exports.authLiveRequest=(req,res,next)=>{
+    let findSpecific=req.body.token;
+    authReq.find(
+        { auth_token:findSpecific   
+         }
+    
+      )
+      .then((document)=>{
+        searchlist=document;
+        res.status(200).json({
+          message:'success',
+          list:searchlist,
+        });
+      })
+}
+exports.removeLiveReq=(req,res,next)=>{
+   
+    authReq.deleteOne({ auth_token: req.body.token }, function (err) {
+        if(err) console.log(err);
+     
+      });
+      console.log('Token Reset')
 }

@@ -15,6 +15,7 @@ import { environment } from '../../environments/environment';
 })
 export class HeaderComponent implements OnInit,OnDestroy {
   userIsAuthed=false;
+  userlogin='Control Panel'
   private authListenerSubs:Subscription;
   public searchData: FormGroup;
   productTransfer:any;
@@ -27,6 +28,7 @@ export class HeaderComponent implements OnInit,OnDestroy {
     .subscribe(isAuth=>{
         this.userIsAuthed=isAuth;
     });
+    this.userlogin=`Hi ,${localStorage.getItem('name')}`
   }
   ngOnDestroy()
   {

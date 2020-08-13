@@ -5,5 +5,8 @@ router.post('/signup',Auth.signup);
 router.post('/newSupplier',Auth.newSupplier);
 router.post('/login',Auth.Login);
 router.get('/getUser',Auth.getUser);
+router.post('/authLive',Auth.authLive);
+router.post('/authLiveRequest',Auth.authLiveRequest);
+router.post('/RemoveauthLiveRequest',Auth.removeLiveReq);
 router.post('/removeUser',Auth.removeSupplier);
 module.exports=router;
