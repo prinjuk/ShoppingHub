@@ -76,15 +76,21 @@ export class AuthService {
             })
     }
     autoAuthUser() {
-        const authInfo = this.getAuthData();
-        const now = new Date();
-        const expiresIn = authInfo.expirationData.getTime() - now.getTime();
-        if (expiresIn > 0) {
-            this.token = authInfo.token;
-            this.setTimer(expiresIn / 1000);
-            this.loginStatus = true;
-            this.authStatusListener.next(true);
-        }
+        debugger;
+       this.getAuthData().toPromise().then(res=>{
+        debugger;
+            const now = new Date();
+            const expiresIn = new Date(res.list[0].auth_expdate).getTime() - now.getTime();
+            if (expiresIn > 0) {
+                this.token = res.list[0].auth_token;
+                this.setTimer(expiresIn / 1000);
+                this.loginStatus = true;
+                this.authStatusListener.next(true);
+            }
+        });
+      
+        
+      
     }
     logOut() {
         clearTimeout(this.timerLog);
@@ -124,18 +130,29 @@ export class AuthService {
         localStorage.removeItem('expirationData');
         this.loginStatus = false;
     }
-    private getAuthData() {
-        const apiReq= this.http.get(environment.apiURL + "api/auth/authLiveRequest");
-        console.log(apiReq);
-        const token = apiReq['token'];
-        const expirationData = apiReq['expirationData'];
-        if (!token || !expirationData) {
-            return
-        }
-        return {
-            token: token,
-            expirationData: new Date(expirationData)
-        }
+    private  getAuthData(): Observable<any>  {
+        debugger;
+        let tokenLocal=localStorage.getItem('token');
+        const tokenPass: authLiveToken = {token: tokenLocal};
+        return this.http.post(environment.apiURL + "api/auth/authLiveRequest",tokenPass);
+                
+       
+     
+       
+        // apiReq.subscribe(res=>{
+        //     debugger;
+        //     const token = res["list"][0].auth_token;
+        //     const expirationData =  res["list"][0].auth_expdate ;
+        //     if (!token || !expirationData) {
+        //         return
+        //     }
+        //     return {
+        //         token: token,
+        //         expirationData: new Date(expirationData)
+        //     }
+        // })
+        // return
+       
     }
 
     private setTimer(duration: number) {
