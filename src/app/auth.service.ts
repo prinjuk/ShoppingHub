@@ -1,25 +1,30 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AuthData, initData,Supplier,DeleteViaUniqueCode,authLive, authLiveToken } from './signup/signup.model';
+import { AuthData, initData,Supplier,DeleteViaUniqueCode,authLive, authLiveToken, DeleteTokenDate, UserCombinationData } from './signup/signup.model';
 
 import { Subject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { map, filter, switchMap } from 'rxjs/operators'
 @Injectable({
     providedIn: "root"
 })
 export class AuthService {
     private token: any;
+    private userDataForAllPages:any;
+    private shopidUnique:any;
     private timerLog: NodeJS.Timer;
     loginStatus = false;
 
     private authStatusListener = new Subject<boolean>();
     // private getUserList=new Subject<boolean>();
     constructor(private http: HttpClient, private router: Router) {
-
+        
+      
     }
+   
     getToken() {
-        return this.token;
+        return this.getAuthData();
     }
     getAuthStatusListener() {
         return this.authStatusListener.asObservable();
@@ -53,7 +58,11 @@ export class AuthService {
             })
     };
     getUser(): Observable<any> {
-        return this.http.get(environment.apiURL + "api/auth/getUser");
+        debugger;
+        const auth:UserCombinationData={storeId:this.shopidUnique,auth_type:this.userDataForAllPages}
+        debugger;
+        return this.http.post(environment.apiURL + "api/auth/getUser",auth);
+       
     }
 
     login(email: string, password: string) {
@@ -61,8 +70,10 @@ export class AuthService {
         const auth: AuthData = { email: email, password: password };
         this.http.post<{name: string, token: string, unique_SHOP : string, expiresIn: number }>(environment.apiURL + "api/auth/login", auth)
             .subscribe(resp => {
-                console.log(resp);
+            
+                const userType=resp['usertype'];
                 const shopid=resp['unique_SHOP'];
+               
                 const expiresInDuration = resp.expiresIn;
                 const name=resp['name'];
                 const token = resp['token'];
@@ -71,14 +82,29 @@ export class AuthService {
                 this.authStatusListener.next(true);
                 const now = new Date();
                 const expirationData = new Date(now.getTime() + expiresInDuration * 1000);
-                this.saveAuthData(name,token, expirationData,shopid);
+                this.saveAuthData(name,token, expirationData,shopid,userType);
                 this.router.navigate(['/']);
             })
     }
+    autoClearDBAuthToken()
+    {
+       const now = new Date();
+      now.setHours(now.getHours() - 1);
+        const auth: DeleteTokenDate = {  exp:now };
+        this.http.post(environment.apiURL + "api/auth/removeUnwantedTokens", auth)
+        .subscribe(resp => {
+            console.log(resp);
+        })
+    }
     autoAuthUser() {
-        debugger;
+        
        this.getAuthData().toPromise().then(res=>{
-        debugger;
+        
+        if(res.list.length  != 0)
+        {
+
+            this.userDataForAllPages=res.list[0].auth_type;
+            this.shopidUnique=res.list[0].auth_shopId;
             const now = new Date();
             const expiresIn = new Date(res.list[0].auth_expdate).getTime() - now.getTime();
             if (expiresIn > 0) {
@@ -87,8 +113,9 @@ export class AuthService {
                 this.loginStatus = true;
                 this.authStatusListener.next(true);
             }
+        }
         });
-      
+        this.autoClearDBAuthToken();
         
       
     }
@@ -103,12 +130,15 @@ export class AuthService {
         return this.loginStatus;
 
     }
-    private saveAuthData(name:string,token: string, expirationData: Date,shopid : string) {
-        const auth: authLive = {name:name, token: token, expirationData: expirationData,shopid:shopid };
+    private saveAuthData(name:string,token: string, expirationData: Date,shopid : string,userType :Number) {
+       
+        const auth: authLive = {name:name, token: token, expirationData: expirationData,shopid:shopid,userType:userType };
         this.http.post(environment.apiURL + "api/auth/authLive", auth)
         .subscribe(resp=>{
 
-        })
+        });
+        this.userDataForAllPages=userType;
+        this.shopidUnique=shopid;
         localStorage.setItem('name', name);
         localStorage.setItem('token', token);
         localStorage.setItem('shopid', shopid);
@@ -124,34 +154,19 @@ export class AuthService {
     
             });
         }
-       
+     
         localStorage.removeItem('token');
-        
+        localStorage.removeItem('name');
+        localStorage.removeItem('shopid');
         localStorage.removeItem('expirationData');
         this.loginStatus = false;
     }
     private  getAuthData(): Observable<any>  {
-        debugger;
+        
         let tokenLocal=localStorage.getItem('token');
         const tokenPass: authLiveToken = {token: tokenLocal};
         return this.http.post(environment.apiURL + "api/auth/authLiveRequest",tokenPass);
-                
-       
-     
-       
-        // apiReq.subscribe(res=>{
-        //     debugger;
-        //     const token = res["list"][0].auth_token;
-        //     const expirationData =  res["list"][0].auth_expdate ;
-        //     if (!token || !expirationData) {
-        //         return
-        //     }
-        //     return {
-        //         token: token,
-        //         expirationData: new Date(expirationData)
-        //     }
-        // })
-        // return
+         
        
     }
 

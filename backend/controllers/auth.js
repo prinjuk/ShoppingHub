@@ -11,6 +11,7 @@ exports.Login=(req,res,next)=>{
     let useridStorage='';
     let userstoreStorage='';
     let nametoreStorage='';
+    let typeStorage='';
     try{
         User.findOne({email:req.body.email})
         .then(user=>{
@@ -23,6 +24,7 @@ exports.Login=(req,res,next)=>{
             emailStorage=req.body.email;
             useridStorage=user._id;
             userstoreStorage=user.unique_SHOP;
+            typeStorage=user.usertype;
             nametoreStorage=user.firstname;
             return bcrypt.compare(req.body.password,user.password);
         })
@@ -43,6 +45,7 @@ exports.Login=(req,res,next)=>{
                 token:token,
                 unique_SHOP:userstoreStorage,
                 expiresIn:3600,
+                usertype:typeStorage,
             })
         
         })
@@ -91,7 +94,8 @@ exports.signup=(req,res,next)=>{
 }
 exports.newSupplier=(req,res,next)=>{
     try{
-        uniqueShopValue= String(Math.floor(Math.random() * 1000000));
+        uniqueShopValueGen= String(Math.floor(Math.random() * 1000000));
+        const uniqueShopValue=uniqueShopValueGen;
     bcrypt.hash(req.body.password,10)
     .then(hash=>{
 
@@ -159,14 +163,39 @@ exports.newSupplier=(req,res,next)=>{
     }
 }
 exports.getUser=(req,res,next)=>{
-    User.find().select('_id email firstname lastname phoneNumber usertype unique_SHOP')
-    .then((document)=>{
-        userData=document.phoneNumber
-        res.status(200).json({
-          message:'success',
-          list:document,
-        }); 
-    })
+    console.log(req.body.auth_type)
+   //optimize
+    if(req.body.auth_type == 0)
+    {
+        User.find(
+            {
+               
+            }
+    
+        ).select('_id email firstname lastname phoneNumber usertype unique_SHOP')
+        .then((document)=>{
+            userData=document.phoneNumber
+            res.status(200).json({
+              message:'success',
+              list:document,
+            }); 
+        })
+    }else{
+        User.find(
+            {
+                unique_SHOP:req.body.storeId
+            }
+    
+        ).select('_id email firstname lastname phoneNumber usertype unique_SHOP')
+        .then((document)=>{
+            userData=document.phoneNumber
+            res.status(200).json({
+              message:'success',
+              list:document,
+            }); 
+        })
+    }
+   
 }
 exports.removeSupplier=(req,res,next)=>{
    
@@ -179,13 +208,24 @@ exports.removeSupplier=(req,res,next)=>{
        
       });
 }
+exports.removeUnwantedTokens=(req,res,next)=>{
+
+    authReq.deleteMany(
+        { auth_expdate:{$lte : req.body.exp} },
+         function (err) {
+        if(err) console.log(err);
+     
+      });
+    
+}
 exports.authLive=(req,res,next)=>{
-    console.log(req.body);
+  
     const authLiveReq=new authReq({
         auth_name:req.body.name,
         auth_token:req.body.token,
         auth_expdate:req.body.expirationData,
         auth_shopId:req.body.shopid,
+        auth_type:req.body.userType
     })
     authLiveReq.save()
     .then(result=>{

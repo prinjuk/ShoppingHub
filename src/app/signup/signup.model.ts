@@ -16,11 +16,23 @@ export interface DeleteViaUniqueCode{
     unique_SHOP:string,
    
 }
+export interface DeleteTokenDate{
+    
+    exp:Date,
+   
+}
 export interface authLive{
     name:string,
     token:string,
     expirationData:Date,
     shopid:string,
+    userType:Number
+}
+export interface UserCombinationData{
+  
+    storeId:string,
+    auth_type:number
+   
    
 }
 export interface authLiveToken{

@@ -4,7 +4,7 @@ const authentication= mongoose.Schema({
   auth_token: {type: String,required:true},
   auth_expdate: {type: String,required:true},
   auth_shopId: {type: String,required:true},
-  
+  auth_type:{type:String,required:true}
 });
  
 module.exports = mongoose.model('authentication',authentication);
