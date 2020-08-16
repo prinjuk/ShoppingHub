@@ -28,12 +28,27 @@ export interface authLive{
     shopid:string,
     userType:Number
 }
+export interface employeeDetails{
+    firstname: string,
+    lastname: string,
+  
+    phoneNumber: number,
+    email: string,
+   
+    password: string,
+    usertype:number,
+    unique_SHOP: number,
+       
+}
 export interface UserCombinationData{
   
     storeId:string,
     auth_type:number
    
    
+}
+export interface getStore{
+    storeId:string,
 }
 export interface authLiveToken{
   

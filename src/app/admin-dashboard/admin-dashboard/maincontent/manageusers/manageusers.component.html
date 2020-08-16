@@ -113,7 +113,7 @@
                         >Your Last Name</mat-error
                       >
                     </mat-form-field>
-                    <mat-form-field class="example-full-width">
+                    <mat-form-field class="example-full-width" *ngIf="this.authorization ">
                       <mat-label>Store Name</mat-label>
                       <input
                         matInput
@@ -128,7 +128,7 @@
                         >Your Store Name</mat-error
                       >
                     </mat-form-field>
-                    <mat-form-field class="example-full-width">
+                    <mat-form-field class="example-full-width" *ngIf="this.authorization ">
                       <mat-label>GST Number</mat-label>
                       <input
                         matInput
@@ -141,7 +141,7 @@
                       />
                       <mat-error *ngIf="gst.invalid">Your GST Number</mat-error>
                     </mat-form-field>
-                    <mat-form-field class="example-full-width">
+                    <mat-form-field class="example-full-width"  *ngIf="this.authorization ">
                       <mat-label>Address Line 1</mat-label>
                       <input
                         matInput
@@ -156,7 +156,7 @@
                         >Your Address</mat-error
                       >
                     </mat-form-field>
-                    <mat-form-field class="example-full-width">
+                    <mat-form-field class="example-full-width" *ngIf="this.authorization ">
                       <mat-label>Address Line 2</mat-label>
                       <input
                         matInput
@@ -171,7 +171,7 @@
                         >Your Address</mat-error
                       >
                     </mat-form-field>
-                    <mat-form-field class="example-full-width">
+                    <mat-form-field class="example-full-width" *ngIf="this.authorization ">
                       <mat-label>City</mat-label>
                       <input
                         matInput
@@ -184,7 +184,7 @@
                       />
                       <mat-error *ngIf="city.invalid">Your Address</mat-error>
                     </mat-form-field>
-                    <mat-form-field class="example-full-width">
+                    <mat-form-field class="example-full-width" *ngIf="this.authorization ">
                       <mat-label>State</mat-label>
                       <input
                         matInput
@@ -197,7 +197,7 @@
                       />
                       <mat-error *ngIf="State.invalid">Your State</mat-error>
                     </mat-form-field>
-                    <mat-form-field class="example-full-width">
+                    <mat-form-field class="example-full-width" *ngIf="this.authorization "> 
                       <mat-label>Country</mat-label>
                       <input
                         matInput
@@ -212,7 +212,7 @@
                         >Your Country</mat-error
                       >
                     </mat-form-field>
-                    <mat-form-field class="example-full-width">
+                    <mat-form-field class="example-full-width" *ngIf="this.authorization ">
                       <mat-label>Zip Code</mat-label>
                       <input
                         matInput
@@ -233,7 +233,7 @@
               </mat-form-field> -->
               <mat-form-field class="example-full-width">
                 <mat-label>User Type</mat-label>
-                <mat-select  ngModel name="usertype"    #usertype="ngModel"        required>
+                <mat-select name="usertype"    ngModel  #usertype="ngModel" required>
                   <mat-option   ngModel *ngFor="let userType of userType" [value]="userType.value" >
                     {{userType.viewValue}}
                   </mat-option>

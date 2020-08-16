@@ -1,6 +1,7 @@
 const User=require('../models/user');
 const supplier=require('../models/supplier');
 const authReq=require('../models/authentication');
+const employees=require('../models/employees');
 const bcrypt=require('bcryptjs');
 const jwt=require('jsonwebtoken');
 const { unique } = require('jquery');
@@ -96,8 +97,8 @@ exports.newSupplier=(req,res,next)=>{
     try{
         uniqueShopValueGen= String(Math.floor(Math.random() * 1000000));
         const uniqueShopValue=uniqueShopValueGen;
-    bcrypt.hash(req.body.password,10)
-    .then(hash=>{
+        bcrypt.hash(req.body.password,10)
+        .then(hash=>{
 
 
         const userData=new supplier({
@@ -117,7 +118,18 @@ exports.newSupplier=(req,res,next)=>{
             usertype: req.body.usertype,
             unique_SHOP:uniqueShopValue
         });
-
+        userData.save()
+        .then(result=>{
+          
+            res.status(201).json({
+                message:'user created',
+                result:result
+            });
+        }).catch(err=>{
+            res.status(500).json({
+               message:'Invalid Authentication Failed'
+            });
+        })
         ///copying to user list
         const userInfoAuth=new User({
             firstname:req.body.firstname,
@@ -142,25 +154,16 @@ exports.newSupplier=(req,res,next)=>{
             });
         })
            ///creating to user list
-        userData.save()
-        .then(result=>{
-          
-            res.status(201).json({
-                message:'user created',
-                result:result
-            });
-        }).catch(err=>{
-            res.status(500).json({
-               message:'Invalid Authentication Failed'
-            });
-        })
+     
     });
-   
     }
     catch(err)
     {
-        console.log(err);
+
     }
+    
+   
+ 
 }
 exports.getUser=(req,res,next)=>{
     console.log(req.body.auth_type)
@@ -257,6 +260,24 @@ exports.authLiveRequest=(req,res,next)=>{
         });
       })
 }
+exports.storeDetails=(req,res,next)=>{
+
+    let findSpecific=req.body.storeId;
+    supplier.find(
+        { unique_SHOP:findSpecific   
+         }
+    
+      )
+    //   .select('_id email firstname lastname phoneNumber usertype unique_SHOP')
+      .then((document)=>{
+       
+        searchlist=document;
+        res.status(200).json({
+          message:'success',
+          list:searchlist,
+        });
+      })
+}
 exports.removeLiveReq=(req,res,next)=>{
    
     authReq.deleteOne({ auth_token: req.body.token }, function (err) {
@@ -264,4 +285,62 @@ exports.removeLiveReq=(req,res,next)=>{
      
       });
       console.log('Token Reset')
+}
+exports.employees=(req,res,next)=>{
+   const uniqueShopValue=Number(req.body.unique_SHOP);
+ console.log(req.body)
+    bcrypt.hash(req.body.password,10)
+    .then(hash=>{
+
+
+        const userData=new employees({
+            firstname: req.body.firstname,
+            lastname:req.body.lastname,
+            phoneNumber:req.body.phoneNumber,
+            email:req.body.email,
+            password:hash,
+            usertype: req.body.usertype,
+            unique_SHOP: req.body.unique_SHOP
+        });
+
+        ///copying to user list
+        const userInfoAuth=new User({
+            firstname:req.body.firstname,
+            lastname:req.body.lastname,
+            phoneNumber:req.body.phoneNumber,
+            email:req.body.email,
+            password:hash,
+            usertype:req.body.usertype,
+            unique_SHOP:uniqueShopValue
+        });
+        
+        // userInfoAuth.save()
+        // .then(result=>{
+          
+        //     res.status(201).json({
+        //         message:'user created',
+        //         result:result
+        //     });
+        // }).catch(err=>{
+        //     res.status(500).json({
+        //        message:err.body
+        //     });
+        // })
+           ///creating to user list
+        userData.save()
+        .then(result=>{
+          
+            res.status(201).json({
+                message:'user created',
+                result:result
+            });
+        }).catch(err=>{
+            res.status(500).json({
+               message:'Invalid Authentication Failed'
+            });
+        })
+    });
+   
+ 
+  
 }

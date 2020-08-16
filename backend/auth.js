@@ -10,4 +10,6 @@ router.post('/authLiveRequest',Auth.authLiveRequest);
 router.post('/RemoveauthLiveRequest',Auth.removeLiveReq);
 router.post('/removeUnwantedTokens',Auth.removeUnwantedTokens);
 router.post('/removeUser',Auth.removeSupplier);
+router.post('/storeDetails',Auth.storeDetails);
+router.post('/employees',Auth.employees);
 module.exports=router;

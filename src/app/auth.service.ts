@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AuthData, initData,Supplier,DeleteViaUniqueCode,authLive, authLiveToken, DeleteTokenDate, UserCombinationData } from './signup/signup.model';
+import { AuthData, initData,Supplier,DeleteViaUniqueCode,authLive, authLiveToken,employeeDetails, DeleteTokenDate, UserCombinationData, getStore } from './signup/signup.model';
 
 import { Subject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
@@ -58,9 +58,9 @@ export class AuthService {
             })
     };
     getUser(): Observable<any> {
-        debugger;
+       
         const auth:UserCombinationData={storeId:this.shopidUnique,auth_type:this.userDataForAllPages}
-        debugger;
+      
         return this.http.post(environment.apiURL + "api/auth/getUser",auth);
        
     }
@@ -161,7 +161,7 @@ export class AuthService {
         localStorage.removeItem('expirationData');
         this.loginStatus = false;
     }
-    private  getAuthData(): Observable<any>  {
+    public  getAuthData(): Observable<any>  {
         
         let tokenLocal=localStorage.getItem('token');
         const tokenPass: authLiveToken = {token: tokenLocal};
@@ -169,10 +169,25 @@ export class AuthService {
          
        
     }
-
+    public getShopDetails(storeid:string):Observable<any>{
+        let storeLocal=storeid;
+        const storepass: getStore = {storeId: storeLocal};
+        return this.http.post(environment.apiURL + "api/auth/storeDetails",storepass);
+         
+    }
     private setTimer(duration: number) {
         this.timerLog = setTimeout(() => {
             this.logOut();
         }, duration * 1000);
     }
+    employeelist(firstname: string, lastname: string,  phoneNumber: number, email: string, password: string,usertype:number,unique_SHOP:number) {
+      
+        const auth: employeeDetails = { firstname: firstname, lastname: lastname,
+            phoneNumber: phoneNumber, email: email, password: password,usertype:usertype,unique_SHOP:unique_SHOP };
+           
+        this.http.post(environment.apiURL + "api/auth/employees", auth)
+            .subscribe(resp => {
+                console.log(resp);
+            })
+    };
 }

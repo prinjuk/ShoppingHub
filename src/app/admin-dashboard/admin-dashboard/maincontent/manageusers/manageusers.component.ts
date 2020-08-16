@@ -30,15 +30,26 @@ export class ManageusersComponent implements OnInit {
   ];
   displayedColumns: string[] = ['email', 'firstname', 'lastname', 'phone','usertype','Action'];
   dataUser = ELEMENT_DATA;
+  authorization:boolean=false;
+  
+  loginData: any;
   constructor(public auth:AuthService) { }
 
   ngOnInit(): void {
     
     this.auth.getUser().subscribe((res)=>{
-   console.log(res.list);
+    
       this.dataUser=res.list;
     });
-
+    this.auth.getAuthData().subscribe(res=>{
+      debugger;
+      this.loginData=res.list[0];
+      if(this.loginData.auth_type ==0)
+      {
+        this.authorization=true;
+      }
+    });
+   
   }
   DeleteEntry(e)
   {
@@ -46,13 +57,24 @@ export class ManageusersComponent implements OnInit {
   }
   onLogin(form)
   {
+    debugger;
     if(!form.invalid)
     {
+    if(!this.authorization)
+    {
     
-   
-  this.auth.createSupplier(form.value.firstname, form.value.lastname, form.value.storename, form.value.GST
-    , form.value.Address1, form.value.Address2, form.value.city, form.value.State, form.value.Country,form.value.Zip,
-    form.value.phoneNumber, form.value.email, form.value.passid,form.value.usertype);
+     debugger;  
+        this.auth.employeelist(form.value.firstname, form.value.lastname,form.value.phoneNumber,
+           form.value.email, form.value.passid,form.value.usertype,this.loginData.auth_shopId);
+  
+
+    }
+   else{
+    this.auth.createSupplier(form.value.firstname, form.value.lastname, form.value.storename, form.value.GST
+      , form.value.Address1, form.value.Address2, form.value.city, form.value.State, form.value.Country,form.value.Zip,
+      form.value.phoneNumber, form.value.email, form.value.passid,form.value.usertype);
+   }
+
   
     }
   }
