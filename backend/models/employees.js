@@ -7,7 +7,7 @@ const employeeSchema= mongoose.Schema({
   email: {type: String,required:true,unique:true},
   password: {type: String,required:true},
   usertype: {type: Number,required:true},
-  unique_SHOP: {type: Number,required:true},
+  unique_SHOP: {type: String,required:true},
 });
 employeeSchema.plugin(uniqueValidator);
 module.exports = mongoose.model('employees',employeeSchema);

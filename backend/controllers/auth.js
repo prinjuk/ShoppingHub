@@ -4,7 +4,7 @@ const authReq=require('../models/authentication');
 const employees=require('../models/employees');
 const bcrypt=require('bcryptjs');
 const jwt=require('jsonwebtoken');
-const { unique } = require('jquery');
+const uniqueString = require('unique-string');
 
 
 exports.Login=(req,res,next)=>{
@@ -66,7 +66,7 @@ exports.signup=(req,res,next)=>{
  
     bcrypt.hash(req.body.password,10)
     .then(hash=>{
-        uniqueShopValue= String(Math.floor(Math.random() * 1000000));
+        uniqueShopValue= uniqueString();
         const userData=new User({
             firstname:req.body.firstname,
             lastname:req.body.lastname,
@@ -95,8 +95,8 @@ exports.signup=(req,res,next)=>{
 }
 exports.newSupplier=(req,res,next)=>{
     try{
-        uniqueShopValueGen= String(Math.floor(Math.random() * 1000000));
-        const uniqueShopValue=uniqueShopValueGen;
+   
+        const uniqueShopValue=uniqueString();
         bcrypt.hash(req.body.password,10)
         .then(hash=>{
 
@@ -287,23 +287,10 @@ exports.removeLiveReq=(req,res,next)=>{
       console.log('Token Reset')
 }
 exports.employees=(req,res,next)=>{
-   const uniqueShopValue=Number(req.body.unique_SHOP);
- console.log(req.body)
+   const uniqueShopValue=req.body.unique_SHOP;
+ console.log(req.body);
     bcrypt.hash(req.body.password,10)
-    .then(hash=>{
-
-
-        const userData=new employees({
-            firstname: req.body.firstname,
-            lastname:req.body.lastname,
-            phoneNumber:req.body.phoneNumber,
-            email:req.body.email,
-            password:hash,
-            usertype: req.body.usertype,
-            unique_SHOP: req.body.unique_SHOP
-        });
-
-        ///copying to user list
+    .then(hash=>{ 
         const userInfoAuth=new User({
             firstname:req.body.firstname,
             lastname:req.body.lastname,
@@ -311,23 +298,10 @@ exports.employees=(req,res,next)=>{
             email:req.body.email,
             password:hash,
             usertype:req.body.usertype,
-            unique_SHOP:uniqueShopValue
+            unique_SHOP:req.body.unique_SHOP
         });
         
-        // userInfoAuth.save()
-        // .then(result=>{
-          
-        //     res.status(201).json({
-        //         message:'user created',
-        //         result:result
-        //     });
-        // }).catch(err=>{
-        //     res.status(500).json({
-        //        message:err.body
-        //     });
-        // })
-           ///creating to user list
-        userData.save()
+        userInfoAuth.save()
         .then(result=>{
           
             res.status(201).json({
@@ -336,9 +310,11 @@ exports.employees=(req,res,next)=>{
             });
         }).catch(err=>{
             res.status(500).json({
-               message:'Invalid Authentication Failed'
+               message:err.body
             });
         })
+        
+      
     });
    
  
