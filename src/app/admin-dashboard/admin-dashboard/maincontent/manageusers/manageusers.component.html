@@ -46,10 +46,10 @@
                     {{ element.usertype | replaceUserType: "element.usertype" }}
                   </td>
                 </ng-container>
-                <ng-container matColumnDef="Action">
+                <ng-container matColumnDef="Action" >
                   <th mat-header-cell *matHeaderCellDef>Action</th>
                   <td mat-cell *matCellDef="let element">
-                    <button mat-button color="primary" (click)="DeleteEntry(element.unique_SHOP)">Deactivate User</button>
+                    <button mat-button color="primary" (click)="DeleteEntry(element.unique_SHOP)"  *ngIf="this.authorization ">Deactivate User</button>
                  
                   </td>
                 </ng-container>
@@ -69,7 +69,7 @@
               </table>
             </div>
           </mat-tab>
-          <mat-tab label="Create New Supplier">
+          <mat-tab label="Create New Supplier"  *ngIf="this.authorization ">
             <div class="">
               <div class="col-md-3"></div>
               <div class="col-md-6">
@@ -297,8 +297,8 @@
               </div>
             </div>
           </mat-tab>
-          <mat-tab label=" 3rd Party Registration Requests"> 3rd Party Registration Requests </mat-tab>
-          <mat-tab label="Pending Requests"> Pending Requests </mat-tab>
+          <mat-tab label=" 3rd Party Registration Requests"  *ngIf="this.authorization "> 3rd Party Registration Requests </mat-tab>
+          <mat-tab label="Pending Requests"  *ngIf="this.authorization "> Pending Requests </mat-tab>
         </mat-tab-group>
       </div>
     </div>

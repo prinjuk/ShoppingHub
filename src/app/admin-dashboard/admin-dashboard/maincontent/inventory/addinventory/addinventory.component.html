@@ -3,7 +3,7 @@
     <form class="example-form" formenctype ='/newInvent'  method="POST"  (ngSubmit)='newinventForm($event)' [formGroup]='userdata' >
     <div class="col-md-4 col-xs-12">
       <div class="imagearea avatar-upload" (click)='FileUpload.click()'  >
-        <img class="" id='preview' src="https://748073e22e8db794416a-cc51ef6b37841580002827d4d94d19b6.ssl.cf3.rackcdn.com/not-found.png" alt="upload" style="" >
+        <img class="" id='preview' src="https://748073e22e8db794416a-cc51ef6b37841580002827d4d94d19b6.ssl.cf3.rackcdn.com/not-found.png" alt="upload" >
         <input class="" type="file" id="uploadImage" accept=".png, .jpg, .jpeg" (change)='onFileChange($event)'  formControlName='imageurl' #FileUpload>
         <label class='edit avatar-edit'>
 
@@ -20,7 +20,7 @@
     </mat-form-field> -->
 
     <table class="example-full-width" cellspacing="0">
-      <tr>
+      <!-- <tr>
         <td>
           <mat-form-field class="example-full-width">
           <mat-label>Store Name</mat-label>
@@ -29,7 +29,7 @@
         </mat-form-field>
       </td>
 
-      </tr>
+      </tr> -->
       <tr>
         <td>
           <mat-form-field class="example-full-width">
@@ -51,7 +51,7 @@
     </td>
 
     </tr>
-    <tr>
+    <!-- <tr>
       <td>
         <mat-form-field class="example-full-width">
         <mat-label>Store Name </mat-label>
@@ -59,14 +59,14 @@
         <mat-error *ngIf="userdata.get('storeid').invalid">Store Name is Compulsory</mat-error>
       </mat-form-field>
     </td>
-    </tr>
+    </tr> -->
     <!-- categories needed -->
     <tr>
       <td>
         <mat-form-field class='example-full-width'>
           <mat-label>Product Id</mat-label>
           <input matInput formControlName='productid' required>
-          <mat-error *ngIf="userdata.get('storeid').invalid">Product Id is Compulsory</mat-error>
+          <mat-error *ngIf="userdata.get('productid').invalid">Product Id is Compulsory</mat-error>
         </mat-form-field>
       </td>
     </tr>

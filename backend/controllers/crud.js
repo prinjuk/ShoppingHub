@@ -1,11 +1,9 @@
 const List =require('../models/list');
 
 exports.AddProduct=(req,res,next) => {
+  
     const url=req.protocol+'://'+req.get('host');
    const passData=new List({
- 
-     storeid: req.body.storeid,
-     storeName: req.body.storeName,
      barcode:  req.body.barcode,
      productname:  req.body.productname,
      brandName:  req.body.brandName,
@@ -14,7 +12,6 @@ exports.AddProduct=(req,res,next) => {
      quant:  req.body.quant,
      imageurl: url+'/images/'+req.file.filename,
      remaining: req.body.remaining,
- 
      productSize: req.body.productSize,
       creator:req.userData.userId
   });

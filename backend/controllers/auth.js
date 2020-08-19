@@ -254,6 +254,7 @@ exports.authLiveRequest=(req,res,next)=>{
       .then((document)=>{
        
         searchlist=document;
+        console.log(document)
         res.status(200).json({
           message:'success',
           list:searchlist,

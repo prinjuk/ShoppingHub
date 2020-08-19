@@ -23,7 +23,7 @@ console.log('db connected succesful');
   console.log('db failed');
 
 });
-app.use('/images',express.static(path.join('images'),{fallthrough: false}));
+app.use('/images',express.static(path.join('./backend/images'),{fallthrough: false}));
 //submitting
 app.post('/newInvent',checkAuth,fileExtractor,crud.AddProduct);
 //retrievingSearch

@@ -24,8 +24,17 @@ export class AuthService {
     }
    
     getToken() {
+        
         return this.getAuthData();
     }
+    getSpecificToken()
+    {
+        let tokenLocal=localStorage.getItem('token');
+        const tokenPass: authLiveToken = {token: tokenLocal};
+        return tokenPass;
+        }
+        
+    
     getAuthStatusListener() {
         return this.authStatusListener.asObservable();
     }
@@ -162,7 +171,7 @@ export class AuthService {
         this.loginStatus = false;
     }
     public  getAuthData(): Observable<any>  {
-        
+        debugger;
         let tokenLocal=localStorage.getItem('token');
         const tokenPass: authLiveToken = {token: tokenLocal};
         return this.http.post(environment.apiURL + "api/auth/authLiveRequest",tokenPass);
