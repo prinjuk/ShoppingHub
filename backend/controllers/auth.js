@@ -37,7 +37,7 @@ exports.Login=(req,res,next)=>{
                 });
             }
             const token =jwt.sign(
-                {email:emailStorage,userId:useridStorage},
+                {email:emailStorage,userId:useridStorage,unique_SHOP:userstoreStorage},
                 process.env.JWT,
                 {expiresIn:'1h'}
                 );
@@ -166,7 +166,7 @@ exports.newSupplier=(req,res,next)=>{
  
 }
 exports.getUser=(req,res,next)=>{
-    console.log(req.body.auth_type)
+    
    //optimize
     if(req.body.auth_type == 0)
     {
@@ -289,7 +289,7 @@ exports.removeLiveReq=(req,res,next)=>{
 }
 exports.employees=(req,res,next)=>{
    const uniqueShopValue=req.body.unique_SHOP;
- console.log(req.body);
+
     bcrypt.hash(req.body.password,10)
     .then(hash=>{ 
         const userInfoAuth=new User({

@@ -43,7 +43,7 @@ export class AuthService {
         const auth: initData = { firstname: firstname, lastname: lastname, phoneNumber: phoneNumber, email: email, password: password };
         this.http.post(environment.apiURL + "api/auth/signup", auth)
             .subscribe(resp => {
-                console.log(resp);
+               
             })
     };
     deleteUserSupplierWay(Unique_id:string)
@@ -51,7 +51,7 @@ export class AuthService {
         const auth: DeleteViaUniqueCode = {  unique_SHOP: Unique_id};
         this.http.post(environment.apiURL + "api/auth/removeUser", auth)
         .subscribe(resp => {
-            console.log(resp);
+       
         })
      
     }
@@ -60,10 +60,10 @@ export class AuthService {
         const auth: Supplier = { firstname: firstname, lastname: lastname,storename:storename, gst: GST,address1:Address1,
             address2:Address2,city:city,state:State,country:Country,zip:Zip,
             phoneNumber: phoneNumber, email: email, password: password,usertype:usertype };
-            console.log(auth);
+           
         this.http.post(environment.apiURL + "api/auth/newSupplier", auth)
             .subscribe(resp => {
-                console.log(resp);
+               
             })
     };
     getUser(): Observable<any> {
@@ -102,7 +102,7 @@ export class AuthService {
         const auth: DeleteTokenDate = {  exp:now };
         this.http.post(environment.apiURL + "api/auth/removeUnwantedTokens", auth)
         .subscribe(resp => {
-            console.log(resp);
+         
         })
     }
     autoAuthUser() {
@@ -171,7 +171,7 @@ export class AuthService {
         this.loginStatus = false;
     }
     public  getAuthData(): Observable<any>  {
-        debugger;
+    
         let tokenLocal=localStorage.getItem('token');
         const tokenPass: authLiveToken = {token: tokenLocal};
         return this.http.post(environment.apiURL + "api/auth/authLiveRequest",tokenPass);
@@ -196,7 +196,7 @@ export class AuthService {
            
         this.http.post(environment.apiURL + "api/auth/employees", auth)
             .subscribe(resp => {
-                console.log(resp);
+              
             })
     };
 }

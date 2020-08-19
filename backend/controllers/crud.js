@@ -1,5 +1,5 @@
 const List =require('../models/list');
-
+const supplier =require('../models/supplier');
 exports.AddProduct=(req,res,next) => {
   
     const url=req.protocol+'://'+req.get('host');
@@ -13,7 +13,7 @@ exports.AddProduct=(req,res,next) => {
      imageurl: url+'/images/'+req.file.filename,
      remaining: req.body.remaining,
      productSize: req.body.productSize,
-      creator:req.userData.userId
+      creator:req.body.creator
   });
   passData.save();
    res.status(200).json({
@@ -36,6 +36,7 @@ exports.AddProduct=(req,res,next) => {
         // { productname: { $regex: req.params.query,$options: "i" }}
       )
       .then((document)=>{
+        console.log(document)
         searchlist=document;
         res.status(200).json({
           message:'success',
@@ -44,10 +45,29 @@ exports.AddProduct=(req,res,next) => {
       });
     }
     else{
-      List.find(
-        { productname: { $regex: req.params.query,$options: "i" }}
-      )
+      List.aggregate([
+        {$match:
+          { productname: { $regex: req.params.query,$options: "i" }}
+        },
+        { $lookup:{
+              from: "suppliers",
+              localField: "creator",
+              foreignField: "unique_SHOP",
+              as: "source"
+            }
+       },
+    //    {
+    //     $project: {
+    //       source: {
+    //         storename: 1,
+    //         zip: 1
+    //         }
+    //     }
+    // }
+      
+      ]) 
       .then((document)=>{
+        
         searchlist=document;
         res.status(200).json({
           message:'success',
@@ -59,14 +79,14 @@ exports.AddProduct=(req,res,next) => {
   
   };
   exports.customSearch=(req,res,next)=>{
-    let searchlist;
   
-    let para=req.params.productname;
+   
+    let para=req.body.productname;
     
-    console.log(req.params.productname);
+    console.log(req.body.productname);
     List.find(
       { productname: { $regex: para,$options: "i" },
-        creator:req.userData.userId         
+        creator:req.userData.unique_SHOP         
        }
   
     )
@@ -144,10 +164,10 @@ exports.AddProduct=(req,res,next) => {
   
   };
   exports.allProducts=(req,res,next)=>{
-  
+  console.log(req.userData )
     const pageSize=+req.query.size;
     const currentPage=+req.query.page;
-    const postQuery=List.find({  creator:req.userData.userId      });
+    const postQuery=List.find({  creator:req.userData.unique_SHOP      });
     let fetchData,MaxPost;
     if(pageSize && currentPage)
     {

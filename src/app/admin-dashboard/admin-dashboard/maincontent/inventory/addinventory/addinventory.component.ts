@@ -24,6 +24,7 @@ export class AddinventoryComponent implements OnInit {
     this.buildForm();
     this.auth.getAuthData().subscribe(res=>{
       debugger;
+      
       this.creator=res.list[0]['auth_shopId'];
      
     });

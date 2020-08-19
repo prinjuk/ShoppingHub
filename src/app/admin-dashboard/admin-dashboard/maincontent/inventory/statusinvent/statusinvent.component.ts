@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./statusinvent.component.css']
 })
 export class StatusinventComponent implements OnInit {
+
   searchData:any='Products from ShopHub';
   productTransfer=[];
   totalPosts=1;
@@ -27,7 +28,7 @@ export class StatusinventComponent implements OnInit {
     this.getList();
   }
 getList()
-{
+{  debugger;
   this.http.get<{message: string, list: any,max:any}>(environment.apiURL+'api/retLimiter/'+this.searchData)
   .subscribe((res) => {
     console.log(res);

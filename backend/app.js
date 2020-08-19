@@ -29,7 +29,7 @@ app.post('/newInvent',checkAuth,fileExtractor,crud.AddProduct);
 //retrievingSearch
 app.use('/api/searchlist:query',crud.ListPage);
 //searchspecific
-app.use('/api/filterSearch/:productname',checkAuth,crud.customSearch);
+app.post('/api/filterSearch/',checkAuth,crud.customSearch);
 //deletespecific
 app.delete('/api/delete/:id',checkAuth,crud.deleteEntry);
 //updatespecific

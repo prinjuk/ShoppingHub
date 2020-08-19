@@ -4,6 +4,7 @@ import {MatDialog} from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { DialogEditComponent } from '../updateinventory/dialog-edit/dialog-edit.component';
 import { Injectable } from '@angular/core';
+import { AuthService } from '../../../../../auth.service';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 @Injectable()
@@ -14,14 +15,16 @@ import { environment } from 'src/environments/environment';
 })
 export class UpdateinventoryComponent implements OnInit {
   Details: any;
+  creator:any;
   resultshown: any;
   resultjsonsearch: {};
   refined=[];
 
-  constructor(public dialog: MatDialog, public form: FormBuilder,public http: HttpClient) { }
+  constructor(public dialog: MatDialog, public form: FormBuilder,public http: HttpClient,public auth:AuthService) { }
   public productdata: FormGroup;
   ngOnInit(): void {
   this.builtform();
+ 
   }
   builtform() {
     this.productdata = this.form.group({
@@ -30,11 +33,14 @@ export class UpdateinventoryComponent implements OnInit {
     });
   }
   searchinit(form: NgForm) {
-    let searchvalue = '';
+    let searchvalue ;
     if (!this.productdata.invalid) {
       this.resultshown = 1;
-      searchvalue = this.productdata.value.productsec;
-      this.http.get<{message: string, list: any}>(environment.apiURL+'api/filterSearch/'+ searchvalue)
+      // searchvalue = this.productdata.value.productsec;
+      searchvalue = {productname: this.productdata.value.productsec};
+      console.log(searchvalue)
+      debugger;
+      this.http.post<{message: string, list: any}>(environment.apiURL+'api/filterSearch/', searchvalue)
       .subscribe((res) => {
 
         this.resultjsonsearch = res.list;
@@ -45,7 +51,7 @@ export class UpdateinventoryComponent implements OnInit {
         this.refined= [];
         console.log(resultSet);
         for (const element of JSON.parse(resultSet)) {
-          if (element.productname.toLowerCase().includes(searchvalue.toLowerCase())) {
+          if (element.productname.toLowerCase().includes(searchvalue['productname'].toLowerCase())) {
 
             this.refined.push(element);
           }

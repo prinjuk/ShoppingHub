@@ -4,10 +4,10 @@ module.exports=(req,res,next)=>{
     try{
    
         const token =req.headers.authorization.split(' ')[1];
-        console.log(req.headers)
+  
         const decodedToken= jwt.verify(token,process.env.JWT);
-        
-       req.userData={email: decodedToken.email,userId:decodedToken.userId};
+        console.log(decodedToken)
+       req.userData={email: decodedToken.email,userId:decodedToken.userId,unique_SHOP:decodedToken.unique_SHOP};
   
         next();
     }
