@@ -1,5 +1,7 @@
 const List =require('../models/list');
-const supplier =require('../models/supplier');
+const uniqueString = require('unique-string');
+const orderList=require('../models/orderList');
+const address=require('../models/addressCollection');
 exports.AddProduct=(req,res,next) => {
   
     const url=req.protocol+'://'+req.get('host');
@@ -212,3 +214,51 @@ exports.AddProduct=(req,res,next) => {
     });
     });
     };
+    exports.orderCompletion=(req,res,next)=>{
+      const orderiD=uniqueString()
+      const order=new orderList({
+        orderid:orderiD,
+        creator:req.userData.unique_SHOP,
+        order:req.body.order
+      })
+      order.save()
+      res.status(200).json({
+        message:'success',
+        list:order,
+      });
+      res.status(500).json({
+    message:'Unknown Error'
+      });
+    }
+   
+    exports.addressCollection=(req,res,next)=>{
+      console.log(req.userData)
+      const PassAddress=new address({
+        firstname:req.body.firstname,
+        lastname:req.body.lastname,
+        phone:req.body.phone,
+        zip:req.body.zip,
+        address1:req.body.address1,
+        address2:req.body.address2,
+        city:req.body.city,
+        state:req.body.state,
+        country:req.body.country,
+        creator:req.userData.unique_SHOP
+      });
+     const checkPropertyExist= address.find({
+        creator:req.userData.unique_SHOP
+      });
+      // console.log(checkPropertyExist.countDocuments())
+      if(!checkPropertyExist.countDocuments())
+      {
+        PassAddress.save()
+        res.status(200).json({
+          message:'success',
+          list:PassAddress,
+        });
+        res.status(500).json({
+      message:'Unknown Error'
+        });
+      }
+     
+    }

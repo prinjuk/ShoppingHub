@@ -10,6 +10,7 @@ import { AuthService } from'../auth.service';
 export class PaymentsummaryComponent implements OnInit {
   childMessage: any;
   Details: any;
+  cartLeftOver:any;
   isLoggedIn=false;
   payout = 0;
   constructor(private cartData: CartDataService,private auth:AuthService ) { }
@@ -21,12 +22,12 @@ export class PaymentsummaryComponent implements OnInit {
     this.payout = sum;
   }
   ngOnInit(): void {
-   
+   debugger;
     this.cartData.currentMessage.subscribe(message => this.childMessage = message);
     if (this.childMessage.length == 0 && JSON.parse(localStorage.getItem('cartStorage')) != null) {
-      const cartLeftOver = JSON.parse(localStorage.getItem('cartStorage'));
-      // alert(cartLeftOver);
-      cartLeftOver.forEach(element => {
+      this.cartLeftOver = JSON.parse(localStorage.getItem('cartStorage'));
+   
+      this.cartLeftOver.forEach(element => {
         this.childMessage.push(element);
       });
 
@@ -40,15 +41,17 @@ export class PaymentsummaryComponent implements OnInit {
     if(form.invalid)
     return;
     const details = this.Details = {
-      firstname: form.value.firstname,
+       firstname: form.value.firstname,
       lastname: form.value.lastname,
       phone: form.value.phone,
-      addy: form.value.addy,
-      street: form.value.street,
+      address1: form.value.addy,
+      address2: form.value.street,
       city: form.value.city,
       zip: form.value.zip,
       state: form.value.state,
+      country:form.value.country,
+      order_details:[this.cartLeftOver],
     };
-console.log(details);
+    this.auth.newOrder(details);
   }
 }

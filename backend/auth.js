@@ -1,5 +1,7 @@
 const express= require('express');
+const checkAuth=require('./middleware/check-auth');
 const Auth=require('./controllers/auth');
+const crud=require('./controllers/crud');
 const router = express.Router();
 router.post('/signup',Auth.signup);
 router.post('/newSupplier',Auth.newSupplier);
@@ -12,4 +14,6 @@ router.post('/removeUnwantedTokens',Auth.removeUnwantedTokens);
 router.post('/removeUser',Auth.removeSupplier);
 router.post('/storeDetails',Auth.storeDetails);
 router.post('/employees',Auth.employees);
+router.post('/OrderCompletion',checkAuth,crud.orderCompletion);
+router.post('/addressCollection',checkAuth,crud.addressCollection);
 module.exports=router;

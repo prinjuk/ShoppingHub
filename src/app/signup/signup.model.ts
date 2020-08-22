@@ -73,3 +73,24 @@ export interface Supplier{
     usertype: number,
   
 }
+export interface address{
+    firstname: string,
+    lastname: string,
+  
+    phone: number,
+ 
+    address1: string,
+    address2: string,
+    city: string,
+    state: string,
+    country: string,
+    zip: string,
+   
+  
+     
+}
+export interface orderDetails{
+   
+
+     orders:any
+}

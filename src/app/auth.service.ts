@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AuthData, initData,Supplier,DeleteViaUniqueCode,authLive, authLiveToken,employeeDetails, DeleteTokenDate, UserCombinationData, getStore } from './signup/signup.model';
+import { AuthData, initData,Supplier,DeleteViaUniqueCode,authLive, authLiveToken,employeeDetails, DeleteTokenDate, UserCombinationData, getStore, address, orderDetails } from './signup/signup.model';
 
 import { Subject, Observable } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -217,4 +217,23 @@ export class AuthService {
               
             })
     };
+    newOrder(details:any)
+    {
+       
+        // firstname:string,lastname:string,phone:number,address1:string,address2:string,
+        // city:string,zip:number,state:string,country:string,order_details:)
+        const addressEntry:address={firstname:details.firstname,lastname:details.lastname,phone:details.phone,
+            zip:details.zip,address1:details.address1,address2:details.address2,city:details.city,state:details.state,
+            country:details.country
+        }
+        const order:orderDetails={
+            orders:details.order_details
+        }
+        this.http.post(environment.apiURL+'api/auth/addressCollection',addressEntry).subscribe(resp=>{
+            debugger;
+        });
+        this.http.post(environment.apiURL+'api/auth/OrderCompletion',order).subscribe(resp=>{
+            debugger;
+        });
+    }
 }

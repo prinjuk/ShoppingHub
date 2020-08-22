@@ -1,7 +1,7 @@
 const User=require('../models/user');
 const supplier=require('../models/supplier');
 const authReq=require('../models/authentication');
-const employees=require('../models/employees');
+
 const bcrypt=require('bcryptjs');
 const jwt=require('jsonwebtoken');
 const uniqueString = require('unique-string');
