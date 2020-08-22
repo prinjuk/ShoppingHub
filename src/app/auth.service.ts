@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AuthData, initData,Supplier,DeleteViaUniqueCode,authLive, authLiveToken,employeeDetails, DeleteTokenDate, UserCombinationData, getStore } from './signup/signup.model';
 
 import { Subject, Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { map, filter, switchMap } from 'rxjs/operators'
 @Injectable({
@@ -15,10 +15,10 @@ export class AuthService {
     private shopidUnique:any;
     private timerLog: NodeJS.Timer;
     loginStatus = false;
-
+    redirectURL:any;
     private authStatusListener = new Subject<boolean>();
     // private getUserList=new Subject<boolean>();
-    constructor(private http: HttpClient, private router: Router) {
+    constructor(private http: HttpClient, private router: Router,private route: ActivatedRoute) {
         
       
     }
@@ -26,6 +26,10 @@ export class AuthService {
     getToken() {
         
         return this.getAuthData();
+    }
+    addressConnection()
+    {
+        
     }
     getSpecificToken()
     {
@@ -79,7 +83,7 @@ export class AuthService {
         const auth: AuthData = { email: email, password: password };
         this.http.post<{name: string, token: string, unique_SHOP : string, expiresIn: number }>(environment.apiURL + "api/auth/login", auth)
             .subscribe(resp => {
-            
+                this.redirectURL=false;
                 const userType=resp['usertype'];
                 const shopid=resp['unique_SHOP'];
                
@@ -92,8 +96,21 @@ export class AuthService {
                 const now = new Date();
                 const expirationData = new Date(now.getTime() + expiresInDuration * 1000);
                 this.saveAuthData(name,token, expirationData,shopid,userType);
-                this.router.navigate(['/']);
-            })
+               
+                let params = this.route.snapshot.queryParams;
+                if (params['redirectURL']) {
+                    this.redirectURL = params['redirectURL'];
+                }
+                if(this.redirectURL=="/paymentsummary")
+                {
+                     this.router.navigate([this.redirectURL]);
+                }
+                else{
+                    this.router.navigate(['/']);
+                }
+               
+            });
+          
     }
     autoClearDBAuthToken()
     {
@@ -154,6 +171,7 @@ export class AuthService {
         localStorage.setItem('expirationData', expirationData.toISOString());
     }
     private clearAuthData() {
+        debugger;
         let token=localStorage.getItem('token');
         if(token)
         {
@@ -171,7 +189,7 @@ export class AuthService {
         this.loginStatus = false;
     }
     public  getAuthData(): Observable<any>  {
-    
+    debugger;
         let tokenLocal=localStorage.getItem('token');
         const tokenPass: authLiveToken = {token: tokenLocal};
         return this.http.post(environment.apiURL + "api/auth/authLiveRequest",tokenPass);

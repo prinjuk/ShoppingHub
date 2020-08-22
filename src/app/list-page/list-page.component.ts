@@ -37,7 +37,8 @@ export class ListPageComponent implements OnInit, AfterViewInit  {
   storelimit = 1;
   // this.relatedStore ='';
   productidTrans = '';
-  tempPdt = '';
+  Barcode = '';
+  storename='';
   tempcommon = '';
   productBindImage = '';
   productBindName = '';
@@ -73,8 +74,11 @@ popToast() {
 }
 
   ngOnInit(): void {
-    
-    this.cartData.currentMessage.subscribe(message => this.arrayCart = message);
+    debugger;
+    this.cartData.currentMessage.subscribe((message) => 
+    {
+      this.arrayCart = message
+    });
     this.cartData.currentsearch.subscribe(message=>{
       
       
@@ -95,6 +99,7 @@ popToast() {
   // Filtering duplication: future filter on low price
   
       this.productFilterArray.forEach((element, indexz) => {
+        debugger;
     let flag = 0;
     if (this.productArray.length == -1) {
         this.productArray.push(element);
@@ -116,22 +121,17 @@ popToast() {
     });
     });
     
-// DataListPage
-// if(this.searchQuery.value.search == undefined)
-// {
-//   this.searchQuery.value.search='';
-// }
-// console.log(this.searchQuery.value.search);
-//     
+
     
 
 
 
 
     $('.btn-cart').click(() => {
-
-      const code = this.tempPdt;
+    
+      const code = this.Barcode;
       const store = this.statusSelect;
+      const storeName = this.storename;
       const count = this.pdtcount;
       const price = this.finalprice;
       const title = this.productBindName;
@@ -140,6 +140,7 @@ popToast() {
           title,
           code,
           store,
+          storeName,
           price,
           count,
         },
@@ -148,6 +149,7 @@ popToast() {
 
 
       this.arrayCart.forEach((element, index) => {
+        debugger;
         if (element.product.code == objectTransfer.product.code && element.product.store == objectTransfer.product.store ) {
           flag = 1;
 
@@ -174,6 +176,7 @@ popToast() {
 
   }
   cartUpdate()  {
+    debugger;
     this.parentMessage = this.arrayCart;
       // this.arrayCart.forEach((element,index,Array) => {
     this.cartData.changeMessage(this.arrayCart);
@@ -217,15 +220,16 @@ imageConverter(base64data)
     }
     this.statusCartButton();
   }
-  btnStoreChange(select, data) {
-
+  btnStoreChange(select, data,storename) {
+debugger;
 this.finalprice = data;
 this.statusSelect = select;
+this.storename=storename;
     // this.relatedStore=[];
 this.relatedStore.forEach((element, index) => {
-
-  if (element.storeid == select) {
-          this.tempPdt = element.barcode;
+debugger;
+  if (element.creator == select) {
+          this.Barcode = element.barcode;
           this.productBindImage = element.imageurl;
           let flag = 0;
           this.arrayCart.forEach((element2, index) => {
@@ -270,7 +274,7 @@ productView(prdctId,storeid) {
       this.productFilterArray.forEach((element, index) => {
 
         if (element.barcode == prdctId) {
-
+debugger;
             this.relatedStore.push(element);
 
         }
@@ -284,10 +288,16 @@ productView(prdctId,storeid) {
   const checkPdt = () => {
     return new Promise((resolve, reject) => {
       this.productFilterArray.forEach(element => {
-        
-        if (element.storeid == storeid ) {
-            this.statusSelect = element.storeid;
-            this.tempPdt = prdctId;
+        debugger;
+        if (element.creator == storeid && element.barcode == prdctId ) {
+             // const Barcode="";
+      // const price="";
+      // const storeid="";
+      // const storename="";
+            // this.barcode=element.barcode;
+            this.statusSelect = element.creator;
+            this.Barcode = prdctId;
+            this.storename=element.source[0].storename;
             this.finalprice = element.price;
             // this.tempcommon = prdctCommon;
             this.productBindImage = element.imageurl;

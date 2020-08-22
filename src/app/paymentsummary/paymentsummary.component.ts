@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CartDataService } from '../cart-data.service';
 import { NgForm } from '@angular/forms';
+import { AuthService } from'../auth.service';
 @Component({
   selector: 'app-paymentsummary',
   templateUrl: './paymentsummary.component.html',
@@ -9,8 +10,9 @@ import { NgForm } from '@angular/forms';
 export class PaymentsummaryComponent implements OnInit {
   childMessage: any;
   Details: any;
+  isLoggedIn=false;
   payout = 0;
-  constructor(private cartData: CartDataService) { }
+  constructor(private cartData: CartDataService,private auth:AuthService ) { }
   Recal() {
     let sum = 0;
     this.childMessage.forEach(element => {
@@ -19,6 +21,7 @@ export class PaymentsummaryComponent implements OnInit {
     this.payout = sum;
   }
   ngOnInit(): void {
+   
     this.cartData.currentMessage.subscribe(message => this.childMessage = message);
     if (this.childMessage.length == 0 && JSON.parse(localStorage.getItem('cartStorage')) != null) {
       const cartLeftOver = JSON.parse(localStorage.getItem('cartStorage'));
@@ -31,6 +34,7 @@ export class PaymentsummaryComponent implements OnInit {
       localStorage.setItem('cartStorage', JSON.stringify(this.childMessage));
     }
     this.Recal();
+   
   }
   paymentForm(form: NgForm) {
     if(form.invalid)

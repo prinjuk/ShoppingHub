@@ -33,7 +33,7 @@ export class CartfooterComponent implements OnInit, AfterViewInit  {
       this.router.navigate(['paymentsummary']);
     }
     goCART() {
-
+debugger;
       if (this.childMessage.length == 0 && JSON.parse(localStorage.getItem('cartStorage'))!=null) {
       const cartLeftOver = JSON.parse(localStorage.getItem('cartStorage'));
       // alert(cartLeftOver);

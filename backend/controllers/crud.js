@@ -32,16 +32,27 @@ exports.AddProduct=(req,res,next) => {
      
     if(req.params.query == 'Products from ShopHub')
     {
-      List.find(
-        // { productname: { $regex: req.params.query,$options: "i" }}
-      )
+      List.aggregate([
+        
+        { $lookup:{
+              from: "suppliers",
+              localField: "creator",
+              foreignField: "unique_SHOP",
+              as: "source"
+            }
+            
+       },
+     
+  
+      
+      ]) 
       .then((document)=>{
         console.log(document)
         searchlist=document;
         res.status(200).json({
           message:'success',
           list:searchlist,
-        });
+        })
       });
     }
     else{
@@ -49,21 +60,36 @@ exports.AddProduct=(req,res,next) => {
         {$match:
           { productname: { $regex: req.params.query,$options: "i" }}
         },
-        { $lookup:{
-              from: "suppliers",
-              localField: "creator",
-              foreignField: "unique_SHOP",
-              as: "source"
-            }
-       },
-    //    {
-    //     $project: {
-    //       source: {
-    //         storename: 1,
-    //         zip: 1
-    //         }
-    //     }
-    // }
+      //   { $lookup:{
+      //         from: "suppliers",
+      //         localField: "creator",
+      //         foreignField: "unique_SHOP",
+      //         as: "source"
+      //       }
+      //  },
+        {
+    $lookup: {
+      from: "suppliers",
+      
+      as: "source",
+      let: { creator: "$creator" },
+      pipeline: [
+        {
+          $match: {
+            $expr: { $eq: ["$$creator", "$unique_SHOP"] }
+          }
+        },
+        {
+          $project: {
+            _id: 0,
+            zip: 1,
+            storename:1,
+            unique_SHOP: 1
+          }
+        }
+      ]
+    }
+  }
       
       ]) 
       .then((document)=>{

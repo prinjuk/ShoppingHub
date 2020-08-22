@@ -315,3 +315,7 @@ a{
   display: block;
   color: #0dd35c;
 }
+.bindImage{
+  width: 100%;
+    object-fit: contain;
+}

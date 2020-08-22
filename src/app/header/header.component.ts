@@ -51,11 +51,11 @@ export class HeaderComponent implements OnInit,OnDestroy {
     }
     this.http.get<{message: string, list: any}>(environment.apiURL+'api/searchlist'+this.searchData.value['search'])
     .subscribe((res) => {
-
+      this.router.navigate(['list']);
       this.productTransfer = res.list;
       const data = this.productTransfer;
       this.search.changesearch(data);
-      this.router.navigate(['list']);
+    
  
     
 

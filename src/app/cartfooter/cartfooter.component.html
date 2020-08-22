@@ -52,7 +52,7 @@
             <tr *ngFor="let i of childMessage;let count = index">
 
               <td>{{ i.product.count }}</td>
-              <td>{{ i.product.title }} <div class='portal'>{{ i.product.store }}</div></td>
+              <td>{{ i.product.title }} <div class='portal'>{{ i.product.storeName }}</div></td>
 
               <td class='priceTag'><i class='fa fa-inr'></i> {{ i.product.price*i.product.count }}</td>
               <!-- <td>{{ i.product.code }}</td> -->

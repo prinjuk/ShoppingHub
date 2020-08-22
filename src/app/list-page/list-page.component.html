@@ -39,7 +39,7 @@
             <img
               src="{{ productBindImage }}"
               alt="Images"
-              height="432"
+              height="432" class='bindImage'
             />
           </div>
           <div class="col-md-6" style="height: 500px; padding: 16px;">
@@ -62,7 +62,7 @@
               <div class="pricetag">
                 MRP RS. <span id="finalPrice" ngDefaultControl  #finalPrice [(ngModel)]="finalprice" >{{ finalprice }}</span>
               </div>
-              <div class="prdctCode"> BarCode: <span id="pdtcode">{{tempPdt}}</span></div>
+              <div class="prdctCode"> BarCode: <span id="pdtcode">{{Barcode}}</span></div>
               <div class="compPrice">
                 Nearby Store Prices
               </div>
@@ -70,9 +70,9 @@
               <div class="viewMorePrices">
                 <ul class="defaultUl pricelist" >
                   <li  *ngFor="let pdt of relatedStore">
-                    <span>{{ pdt.storeName }}</span>
+                    <span>{{ pdt.source[0].storename }}</span>
                     <span class="price" ><i class="fa fa-inr"></i>{{ pdt.price }}  </span>
-                    <span class="btn btn-select " (click)="btnStoreChange(pdt.storeid, pdt.price)"   attr.data-price="{{pdt.price}}"  attr.id="{{ pdt.storeid}}" [class.active]="statusSelect==pdt.storeid" ><span [hidden]="statusSelect==pdt.storeid">Select</span><span [hidden]="!(statusSelect==pdt.storeid)"> Selected</span></span>
+                    <span class="btn btn-select " (click)="btnStoreChange(pdt.creator, pdt.price,pdt.source[0].storename)"   attr.data-price="{{pdt.price}}"  attr.id="{{ pdt.creator}}" [class.active]="statusSelect==pdt.creator" ><span [hidden]="statusSelect==pdt.creator">Select</span><span [hidden]="!(statusSelect==pdt.creator)"> Selected</span></span>
                   </li>
 
                 </ul>
@@ -134,17 +134,31 @@
       </div>
       <div class="col-md-8">
         <div class="row">
-          <div class="item">
-            <!-- Disables the animation -->
-            <!-- <ngx-skeleton-loader animation="false" ></ngx-skeleton-loader> -->
-            <!-- Uses `progress` as animation -->
-            <!-- <ngx-skeleton-loader animation="progress" ></ngx-skeleton-loader> -->
-           
-            <!-- Uses `pulse` as animation -->
-            <ngx-skeleton-loader animation="pulse" *ngIf='loadingdata'></ngx-skeleton-loader>
+          <div class="col-md-6">
+            <div class="item">
+              <!-- Disables the animation -->
+              <!-- <ngx-skeleton-loader animation="false" ></ngx-skeleton-loader> -->
+              <!-- Uses `progress` as animation -->
+              <!-- <ngx-skeleton-loader animation="progress" ></ngx-skeleton-loader> -->
+             
+              <!-- Uses `pulse` as animation -->
+              <ngx-skeleton-loader animation="pulse" *ngIf='loadingdata'></ngx-skeleton-loader>
+            </div>
           </div>
+          <div class="col-md-6">
+            <div class="item">
+              <!-- Disables the animation -->
+              <!-- <ngx-skeleton-loader animation="false" ></ngx-skeleton-loader> -->
+              <!-- Uses `progress` as animation -->
+              <!-- <ngx-skeleton-loader animation="progress" ></ngx-skeleton-loader> -->
+             
+              <!-- Uses `pulse` as animation -->
+              <ngx-skeleton-loader animation="pulse" *ngIf='loadingdata'></ngx-skeleton-loader>
+            </div>
+          </div>
+        
           <div class="col-md-6 productViewer" *ngFor="let pdt of FinalArray">
-            <ul class="defaultUl listProduct"  (click)='productView( pdt.barcode, pdt.storeid)'>
+            <ul class="defaultUl listProduct"  (click)='productView( pdt.barcode, pdt.creator)'>
               <li>
                 <div class="defaultFlex">
                   <div class="ProductShowCase" style='

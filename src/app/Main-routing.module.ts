@@ -8,6 +8,7 @@ import { PurchaseSummaryComponent } from './purchase-summary/purchase-summary.co
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { PaymentsummaryComponent } from './paymentsummary/paymentsummary.component';
+import { AuthGuard } from './auth.guard';
 
 const routes:Routes=[
     {path: '',
@@ -32,7 +33,7 @@ const routes:Routes=[
             path: 'signup', component: SignupComponent,
           },
           {
-            path: 'paymentsummary', component: PaymentsummaryComponent,
+            path: 'paymentsummary', component: PaymentsummaryComponent,canActivate:[AuthGuard]  
           },
         ]
     }
