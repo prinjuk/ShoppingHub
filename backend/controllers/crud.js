@@ -215,7 +215,8 @@ exports.AddProduct=(req,res,next) => {
     });
     };
     exports.orderCompletion=(req,res,next)=>{
-      const orderiD=uniqueString()
+      const orderiD=uniqueString();
+      console.log(req.body.order)
       const order=new orderList({
         orderid:orderiD,
         creator:req.userData.unique_SHOP,
@@ -232,7 +233,7 @@ exports.AddProduct=(req,res,next) => {
     }
    
     exports.addressCollection=(req,res,next)=>{
-      console.log(req.userData)
+    
       const PassAddress=new address({
         firstname:req.body.firstname,
         lastname:req.body.lastname,
@@ -245,13 +246,38 @@ exports.AddProduct=(req,res,next) => {
         country:req.body.country,
         creator:req.userData.unique_SHOP
       });
-     const checkPropertyExist= address.find({
-        creator:req.userData.unique_SHOP
-      });
+    //  const checkPropertyExist= address.find({
+    //     creator:req.userData.unique_SHOP
+    //   });
       // console.log(checkPropertyExist.countDocuments())
-      if(!checkPropertyExist.countDocuments())
-      {
-        PassAddress.save()
+      // if(!checkPropertyExist.countDocuments())
+      // {
+        
+        // address.update(
+         
+        //    {creator:req.userData.unique_SHOP},
+        //   PassAddress,
+            
+            
+        //      {upsert:true,
+            
+           
+        
+        //     }
+        //     )
+        address.findOneAndUpdate(
+          {creator:req.userData.unique_SHOP}, // find a document with that filter
+          PassAddress, // document to insert when nothing was found
+          {upsert: true, new: true,}, // options
+          function (err, doc) { // callback
+              if (err) {
+                  console.log(err)
+              } else {
+                console.log(doc)  // handle document
+              }
+          }
+      );
+        // PassAddress.save()
         res.status(200).json({
           message:'success',
           list:PassAddress,
@@ -259,6 +285,6 @@ exports.AddProduct=(req,res,next) => {
         res.status(500).json({
       message:'Unknown Error'
         });
-      }
+      // }
      
     }
